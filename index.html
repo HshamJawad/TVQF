@@ -34,34 +34,27 @@
             margin: 0 auto;
             padding: 1.5rem 2rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            gap: 1rem;
+            position: relative;
+            min-height: 80px;
         }
 
         .site-logo {
+            position: absolute;
+            top: 50%;
+            inset-inline-start: 2rem;
+            transform: translateY(-50%);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
             text-decoration: none;
-            flex-shrink: 0;
+            z-index: 2;
         }
 
         .site-logo img {
-            height: 58px;
+            height: 116px;
             width: auto;
             display: block;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        @media (max-width: 480px) {
-            .site-logo img {
-                height: 42px;
-            }
         }
 
         .search-box {
@@ -469,6 +462,17 @@
                 gap: 1rem;
             }
 
+            .site-logo {
+                position: static;
+                transform: none;
+                order: -1;
+                align-self: center;
+            }
+
+            .site-logo img {
+                height: 90px;
+            }
+
             .search-box {
                 width: 100%;
             }
@@ -557,6 +561,10 @@
         }
 
         /* ===== RTL Layout Overrides (Arabic) ===== */
+        html[dir="rtl"] .header-container {
+            justify-content: flex-start;
+        }
+
         html[dir="rtl"] .search-box input {
             border-right: 1px solid #ddd;
             border-left: none;
@@ -625,7 +633,6 @@
 <a class="site-logo" href="#" onclick="return showPage('home')">
 <img alt="TVQF Iraq Logo" src="Logo_TVQF__Iraq.png"/>
 </a>
-<div class="header-actions">
 <button aria-label="Switch to English" class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()" type="button">
 <span class="lang-icon">🌐</span>
 <span id="langToggleLabel">EN</span>
@@ -633,7 +640,6 @@
 <div class="search-box">
 <input data-i18n-placeholder="ph_2" placeholder="Search for keywords..." type="text"/>
 <button type="submit">🔍</button>
-</div>
 </div>
 </div>
 <nav id="mainNav">
