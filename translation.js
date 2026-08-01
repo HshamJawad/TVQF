@@ -34,6 +34,10 @@ const TVQF_TRANSLATIONS = {
   "nav_27": "Contact Us",
   "hero_28": "Building a Skilled and Recognized Iraq Through Trustworthy Qualifications",
   "hero_29": "Establishing a unified qualifications system that aligns vocational, technical and higher education to national and global standards",
+  "a_116_href": "Forms%20EN/Form%202%20%E2%80%93%20Recognition%20of%20Prior%20Learning%20(RPL).docx",
+  "a_138_href": "Forms%20EN/Form%202%20%E2%80%93%20Recognition%20of%20Prior%20Learning%20(RPL).docx",
+  "a_276_href": "Forms%20EN/Form%203%20%E2%80%93%20TVQF%20Institutional%20Accreditation.docx",
+  "a_287_href": "Forms%20EN/Form%201%20%E2%80%93%20Qualification%20Leveling%20(Alignment).docx",
   "cta_30": "Explore the Framework",
   "t_31": "Welcome to TVQF Iraq",
   "t_32": "The Technical and Vocational Qualifications Framework (TVQF Iraq) sets the foundation for a unified qualifications system in Iraq, aligning vocational, technical and higher education to national levels and globally-comparable standards. It supports lifelong learning, clearer pathways, and improved links between skills, education and employment.",
@@ -352,6 +356,10 @@ const TVQF_TRANSLATIONS = {
   "nav_27": "اتصل بنا",
   "hero_28": "بناء عراق ماهر ومعترف به من خلال مؤهلات موثوقة",
   "hero_29": "إرساء نظام موحّد للمؤهلات يربط التعليم والتدريب التقني والمهني بالتعليم العالي وفق المعايير الوطنية والعالمية",
+  "a_116_href": "Forms%20AR/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%85%D8%A7%D8%B1%D8%A9%20%D8%B1%D9%82%D9%85%20%282%29%20%E2%80%93%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%B1%D8%A7%D9%81%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D9%82%20%28RPL%29.docx",
+  "a_138_href": "Forms%20AR/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%85%D8%A7%D8%B1%D8%A9%20%D8%B1%D9%82%D9%85%20%282%29%20%E2%80%93%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%B1%D8%A7%D9%81%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D9%82%20%28RPL%29.docx",
+  "a_276_href": "Forms%20AR/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%85%D8%A7%D8%B1%D8%A9%20%D8%B1%D9%82%D9%85%20%283%29%20%E2%80%93%20%D8%B7%D9%84%D8%A8%20%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF%20%D8%A7%D9%84%D9%85%D8%A4%D8%B3%D8%B3%D8%A9.docx",
+  "a_287_href": "Forms%20AR/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%85%D8%A7%D8%B1%D8%A9%20%D8%B1%D9%82%D9%85%20%281%29%20%E2%80%93%20%D8%AA%D8%B3%D9%83%D9%8A%D9%86%20%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84%20%28%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%A1%D9%85%D8%A9%29.docx",
   "cta_30": "استكشف الإطار",
   "t_31": "مرحباً بكم في الإطار الوطني للمؤهلات التقنية والمهنية في العراق",
   "t_32": "يضع الإطار الوطني للمؤهلات التقنية والمهنية (TVQF Iraq) الأساس لنظام موحّد للمؤهلات في العراق، يربط التعليم والتدريب التقني والمهني بالتعليم العالي بمستويات وطنية ومعايير قابلة للمقارنة عالمياً. ويدعم التعلم مدى الحياة، ومسارات أوضح، وروابط محسّنة بين المهارات والتعليم والتوظيف.",
@@ -686,6 +694,14 @@ const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_
       const key = el.getAttribute('data-i18n-placeholder');
       if (dict[key] !== undefined) {
         el.setAttribute('placeholder', dict[key]);
+      }
+    });
+
+    // Links (e.g. form download buttons that differ by language)
+    document.querySelectorAll('[data-i18n-href]').forEach(function(el) {
+      const key = el.getAttribute('data-i18n-href');
+      if (dict[key] !== undefined) {
+        el.setAttribute('href', dict[key]);
       }
     });
 
