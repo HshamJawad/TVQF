@@ -24,14 +24,8 @@
         header {
             background: #fff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 1000;
-            transition: transform 0.35s ease;
-        }
-
-        header.header-hidden {
-            transform: translateY(-100%);
         }
 
         .header-container {
@@ -1374,38 +1368,6 @@
                 }
             });
         });
-        // Hide header on scroll down, reveal on scroll up (like aqf.edu.au)
-        (function () {
-            const header = document.querySelector('header');
-            let lastScrollY = window.scrollY;
-            let ticking = false;
-
-            function onScroll() {
-                const currentScrollY = window.scrollY;
-                const headerHeight = header.offsetHeight;
-
-                if (currentScrollY <= headerHeight) {
-                    // Always show header near the top of the page
-                    header.classList.remove('header-hidden');
-                } else if (currentScrollY > lastScrollY) {
-                    // Scrolling down
-                    header.classList.add('header-hidden');
-                } else {
-                    // Scrolling up
-                    header.classList.remove('header-hidden');
-                }
-
-                lastScrollY = currentScrollY;
-                ticking = false;
-            }
-
-            window.addEventListener('scroll', function () {
-                if (!ticking) {
-                    window.requestAnimationFrame(onScroll);
-                    ticking = true;
-                }
-            }, { passive: true });
-        })();
     </script>
 </body>
 </html>
