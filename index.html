@@ -955,29 +955,11 @@
 <h2 data-i18n="t_62">Levels &amp; Descriptors</h2>
 <p data-i18n="t_63">Discover the full set of 10 qualification levels of TVQF Iraq, each defined by knowledge, skills and competence descriptors. Download the full PDF document for detailed descriptions.</p>
 <a class="download-btn" data-i18n="a_73" href="#">📄 Download TVQF Levels &amp; Descriptors PDF</a>
-<h3 data-i18n="t_64">The 10 Levels of TVQF Iraq</h3>
-<div class="content-box">
-<h3 data-i18n="t_65">Levels 1-3: Basic Vocational Training</h3>
-<p data-i18n="t_66">Entry-level vocational certificates focusing on foundational skills and basic competencies in specific trades and occupations.</p>
-</div>
-<div class="content-box">
-<h3 data-i18n="t_67">Level 4: Secondary Vocational Diplomas</h3>
-<p data-i18n="t_68">Intermediate technical qualifications that prepare learners for skilled employment or further education.</p>
-</div>
-<div class="content-box">
-<h3 data-i18n="t_69">Levels 5-6: Technical Diplomas and First Degrees</h3>
-<p data-i18n="t_70">Advanced technical diplomas and bachelor's degrees demonstrating substantial knowledge and skills in a field of study.</p>
-</div>
-<div class="content-box">
-<h3 data-i18n="t_71">Levels 7-10: Higher Degrees</h3>
-<p data-i18n="t_72">Postgraduate qualifications including master's degrees (Level 7), doctoral degrees (Level 9-10), and advanced research qualifications.</p>
-</div>
 
-<h3>واصفات المستويات العشرة (المعرفة، المهارات، الكفايات)</h3>
-<p class="level-hint">انقر على أي مستوى لعرض تفاصيل المعرفة والمهارات والكفايات الخاصة به.</p>
 <div class="levels-table-wrapper">
 <table class="levels-table">
 <thead>
+
 <tr>
 <th style="width: 90px;">المستوى</th>
 <th>مسمى المؤهل</th>
@@ -1585,7 +1567,8 @@
         function renderLevelsTable() {
             const tbody = document.getElementById('levelsTableBody');
             if (!tbody) return;
-            tbody.innerHTML = TVQF_LEVELS_DATA.map(function (lvl) {
+            const orderedLevels = TVQF_LEVELS_DATA.slice().sort(function (a, b) { return b.level - a.level; });
+            tbody.innerHTML = orderedLevels.map(function (lvl) {
                 return '<tr onclick="openLevelModal(' + lvl.level + ')">' +
                     '<td><span class="level-badge">' + lvl.level + '</span></td>' +
                     '<td class="level-title-cell">' + lvl.title + '</td>' +
