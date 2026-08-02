@@ -729,6 +729,11 @@ const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_
 
     saveLang(lang);
     window.TVQF_CURRENT_LANG = lang;
+
+    // Re-render the interactive levels table/modal (if present on this page) in the new language
+    if (typeof window.renderLevelsTable === 'function') {
+      window.renderLevelsTable();
+    }
   }
 
   function toggleLanguage() {

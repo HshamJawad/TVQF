@@ -961,8 +961,8 @@
 <thead>
 
 <tr>
-<th style="width: 90px;">المستوى</th>
-<th>مسمى المؤهل</th>
+<th style="width: 90px;" id="levelsColLevel">المستوى</th>
+<th id="levelsColTitle">مسمى المؤهل</th>
 </tr>
 </thead>
 <tbody id="levelsTableBody"></tbody>
@@ -976,15 +976,15 @@
 <h3 id="levelModalTitle"></h3>
 </div>
 <div class="level-modal-section">
-<h4>📘 المعرفة</h4>
+<h4 id="levelModalKnowledgeLabel">📘 المعرفة</h4>
 <p id="levelModalKnowledge"></p>
 </div>
 <div class="level-modal-section">
-<h4>🛠️ المهارات</h4>
+<h4 id="levelModalSkillsLabel">🛠️ المهارات</h4>
 <p id="levelModalSkills"></p>
 </div>
 <div class="level-modal-section">
-<h4>🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)</h4>
+<h4 id="levelModalCompetenciesLabel">🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)</h4>
 <p id="levelModalCompetencies"></p>
 </div>
 </div>
@@ -1490,8 +1490,8 @@
 </footer>
 <script src="translation.js"></script>
 <script>
-        // Data for the 10 TVQF levels (Arabic) - knowledge, skills, competencies
-        const TVQF_LEVELS_DATA = [
+        // Data for the 10 TVQF levels - knowledge, skills, competencies (AR + EN)
+        const TVQF_LEVELS_DATA_AR = [
   {
     "level": 1,
     "title": "شهادة المستوى الأول",
@@ -1564,10 +1564,129 @@
   }
 ];
 
+        const TVQF_LEVELS_DATA_EN = [
+  {
+    "level": 1,
+    "title": "Level 1 Certificate",
+    "knowledge": "Basic introductory knowledge of a subject (in a field of learning) or a very familiar field of work. Basic literacy and numeracy needed to recall very simple facts and texts, and to form very simple numerical facts and ideas related to the subject of learning or field of work. Knowledge of the simplest basic tools needed to carry out simple tasks under direct supervision.",
+    "skills": "Basic (introductory) skills to carry out very simple and familiar activities. Basic practical skills for using simple materials and tools. Literacy and numeracy skills needed to receive and convey simple information, and to solve very simple numerical problems within very familiar and well-organised contexts.",
+    "competencies": "Ability to work under clear, direct supervision in a fully well-defined, routine environment. Ability to work with others in small, organised groups under direct supervision in a very familiar learning or work environment. Ability to respond to simple written or verbal instructions and guidance, or to communicate with others within highly routine contexts."
+  },
+  {
+    "level": 2,
+    "title": "Level 2 Certificate",
+    "knowledge": "Basic factual knowledge of general topics relevant to the field of learning or work. Basic knowledge of the simple tools and materials required to carry out routine tasks in a highly organised work environment. Basic literacy and numeracy needed to understand and produce simple texts and mathematical operations in very familiar work/learning environments.",
+    "skills": "Basic/simple cognitive and practical skills to use materials and tools to carry out routine tasks and handle routine problems. Learning skills under direct supervision. Basic skills to carry out familiar, routine tasks and solve very simple, predictable problems. Basic communication and IT skills needed to present information from known and very specific sources. Literacy and numeracy skills needed to receive and convey simple information taken from simple texts, and to solve simple mathematical problems within very familiar contexts.",
+    "competencies": "Ability to work under direct supervision in a familiar, routine environment. Ability to take responsibility for one's own conduct and exercise a small degree of self-autonomy. Ability to carry out routine tasks individually or with others in small, organised groups under direct supervision. Ability to respond to simple written or verbal instructions and correspondence within familiar work or learning environments."
+  },
+  {
+    "level": 3,
+    "title": "Level 3 Certificate",
+    "knowledge": "Factual, technical, procedural and theoretical knowledge related to the field of learning or work. Knowledge needed to understand a limited range of facts and procedures required for basic tasks or for using technology in the field of learning or work. Literacy and numeracy needed to understand and produce simple, consistent written texts, or to understand and solve simple mathematical problems.",
+    "skills": "A limited range of cognitive and practical skills needed to understand and analyse simple information and offer initial solutions to specific issues. Skills needed to select and use tools, materials or information appropriate to the learning or work environment, helping to complete specific tasks and solve routine problems under direct guidance. IT and communication skills to access and use information within routine and occasionally non-routine work or learning environments. Literacy and numeracy skills to produce clear but simple texts and carry out mathematical operations within defined contexts.",
+    "competencies": "Ability to carry out routine tasks individually and in small groups under direct supervision and specific guidance within a familiar work or learning environment. Ability to exercise self-responsibility for completing specific tasks, which may include solving problems related to the field of learning or work. Ability to take responsibility and exercise a degree of autonomy needed to identify one's own role, individual conduct and personal strengths and weaknesses according to pre-defined criteria, and/or to identify the roles assigned to others within small learning or work groups. Ability to respond to simple written or verbal instructions and correspondence within familiar work or learning environments."
+  },
+  {
+    "level": 4,
+    "title": "Level 4 Certificate",
+    "knowledge": "A broad range of factual, theoretical and applied knowledge related to the field of learning or work. A knowledge base sufficient to enable an individual to access, understand and analyse information, then draw logical conclusions from it or use it to solve problems or apply certain technical tools. Literacy and numeracy needed to understand, analyse and produce well-organised texts and clear mathematical tools related to the field of learning or work.",
+    "skills": "A set of cognitive and practical skills for handling simple problems related to the field of learning or work and proposing solutions. Skills needed to collect, analyse and exchange a defined range of information using pre-agreed criteria and standards, along with the skills needed to select and use the equipment, tools and materials required in familiar work or learning environments. Communication and IT skills needed to meet the requirements of the work or learning environment. Literacy and numeracy skills to analyse information, produce coherent texts and carry out various mathematical operations.",
+    "competencies": "Ability to carry out varied tasks under limited supervision, in work or learning environments that are familiar and, in some respects, occasionally unfamiliar. Ability to take on some responsibility and exercise a defined level of self-autonomy regarding job requirements and personal conduct according to prevailing social and cultural norms, or regarding tasks assigned to others in small groups under indirect supervision within an organised learning or work environment. Ability to work with limited self-autonomy or with others in small technical or learning teams in different environments under indirect supervision. Ability to respond to some written or verbal instructions and correspondence in familiar work or learning environments."
+  },
+  {
+    "level": 5,
+    "title": "Technical Diploma",
+    "knowledge": "A broad range of specialised technical and theoretical knowledge in the field of learning or work. Comprehensive knowledge of the facts, concepts, principles, processes and rules needed to identify and analyse the data, information and terminology required to solve problems, and to apply and use the tools, equipment and technology associated with the field of learning or work, or with related fields.",
+    "skills": "A broad range of cognitive, technical, communication and remedial skills — including communication skills — to select and use the various tools and technology needed to carry out a number of routine and non-routine activities and/or find solutions to familiar and unfamiliar problems. Specialised communication and IT skills to handle various issues related to the learning and work environment.",
+    "competencies": "Ability to manage and work in familiar or unfamiliar learning or work environments, individually or within diverse teams and under specific direction. Ability, at semi-professional level and under very limited supervision, to take on some responsibility and exercise a degree of self-autonomy in performing tasks related to the field of work or learning. Ability to take on limited supervisory tasks and work with others to define and develop one's own role and/or determine tasks assigned to others in different learning and work environments, which may in some respects be unfamiliar."
+  },
+  {
+    "level": 6,
+    "title": "Advanced Technical Diploma",
+    "knowledge": "Comprehensive, specialised knowledge of the key facts, principles, theories, rules and applied procedures associated with the field of learning or work. Knowledge needed to collect and analyse the data and information required to formulate and develop solutions and views on a number of problems, including abstract problems. Knowledge of the research requirements associated with the field of learning or work.",
+    "skills": "A broad range of cognitive, practical and technical skills to reach evidence-based solutions to problems that may be familiar or unfamiliar, including abstract problems. Critical thinking skills for analysing information and formulating ideas related to the field of learning or work. Skills needed to exchange information and ideas in different formats efficiently and effectively. Communication and IT skills needed to analyse and explain information, which may sometimes be difficult, and communicate it to different groups of stakeholders.",
+    "competencies": "Ability to apply the principle of self-autonomy and take the initiative to manage and supervise activities that may be unpredictable within learning or work environments. Ability to exercise a defined level of leadership responsibility and make decisions on a number of issues associated with the work or learning environment, or with the resources and means available. Ability to develop one's own capabilities and identify strengths and weaknesses related to the field of learning and work according to predefined criteria overseen by a supervisor or another team. Awareness of the nature of one's own conduct and individual tasks and their ethical impact on oneself and others within the work or learning environment."
+  },
+  {
+    "level": 7,
+    "title": "Technical Bachelor's Degree",
+    "knowledge": "Comprehensive and in-depth theoretical and technical knowledge related to the field of specialisation or professional practice. Integrated knowledge of the field of specialisation or professional practice and related fields of specialisation or work. Understanding of the connections between the field of specialisation or professional practice and other related fields. An in-depth grasp of the key theories, concepts, practices, tools and methods needed to generate and evaluate information and data in order to find solutions to problems that may be complex. Awareness of the latest laws, regulations and techniques related to the field of specialisation or work, including familiarity with relevant research methods and tools.",
+    "skills": "Specialised technical and intellectual skills to select and use the tools and technology needed to analyse and evaluate the information required to carry out related activities. Analytical and critical thinking skills to formulate ideas and develop appropriate solutions for handling problems that may be complex and unfamiliar. Skills needed to use or apply relevant research methods and tools. Advanced communication and IT skills to evaluate information that may be complex in order to reach appropriate conclusions.",
+    "competencies": "Ability to work at an advanced level, and/or take responsibility for leading a group/team in different work or learning environments related to the field of knowledge or professional specialisation, which may sometimes be unfamiliar in some respects. Ability to take on and apply the principle of responsibility in handling numerous ethical and professional issues, and to take the initiative in carrying out various activities, which may include evaluating one's own performance or that of others. Ability to take responsibility for one's own professional development according to predefined foundations and standards and under very limited direction."
+  },
+  {
+    "level": 8,
+    "title": "Higher Technical Diploma",
+    "knowledge": "Systematic and comprehensive knowledge in the field of specialisation or professional work. Advanced knowledge and an in-depth understanding of the theories and applications related to the field of knowledge specialisation or professional work. In-depth knowledge of the methodologies, principles, techniques and technology needed to conduct research and studies and achieve innovation associated with the field of study or work.",
+    "skills": "Advanced skills, to the level of mastery and creativity, for solving complex and unpredictable problems related to the field of learning or professional practice. Skills needed to reach the level of capability to carry out critical/analytical review of the information, systems, processes and applications associated with the field of learning or professional specialisation. Advanced skills in selecting relevant research methodologies and tools related to the field of learning or work. Advanced communication and IT skills that help strengthen the ideas presented and/or advance professional work.",
+    "competencies": "Ability to manage and work, at specialist level, in different work or learning environments that may sometimes be unpredictable. Ability to exercise self-autonomy to evaluate operational processes and/or available learning resources, handle complex professional and ethical issues, and identify self-development requirements — particularly those related to advanced skills such as critical thinking and problem solving. Ability to lead multiple teams and make sound, well-considered judgements regarding the roles assigned to team members and their level of performance."
+  },
+  {
+    "level": 9,
+    "title": "Technical Master's Degree",
+    "knowledge": "Highly specialised knowledge at the highest levels of professional work requirements or the field of knowledge specialisation and other related disciplines. A deep and comprehensive understanding of the key theories, concepts, principles and their applications related to the field of knowledge or professional specialisation. Specialised knowledge spanning multiple fields, coupled with a full grasp of the research and innovation methods and techniques, and originality in developing and/or applying the ideas, processes, tools and materials needed for this.",
+    "skills": "Advanced skills in analysing and evaluating ideas and concepts, which may be complex, related to the field of specialisation or professional practice. Specialised skills for solving problems associated with the field of learning, professional specialisation, or related professional disciplines. Advanced skills in using the core research tools and methods relevant to the field of knowledge or work. Advanced communication and IT skills for handling various complex issues.",
+    "competencies": "Ability to manage and work at a professional level, in different work or learning environments that may be complex, unfamiliar and ill-defined. Ability to manage work with complete self-autonomy in order to identify the variables and requirements of the professional learning or work environment, including basic requirements such as enhancing critical thinking, problem-solving, and artificial and emotional intelligence skills. Ability to take full responsibility for exercising an active leadership role in managing different work or learning teams, positively reflecting on the level and nature of one's own role and the active collective roles of others."
+  },
+  {
+    "level": 10,
+    "title": "Technical Doctorate",
+    "knowledge": "Highly specialised and comprehensive knowledge at the forefront of the field of specialisation or professional practice, encompassing advanced knowledge of the key theories, concepts and principles capable of redefining or extending the boundaries of existing knowledge. Integrated knowledge for analysing, evaluating and responding to complex problems, which may include empirical problems related to the field of specialisation or professional practice. Systematic understanding and broad knowledge of developments in the applications and technology of the professional field of specialisation or related professional fields. The highest levels of knowledge of the methods, techniques and concepts relevant to the field of specialised research.",
+    "skills": "Advanced, specialised skills and technical/applied knowledge for analysing and evaluating highly significant problems associated with the field of learning or professional specialisation, or with related specialisations. Originality and innovation in developing concepts and methodologies, and/or applying research methods that can be used to redefine and renew existing knowledge or professional practices, and to address highly complex issues related to the field of learning or work.",
+    "competencies": "The ability, at the advanced professional (expert) level, to exercise authority and self-autonomy, and to employ creative capability in order to make sound decisions related to the field of knowledge specialisation or professional field. Ability to take full responsibility for performing an active leadership role, and for the governance of systems and strategic planning of various complex professional activities. Ability to identify and formulate the requirements for developing the professional/vocational work environment, particularly in aspects related to developing critical thinking, emotional and artificial intelligence skills, and managing research relevant to the field of specialisation or work."
+  }
+];
+
+        const TVQF_LEVELS_LABELS = {
+            ar: {
+                levelCol: 'المستوى',
+                titleCol: 'مسمى المؤهل',
+                levelWord: 'المستوى',
+                knowledge: '📘 المعرفة',
+                skills: '🛠️ المهارات',
+                competencies: '🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)',
+                close: 'إغلاق'
+            },
+            en: {
+                levelCol: 'Level',
+                titleCol: 'Qualification Title',
+                levelWord: 'Level',
+                knowledge: '📘 Knowledge',
+                skills: '🛠️ Skills',
+                competencies: '🎯 Competencies (Responsibility & Autonomy, Application, Engagement)',
+                close: 'Close'
+            }
+        };
+
+        function getCurrentLevelsLang() {
+            const lang = (window.TVQF_CURRENT_LANG === 'en') ? 'en' : 'ar';
+            return lang;
+        }
+
+        function getLevelsData() {
+            return (getCurrentLevelsLang() === 'en') ? TVQF_LEVELS_DATA_EN : TVQF_LEVELS_DATA_AR;
+        }
+
         function renderLevelsTable() {
             const tbody = document.getElementById('levelsTableBody');
             if (!tbody) return;
-            const orderedLevels = TVQF_LEVELS_DATA.slice().sort(function (a, b) { return b.level - a.level; });
+            const lang = getCurrentLevelsLang();
+            const labels = TVQF_LEVELS_LABELS[lang];
+            const levelsColEl = document.getElementById('levelsColLevel');
+            const titleColEl = document.getElementById('levelsColTitle');
+            if (levelsColEl) levelsColEl.textContent = labels.levelCol;
+            if (titleColEl) titleColEl.textContent = labels.titleCol;
+
+            const knowledgeLabelEl = document.getElementById('levelModalKnowledgeLabel');
+            const skillsLabelEl = document.getElementById('levelModalSkillsLabel');
+            const competenciesLabelEl = document.getElementById('levelModalCompetenciesLabel');
+            if (knowledgeLabelEl) knowledgeLabelEl.textContent = labels.knowledge;
+            if (skillsLabelEl) skillsLabelEl.textContent = labels.skills;
+            if (competenciesLabelEl) competenciesLabelEl.textContent = labels.competencies;
+            const closeBtn = document.querySelector('.level-modal-close');
+            if (closeBtn) closeBtn.setAttribute('aria-label', labels.close);
+
+            const orderedLevels = getLevelsData().slice().sort(function (a, b) { return b.level - a.level; });
             tbody.innerHTML = orderedLevels.map(function (lvl) {
                 return '<tr onclick="openLevelModal(' + lvl.level + ')">' +
                     '<td><span class="level-badge">' + lvl.level + '</span></td>' +
@@ -1577,9 +1696,11 @@
         }
 
         function openLevelModal(levelNum) {
-            const data = TVQF_LEVELS_DATA.find(function (l) { return l.level === levelNum; });
+            const lang = getCurrentLevelsLang();
+            const labels = TVQF_LEVELS_LABELS[lang];
+            const data = getLevelsData().find(function (l) { return l.level === levelNum; });
             if (!data) return;
-            document.getElementById('levelModalTitle').textContent = 'المستوى ' + data.level + ' — ' + data.title;
+            document.getElementById('levelModalTitle').textContent = labels.levelWord + ' ' + data.level + ' — ' + data.title;
             document.getElementById('levelModalKnowledge').textContent = data.knowledge;
             document.getElementById('levelModalSkills').textContent = data.skills;
             document.getElementById('levelModalCompetencies').textContent = data.competencies;
