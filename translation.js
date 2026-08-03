@@ -71,7 +71,7 @@ const TVQF_TRANSLATIONS = {
   "t_60": "The framework is overseen by a National Coordination Committee comprising representatives from the Ministries of Education, Higher Education & Research, and Labour & Social Affairs. Their mandate includes policy oversight, stakeholder coordination and guidance for institutional implementation.",
   "t_61": "The governance structure ensures that TVQF Iraq remains responsive to the needs of learners, employers, and the broader economy. Regular reviews and stakeholder consultations help maintain the framework's relevance and effectiveness.",
   "t_62": "Levels & Descriptors",
-  "t_63": "Discover the full set of 10 qualification levels of TVQF Iraq, each defined by knowledge, skills and competence descriptors. Download the full PDF document for detailed descriptions.",
+  "t_63": "Discover the full set of 10 qualification levels of TVQF Iraq, each defined by knowledge, skills and competence descriptors.",
   "t_64": "The 10 Levels of TVQF Iraq",
   "t_65": "Levels 1-3: Basic Vocational Training",
   "t_66": "Entry-level vocational certificates focusing on foundational skills and basic competencies in specific trades and occupations.",
@@ -290,6 +290,7 @@ const TVQF_TRANSLATIONS = {
   "a_276": "📄 Download Institutional Accreditation Application (Form 3)",
   "t_277": "Qualification Approval",
   "t_278": "Institutions can apply for official level recognition for each program through the Qualification Leveling Application Form. The Sectoral Committee reviews and recommends level placement.",
+  "t_278b": "Qualification approval requests go through an internal and external evaluation process overseen by the TVQF Board/Authority and its specialized committees — including the Quality Control Committee — which review the submitted forms and documentation and issue decisions on accreditation and level placement.",
   "t_279": "Application Process",
   "t_280": "Complete the Qualification Leveling Application Form",
   "t_281": "Provide detailed program documentation including learning outcomes, curriculum, and assessment methods",
@@ -323,7 +324,6 @@ const TVQF_TRANSLATIONS = {
   "f_309": "Contact Us",
   "f_310": "Contact",
   "f_311": "<strong>Email:</strong> info@tvqf-iraq.org",
-  "f_312": "<strong>Ministry of Education</strong>",
   "f_313": "Baghdad, Iraq",
   "f_314": "Working Hours:<br/>Sunday - Thursday<br/>8:00 AM - 3:00 PM",
   "f_315": "Our Partners",
@@ -396,7 +396,7 @@ const TVQF_TRANSLATIONS = {
   "t_60": "يُشرف على الإطار لجنة تنسيق وطنية تضم ممثلين عن وزارات التربية، والتعليم العالي والبحث العلمي، والعمل والشؤون الاجتماعية. وتشمل مهامها الإشراف على السياسات وتنسيق أصحاب المصلحة وتوجيه التنفيذ المؤسسي.",
   "t_61": "يضمن هيكل الحوكمة بقاء الإطار متجاوباً مع احتياجات المتعلمين وأصحاب العمل والاقتصاد بشكل عام. وتساعد المراجعات الدورية والتشاور مع أصحاب المصلحة في الحفاظ على أهمية الإطار وفعاليته.",
   "t_62": "المستويات والواصفات",
-  "t_63": "اكتشف المجموعة الكاملة من المستويات العشرة للمؤهلات في الإطار الوطني، وكل مستوى معرّف بواصفات المعرفة والمهارات والكفاءة. حمّل ملف PDF الكامل للاطلاع على التفاصيل.",
+  "t_63": "اكتشف المجموعة الكاملة من المستويات العشرة للمؤهلات في الإطار الوطني، وكل مستوى معرّف بواصفات المعرفة والمهارات والكفاءة.",
   "t_64": "المستويات العشرة للإطار الوطني للمؤهلات في العراق",
   "t_65": "المستويات 1-3: التدريب المهني الأساسي",
   "t_66": "شهادات مهنية للمستوى التمهيدي تركّز على المهارات الأساسية والكفاءات الأولية في حرف ومهن محددة.",
@@ -615,6 +615,7 @@ const TVQF_TRANSLATIONS = {
   "a_276": "📄 تحميل استمارة طلب الاعتماد المؤسسي (النموذج 3)",
   "t_277": "اعتماد المؤهلات",
   "t_278": "يمكن للمؤسسات التقديم للحصول على الاعتراف الرسمي بمستوى كل برنامج من خلال استمارة طلب اعتماد المستوى. وتقوم اللجنة القطاعية بمراجعة الطلب والتوصية بتحديد المستوى.",
+  "t_278b": "تخضع طلبات اعتماد المؤهلات لآلية تقييم داخلي وخارجي يشرف عليها مجلس/هيئة الإطار الوطني للمؤهلات التقنية والمهنية (TVQF) عبر لجانه المتخصصة، ومنها لجنة ضبط الجودة، والتي تتولى مراجعة الاستمارات والوثائق المقدمة واتخاذ القرارات المتعلقة بالاعتماد ومنح المستوى.",
   "t_279": "عملية التقديم",
   "t_280": "إكمال استمارة طلب اعتماد المستوى",
   "t_281": "توفير وثائق تفصيلية عن البرنامج تشمل مخرجات التعلّم والمنهج وأساليب التقييم",
@@ -648,7 +649,6 @@ const TVQF_TRANSLATIONS = {
   "f_309": "اتصل بنا",
   "f_310": "التواصل",
   "f_311": "<strong>البريد الإلكتروني:</strong> info@tvqf-iraq.org",
-  "f_312": "<strong>وزارة التربية</strong>",
   "f_313": "بغداد، العراق",
   "f_314": "ساعات الدوام:<br/>الأحد - الخميس<br/>8:00 صباحاً - 3:00 عصراً",
   "f_315": "شركاؤنا",
@@ -658,7 +658,7 @@ const TVQF_TRANSLATIONS = {
 
 // Keys whose value contains inline HTML (e.g. <br>, <strong>) and must be
 // applied with innerHTML instead of textContent.
-const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_216", "t_217", "t_218", "t_219", "t_220", "t_230", "t_231", "t_232", "t_233", "f_301", "f_311", "f_312", "f_314"]);
+const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_216", "t_217", "t_218", "t_219", "t_220", "t_230", "t_231", "t_232", "t_233", "f_301", "f_311", "f_314"]);
 
 (function() {
   const STORAGE_KEY = 'tvqf-lang';
