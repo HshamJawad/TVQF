@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-i18n="title_1">TVQF Iraq - Technical &amp; Vocational Qualifications Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&amp;family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            gap: 1rem;
+            min-height: 180px;
+        }
+
+        .site-logo-link {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .site-logo {
+            height: 140px;
+            width: auto;
+            display: block;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-inline-start: auto;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem;
+                min-height: 0;
+            }
+
+            .site-logo-link {
+                position: static;
+                transform: none;
+                order: -1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .site-logo {
+                height: 110px;
+            }
+
+            .header-actions {
+                margin-inline-start: 0;
+            }
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .search-box input {
+            padding: 0.6rem 1rem;
+            border: 1px solid #ddd;
+            border-right: none;
+            font-size: 0.95rem;
+            width: 250px;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 0.6rem 1.2rem;
+            background: #006400;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #004d00;
+        }
+
+        nav {
+            width: 100%;
+            background: #006400;
+            margin-top: 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        nav li {
+            flex: 1;
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            transition: background 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #004d00;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            padding: 0.8rem 1.5rem;
+            text-align: left;
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: #006400;
+            color: #fff;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #006400 0%, #004d00 100%);
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #C8102E;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .cta-button:hover {
+            background: #a00d24;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .intro-section {
+            margin-bottom: 3rem;
+        }
+
+        .intro-section h2 {
+            font-size: 2rem;
+            color: #006400;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section h3 {
+            font-size: 1.5rem;
+            color: #006400;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .link-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,100,0,0.2);
+        }
+
+        .link-card h3 {
+            color: #006400;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .link-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Content Sections */
+        .content-box {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #006400;
+        }
+
+        .content-box h3 {
+            color: #006400;
+            margin-bottom: 1rem;
+        }
+
+        .content-box ul {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Interactive Levels Table */
+        .levels-table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .levels-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 480px;
+            background: #fff;
+        }
+
+        .levels-table thead th {
+            background: #006400;
+            color: #fff;
+            padding: 1rem 1.25rem;
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        .levels-table tbody td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .levels-table tbody tr {
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .levels-table tbody tr:hover {
+            background: #f0f7f0;
+        }
+
+        .levels-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .level-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #006400;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .level-title-cell {
+            color: #004d00;
+            font-weight: 600;
+        }
+
+        .level-hint {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        /* Level Modal */
+        .level-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .level-modal-overlay.active {
+            display: flex;
+        }
+
+        .level-modal {
+            background: #fff;
+            border-radius: 14px;
+            max-width: 780px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .level-modal-close {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .level-modal-close:hover {
+            background: #e0e0e0;
+        }
+
+        .level-modal-header {
+            border-bottom: 3px solid #006400;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            padding-left: 2.5rem;
+        }
+
+        .level-modal-header h3 {
+            color: #006400;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .level-modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .level-modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .level-modal-section h4 {
+            color: #fff;
+            background: #006400;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .level-modal-section p {
+            line-height: 1.9;
+            color: #333;
+            margin: 0;
+        }
+
+        .content-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Download Button */
+        .download-btn {
+            display: inline-block;
+            background: #006400;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #004d00;
+        }
+
+        /* News Carousel */
+        .news-section {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            margin: 0 -2rem;
+        }
+
+        .news-section h2 {
+            text-align: center;
+            color: #006400;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .news-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #C8102E;
+        }
+
+        .news-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-date {
+            color: #006400;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .news-card p {
+            color: #666;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Cairo', 'Montserrat', sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: #006400;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #004d00;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #006400;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .partners {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .partner-logo {
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box input {
+                flex: 1;
+                width: 100%;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                text-align: left;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                background: #003300;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .news-carousel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== Language Toggle Button ===== */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #006400;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.1rem;
+            font-family: 'Cairo', 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-inline-start: 1rem;
+        }
+
+        .lang-toggle:hover {
+            background: #004d00;
+        }
+
+        .lang-toggle .lang-icon {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        /* ===== RTL Layout Overrides (Arabic) ===== */
+        html[dir="rtl"] .header-container {
+            justify-content: flex-start;
+        }
+
+        html[dir="rtl"] .search-box input {
+            border-right: 1px solid #ddd;
+            border-left: none;
+            text-align: right;
+        }
+
+        html[dir="rtl"] nav a {
+            border-right: none;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        html[dir="rtl"] nav li:last-child a {
+            border-left: none;
+        }
+
+        html[dir="rtl"] .dropdown-content {
+            left: auto;
+            right: 0;
+            text-align: right;
+        }
+
+        html[dir="rtl"] .dropdown-content a {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .content-box {
+            border-left: none;
+            border-right: 4px solid #006400;
+        }
+
+        html[dir="rtl"] .content-box ul,
+        html[dir="rtl"] ul {
+            margin-left: 0;
+            margin-right: 2rem;
+        }
+
+        html[dir="rtl"] .news-card {
+            border-left: none;
+            border-right: 4px solid #C8102E;
+        }
+
+        html[dir="rtl"] .footer-section p,
+        html[dir="rtl"] .footer-section a {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .link-card,
+        html[dir="rtl"] .intro-section,
+        html[dir="rtl"] .form-group label {
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            html[dir="rtl"] nav a {
+                text-align: right;
+                border-left: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+<div class="header-container">
+<a aria-label="TVQF Iraq - Home" class="site-logo-link" href="#" onclick="return showPage('home')">
+<img alt="TVQF Iraq Logo" class="site-logo" src="logo-tvqf-iraq.png"/>
+</a>
+<div class="header-actions">
+<button aria-label="Switch to English" class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()" type="button">
+<span class="lang-icon">🌐</span>
+<span id="langToggleLabel">EN</span>
+</button>
+<div class="search-box">
+<input data-i18n-placeholder="ph_2" placeholder="Search for keywords..." type="text"/>
+<button type="submit">🔍</button>
+</div>
+</div>
+</div>
+<nav id="mainNav">
+<button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+<ul id="navMenu">
+<li><a data-i18n="nav_3" href="#" onclick="showPage('home')">Home</a></li>
+<li class="dropdown">
+<a data-i18n="nav_4" href="#" onclick="showPage('about')">About ▼</a>
+<div class="dropdown-content">
+<a data-i18n="nav_5" href="#" onclick="showPage('about-tvqf')">About TVQF Iraq</a>
+<a data-i18n="nav_6" href="#" onclick="showPage('about-background')">Background &amp; Development</a>
+<a data-i18n="nav_7" href="#" onclick="showPage('about-governance')">Governance</a>
+</div>
+</li>
+<li class="dropdown">
+<a data-i18n="nav_8" href="#" onclick="showPage('framework')">The Framework ▼</a>
+<div class="dropdown-content">
+<a data-i18n="nav_9" href="#" onclick="showPage('framework-levels')">Levels &amp; Descriptors</a>
+<a data-i18n="nav_10" href="#" onclick="showPage('framework-types')">Qualification Types</a>
+<a data-i18n="nav_11" href="#" onclick="showPage('framework-credit')">Credit &amp; Learning Hours</a>
+<a data-i18n="nav_12" href="#" onclick="showPage('framework-matrices')">Sectoral Matrices</a>
+</div>
+</li>
+<li class="dropdown">
+<a data-i18n="nav_13" href="#" onclick="showPage('quality')">Quality Assurance ▼</a>
+<div class="dropdown-content">
+<a data-i18n="nav_14" href="#" onclick="showPage('quality-accreditation')">Institutional Accreditation</a>
+<a data-i18n="nav_15" href="#" onclick="showPage('quality-approval')">Qualification Approval</a>
+<a data-i18n="nav_16" href="#" onclick="showPage('quality-monitoring')">Monitoring &amp; Evaluation</a>
+</div>
+</li>
+<li class="dropdown">
+<a data-i18n="nav_17" href="#" onclick="showPage('rpl')">RPL ▼</a>
+<div class="dropdown-content">
+<a data-i18n="nav_18" href="#" onclick="showPage('rpl-what')">What is RPL?</a>
+<a data-i18n="nav_19" href="#" onclick="showPage('rpl-apply')">How to Apply</a>
+<a data-i18n="nav_20" href="#" onclick="showPage('rpl-centres')">RPL Centres</a>
+<a data-i18n="nav_21" href="#" onclick="showPage('rpl-forms')">Forms &amp; Guidelines</a>
+</div>
+</li>
+<li class="dropdown">
+<a data-i18n="nav_22" href="#" onclick="showPage('resources')">Tools &amp; Resources ▼</a>
+<div class="dropdown-content">
+<a data-i18n="nav_23" href="#" onclick="showPage('resources-forms')">Forms and Templates</a>
+<a data-i18n="nav_24" href="#" onclick="showPage('resources-guidelines')">Guidelines and Manuals</a>
+<a data-i18n="nav_25" href="#" onclick="showPage('resources-training')">Training Materials</a>
+</div>
+</li>
+<li><a data-i18n="nav_26" href="#" onclick="showPage('news')">News &amp; Events</a></li>
+<li><a data-i18n="nav_27" href="#" onclick="showPage('contact')">Contact Us</a></li>
+</ul>
+</nav>
+</header>
+<!-- HOME PAGE -->
+<div class="page-content active" id="home">
+<section class="hero">
+<h1 data-i18n="hero_28">Building a Skilled and Recognized Iraq Through Trustworthy Qualifications</h1>
+<p data-i18n="hero_29">Establishing a unified qualifications system that aligns vocational, technical and higher education to national and global standards</p>
+<a class="cta-button" data-i18n="cta_30" href="#" onclick="showPage('framework')">Explore the Framework</a>
+</section>
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_31">Welcome to TVQF Iraq</h2>
+<p data-i18n="t_32">The Technical and Vocational Qualifications Framework (TVQF Iraq) sets the foundation for a unified qualifications system in Iraq, aligning vocational, technical and higher education to national levels and globally-comparable standards. It supports lifelong learning, clearer pathways, and improved links between skills, education and employment.</p>
+</div>
+<div class="quick-links">
+<div class="link-card" onclick="showPage('about-tvqf')">
+<h3 data-i18n="t_33">What is TVQF?</h3>
+<p data-i18n="t_34">Learn about the framework and its role in Iraq's education system</p>
+</div>
+<div class="link-card" onclick="showPage('framework-levels')">
+<h3 data-i18n="t_35">Levels &amp; Descriptors</h3>
+<p data-i18n="t_36">Explore the 10 qualification levels and their definitions</p>
+</div>
+<div class="link-card" onclick="showPage('quality-approval')">
+<h3 data-i18n="t_37">Apply for Leveling</h3>
+<p data-i18n="t_38">Submit your qualification for official level recognition</p>
+</div>
+<div class="link-card" onclick="showPage('rpl-what')">
+<h3 data-i18n="t_39">Recognition of Prior Learning</h3>
+<p data-i18n="t_40">Get credit for skills gained through work experience</p>
+</div>
+<div class="link-card" onclick="showPage('news')">
+<h3 data-i18n="t_41">News &amp; Updates</h3>
+<p data-i18n="t_42">Stay informed about latest developments and events</p>
+</div>
+</div>
+</div>
+<section class="news-section">
+<h2 data-i18n="t_43">Latest News &amp; Updates</h2>
+<div class="news-carousel">
+<div class="news-card">
+<h3 data-i18n="t_44">National Pilot Plan Launch</h3>
+<p class="news-date" data-i18n="t_45">October 2025</p>
+<p data-i18n="t_46">The TVQF Iraq National Pilot Plan (2025-2028) has been officially launched, marking a significant milestone in education reform.</p>
+</div>
+<div class="news-card">
+<h3 data-i18n="t_47">Accreditation Applications Open</h3>
+<p class="news-date" data-i18n="t_48">September 2025</p>
+<p data-i18n="t_49">Training providers can now submit applications for institutional accreditation through the official portal.</p>
+</div>
+<div class="news-card">
+<h3 data-i18n="t_50">RPL Pilot Centres Announced</h3>
+<p class="news-date" data-i18n="t_51">August 2025</p>
+<p data-i18n="t_52">Recognition of Prior Learning pilot centres have been established across multiple governorates to support learners.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- ABOUT TVQF IRAQ -->
+<div class="page-content" id="about-tvqf">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_53">About TVQF Iraq</h2>
+<p data-i18n="t_54">The TVQF Iraq is designed to establish a coherent national framework for qualifications across all levels—from basic vocational training through to advanced doctoral awards. Its aim is to enhance transparency, comparability and recognition of learning outcomes for learners, employers and institutions alike.</p>
+<p data-i18n="t_55">The framework provides a systematic approach to organizing qualifications by level and learning outcomes, making it easier for individuals to progress in their education and career paths, and for employers to understand the competencies associated with different qualifications.</p>
+</div>
+</div>
+</div>
+<!-- BACKGROUND & DEVELOPMENT -->
+<div class="page-content" id="about-background">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_56">Background &amp; Development</h2>
+<p data-i18n="t_57">Initiated in 2017 and approved by Council of Ministers Decision 99 (2021), TVQF Iraq reflects a commitment to reforming the education-training system and strengthening alignment with the evolving labour market and international standards.</p>
+<p data-i18n="t_58">The development of TVQF Iraq has been a collaborative effort involving stakeholders from across the education and training sector, supported by international partners including UNESCO and the European Union. The framework represents years of consultation, research, and policy development to create a system that meets Iraq's specific needs while aligning with global best practices.</p>
+</div>
+</div>
+</div>
+<!-- GOVERNANCE -->
+<div class="page-content" id="about-governance">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_59">Governance</h2>
+<p data-i18n="t_60">The framework is overseen by a National Coordination Committee comprising representatives from the Ministries of Education, Higher Education &amp; Research, and Labour &amp; Social Affairs. Their mandate includes policy oversight, stakeholder coordination and guidance for institutional implementation.</p>
+<p data-i18n="t_61">The governance structure ensures that TVQF Iraq remains responsive to the needs of learners, employers, and the broader economy. Regular reviews and stakeholder consultations help maintain the framework's relevance and effectiveness.</p>
+</div>
+</div>
+</div>
+<!-- LEVELS & DESCRIPTORS -->
+<div class="page-content" id="framework-levels">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_62">Levels &amp; Descriptors</h2>
+<p data-i18n="t_63">Discover the full set of 10 qualification levels of TVQF Iraq, each defined by knowledge, skills and competence descriptors. Download the full PDF document for detailed descriptions.</p>
+<a class="download-btn" data-i18n="a_73" data-i18n-href="a_73_href" href="Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.pdf" target="_blank">📄 Download TVQF Levels &amp; Descriptors PDF</a>
+<a class="download-btn" data-i18n="a_73b" data-i18n-href="a_73b_href" href="Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.docx" target="_blank">📝 Download TVQF Levels &amp; Descriptors DOCX</a>
+
+<div class="levels-table-wrapper">
+<table class="levels-table">
+<thead>
+
+<tr>
+<th style="width: 90px;" id="levelsColLevel">المستوى</th>
+<th id="levelsColTitle">مسمى المؤهل</th>
+</tr>
+</thead>
+<tbody id="levelsTableBody"></tbody>
+</table>
+</div>
+
+<div class="level-modal-overlay" id="levelModalOverlay" onclick="if(event.target===this) closeLevelModal()">
+<div class="level-modal" role="dialog" aria-modal="true" aria-labelledby="levelModalTitle">
+<button class="level-modal-close" onclick="closeLevelModal()" aria-label="إغلاق">✕</button>
+<div class="level-modal-header">
+<h3 id="levelModalTitle"></h3>
+</div>
+<div class="level-modal-section">
+<h4 id="levelModalKnowledgeLabel">📘 المعرفة</h4>
+<p id="levelModalKnowledge"></p>
+</div>
+<div class="level-modal-section">
+<h4 id="levelModalSkillsLabel">🛠️ المهارات</h4>
+<p id="levelModalSkills"></p>
+</div>
+<div class="level-modal-section">
+<h4 id="levelModalCompetenciesLabel">🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)</h4>
+<p id="levelModalCompetencies"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- WHAT IS RPL -->
+<div class="page-content" id="rpl-what">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_74">What is RPL?</h2>
+<p data-i18n="t_75">Recognition of Prior Learning (RPL) allows learners to obtain credit for learning acquired outside formal education—through work experience, informal training or other means. RPL supports inclusive access to qualifications, improved mobility and full recognition of competencies.</p>
+<h3 data-i18n="t_76">Benefits of RPL</h3>
+<ul>
+<li data-i18n="t_77">Recognition of skills and knowledge gained through work experience</li>
+<li data-i18n="t_78">Shortened pathway to formal qualifications</li>
+<li data-i18n="t_79">Cost and time savings for learners</li>
+<li data-i18n="t_80">Enhanced employment opportunities</li>
+<li data-i18n="t_81">Increased access to further education and training</li>
+<li data-i18n="t_82">Validation of informal and non-formal learning</li>
+</ul>
+<h3 data-i18n="t_83">What Can Be Recognized?</h3>
+<p data-i18n="t_84">RPL can be granted for learning acquired through:</p>
+<ul>
+<li data-i18n="t_85">Workplace experience and on-the-job training</li>
+<li data-i18n="t_86">Informal training and workshops</li>
+<li data-i18n="t_87">Self-directed learning and study</li>
+<li data-i18n="t_88">Volunteer work and community activities</li>
+<li data-i18n="t_89">Life experience relevant to the qualification</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- HOW TO APPLY RPL -->
+<div class="page-content" id="rpl-apply">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_90">How to Apply for RPL</h2>
+<p data-i18n="t_91">Follow this step-by-step guide to apply for Recognition of Prior Learning.</p>
+<h3 data-i18n="t_92">Step 1: Check Eligibility</h3>
+<p data-i18n="t_93">Ensure you have relevant work experience or informal learning that aligns with the qualification you're seeking. Most RPL applications require a minimum of 2-3 years of relevant experience.</p>
+<h3 data-i18n="t_94">Step 2: Gather Documentation</h3>
+<p data-i18n="t_95">Collect evidence of your learning and experience, including:</p>
+<ul>
+<li data-i18n="t_96">Employment certificates and job descriptions</li>
+<li data-i18n="t_97">Training certificates from informal courses</li>
+<li data-i18n="t_98">Work samples and portfolios</li>
+<li data-i18n="t_99">Reference letters from employers or supervisors</li>
+<li data-i18n="t_100">Any other relevant documentation</li>
+</ul>
+<h3 data-i18n="t_101">Step 3: Complete the Application</h3>
+<p data-i18n="t_102">Fill out the RPL Application Form completely and attach all supporting documents.</p>
+<a class="download-btn" data-i18n="a_116" data-i18n-href="a_116_href" href="Forms%20EN/Form%202%20%E2%80%93%20Recognition%20of%20Prior%20Learning%20(RPL).docx" target="_blank">📄 Download RPL Application Form</a>
+<h3 data-i18n="t_103">Step 4: Submit to RPL Centre</h3>
+<p data-i18n="t_104">Submit your completed application to your nearest RPL Centre. A list of centres is available on the RPL Centres page.</p>
+<h3 data-i18n="t_105">Step 5: Assessment</h3>
+<p data-i18n="t_106">Your application will be reviewed by qualified assessors who will evaluate your evidence against the learning outcomes of the qualification. Assessment methods may include:</p>
+<ul>
+<li data-i18n="t_107">Portfolio review</li>
+<li data-i18n="t_108">Interview or oral questioning</li>
+<li data-i18n="t_109">Practical demonstration</li>
+<li data-i18n="t_110">Written test (if necessary)</li>
+</ul>
+<h3 data-i18n="t_111">Step 6: Receive Results</h3>
+<p data-i18n="t_112">You will be notified of the assessment outcome, which may be:</p>
+<ul>
+<li data-i18n="t_113">Full recognition - credit granted for the entire qualification or units</li>
+<li data-i18n="t_114">Partial recognition - credit granted for some units, with gap training required</li>
+<li data-i18n="t_115">Not recognized - insufficient evidence, with recommendations for further learning</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- RPL CENTRES -->
+<div class="page-content" id="rpl-centres">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_117">RPL Centres (Pilot)</h2>
+<p data-i18n="t_118">A list of pilot RPL centres by governorate will be published to enable local access for applicants.</p>
+<div class="content-box">
+<h3 data-i18n="t_119">Baghdad</h3>
+<p data-i18n-html="t_120">RPL Assessment Centre - Ministry of Education<br/>
+                    Address: Coming Soon<br/>
+                    Contact: Coming Soon</p>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_121">Basra</h3>
+<p data-i18n-html="t_122">RPL Assessment Centre - Technical Institute<br/>
+                    Address: Coming Soon<br/>
+                    Contact: Coming Soon</p>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_123">Erbil</h3>
+<p data-i18n-html="t_124">RPL Assessment Centre - Vocational Training Directorate<br/>
+                    Address: Coming Soon<br/>
+                    Contact: Coming Soon</p>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_125">Mosul</h3>
+<p data-i18n-html="t_126">RPL Assessment Centre - Technical College<br/>
+                    Address: Coming Soon<br/>
+                    Contact: Coming Soon</p>
+</div>
+<p data-i18n-html="t_127" style="margin-top: 2rem;"><strong>Note:</strong> Additional RPL centres are being established. Please check back regularly for updates or contact the TVQF Secretariat for the latest information.</p>
+</div>
+</div>
+</div>
+<!-- RPL FORMS & GUIDELINES -->
+<div class="page-content" id="rpl-forms">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_128">RPL Forms &amp; Guidelines</h2>
+<p data-i18n="t_129">Download the official forms and guidelines for Recognition of Prior Learning applications.</p>
+<div class="content-box">
+<h3 data-i18n="t_130">RPL Application Form</h3>
+<p data-i18n="t_131">Complete this form to apply for recognition of your prior learning and work experience.</p>
+<a class="download-btn" data-i18n="a_138" data-i18n-href="a_138_href" href="Forms%20EN/Form%202%20%E2%80%93%20Recognition%20of%20Prior%20Learning%20(RPL).docx" target="_blank">📄 Download RPL Application Form</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_132">RPL Assessment Guidelines</h3>
+<p data-i18n="t_133">Comprehensive guidelines for assessors conducting RPL evaluations, including assessment criteria and procedures.</p>
+<a class="download-btn" data-i18n="a_139" href="#">📄 Download RPL Assessment Guidelines</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_134">Evidence Portfolio Template</h3>
+<p data-i18n="t_135">A template to help you organize and present your evidence effectively.</p>
+<a class="download-btn" data-i18n="a_140" href="#">📄 Download Portfolio Template</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_136">RPL Information Booklet</h3>
+<p data-i18n="t_137">Detailed information about the RPL process, eligibility, and what to expect.</p>
+<a class="download-btn" data-i18n="a_141" href="#">📄 Download Information Booklet</a>
+</div>
+</div>
+</div>
+</div>
+<!-- FORMS AND TEMPLATES -->
+<div class="page-content" id="resources-forms">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_142">Forms and Templates</h2>
+<p data-i18n="t_143">Download official TVQF Iraq forms and templates for various applications and processes.</p>
+<div class="content-box">
+<h3 data-i18n="t_144">Qualification Leveling Application (Form 1)</h3>
+<p data-i18n="t_145">Apply for official TVQF level recognition for your qualification program.</p>
+<a class="download-btn" data-i18n="a_154" href="#">📄 Download Form 1</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_146">Institutional Accreditation Application (Form 3)</h3>
+<p data-i18n="t_147">Training providers use this form to apply for institutional accreditation.</p>
+<a class="download-btn" data-i18n="a_155" href="#">📄 Download Form 3</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_148">RPL Application Form</h3>
+<p data-i18n="t_149">Apply for Recognition of Prior Learning credit toward qualifications.</p>
+<a class="download-btn" data-i18n="a_156" href="#">📄 Download RPL Form</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_150">Sectoral Committee Review Checklist</h3>
+<p data-i18n="t_151">Checklist used by sectoral committees to review qualification applications.</p>
+<a class="download-btn" data-i18n="a_157" href="#">📄 Download Checklist</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_152">Field Visit Observation Form</h3>
+<p data-i18n="t_153">Form used during quality assurance field visits to training institutions.</p>
+<a class="download-btn" data-i18n="a_158" href="#">📄 Download Observation Form</a>
+</div>
+</div>
+</div>
+</div>
+<!-- GUIDELINES AND MANUALS -->
+<div class="page-content" id="resources-guidelines">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_159">Guidelines and Manuals</h2>
+<p data-i18n="t_160">Access key documents and manuals for implementing TVQF Iraq.</p>
+<div class="content-box">
+<h3 data-i18n="t_161">Implementation Guidelines (Upstream Level)</h3>
+<p data-i18n="t_162">Comprehensive guidelines for policy makers and national coordinators on framework implementation.</p>
+<a class="download-btn" data-i18n="a_171" href="#">📄 Download Implementation Guidelines</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_163">Institutional Roadmap (Downstream Level)</h3>
+<p data-i18n="t_164">Step-by-step guide for training institutions on aligning programs with TVQF standards.</p>
+<a class="download-btn" data-i18n="a_172" href="#">📄 Download Institutional Roadmap</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_165">National Pilot Plan (2025–2028)</h3>
+<p data-i18n="t_166">Strategic plan outlining the phased implementation of TVQF Iraq across the country.</p>
+<a class="download-btn" data-i18n="a_173" href="#">📄 Download Pilot Plan</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_167">Quality Standards for TVET</h3>
+<p data-i18n="t_168">Detailed quality standards for technical and vocational education and training provision.</p>
+<a class="download-btn" data-i18n="a_174" href="#">📄 Download Quality Standards</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_169">Assessment and Moderation Manual</h3>
+<p data-i18n="t_170">Guidelines for developing valid and reliable assessments aligned with TVQF learning outcomes.</p>
+<a class="download-btn" data-i18n="a_175" href="#">📄 Download Assessment Manual</a>
+</div>
+</div>
+</div>
+</div>
+<!-- TRAINING MATERIALS -->
+<div class="page-content" id="resources-training">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_176">Training Materials</h2>
+<p data-i18n="t_177">Access recorded presentations, workshop slides and self-study modules designed for capacity-building across stakeholders.</p>
+<div class="content-box">
+<h3 data-i18n="t_178">Introduction to TVQF Iraq</h3>
+<p data-i18n="t_179">Foundational training module covering the framework's purpose, structure, and benefits.</p>
+<a class="download-btn" data-i18n="a_190" href="#">📄 Download Module 1</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_180">Writing Learning Outcomes</h3>
+<p data-i18n="t_181">Workshop materials on developing clear, measurable learning outcomes aligned with TVQF levels.</p>
+<a class="download-btn" data-i18n="a_191" href="#">📄 Download Module 2</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_182">Curriculum Alignment Workshop</h3>
+<p data-i18n="t_183">Practical guide for mapping existing programs to TVQF levels and descriptors.</p>
+<a class="download-btn" data-i18n="a_192" href="#">📄 Download Module 3</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_184">Quality Assurance Essentials</h3>
+<p data-i18n="t_185">Training on quality assurance processes, accreditation requirements, and continuous improvement.</p>
+<a class="download-btn" data-i18n="a_193" href="#">📄 Download Module 4</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_186">RPL Assessment Training</h3>
+<p data-i18n="t_187">Comprehensive training for RPL assessors on evidence collection, evaluation, and decision-making.</p>
+<a class="download-btn" data-i18n="a_194" href="#">📄 Download Module 5</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_188">Recorded Webinars</h3>
+<p data-i18n="t_189">Access to past webinar recordings covering various TVQF implementation topics.</p>
+<a class="download-btn" data-i18n="a_195" href="#">🎥 Access Webinar Archive</a>
+</div>
+</div>
+</div>
+</div>
+<!-- NEWS & EVENTS -->
+<div class="page-content" id="news">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_196">News &amp; Events</h2>
+<p data-i18n="t_197">Stay informed with the latest announcements, national workshops, implementation updates and success stories of pilot institutions across Iraq.</p>
+</div>
+<div class="news-card" style="margin-bottom: 2rem;">
+<h3 data-i18n="t_198">National Pilot Plan Launch</h3>
+<p class="news-date" data-i18n="t_199">October 15, 2025</p>
+<p data-i18n="t_200">The TVQF Iraq National Pilot Plan (2025-2028) has been officially launched at a ceremony in Baghdad attended by ministers, international partners, and representatives from pilot institutions. The plan outlines a phased approach to implementing the framework across all governorates, starting with 20 pilot institutions in key sectors including engineering, IT, healthcare, and construction.</p>
+<p data-i18n="t_201">The Minister of Education emphasized that TVQF Iraq represents a transformative step toward modernizing Iraq's education system and ensuring qualifications are recognized both nationally and internationally.</p>
+</div>
+<div class="news-card" style="margin-bottom: 2rem;">
+<h3 data-i18n="t_202">Institutional Accreditation Applications Now Open</h3>
+<p class="news-date" data-i18n="t_203">September 28, 2025</p>
+<p data-i18n="t_204">Training providers across Iraq can now submit applications for institutional accreditation through the official TVQF portal. The accreditation process ensures that institutions meet quality standards and are authorized to issue TVQF-aligned qualifications.</p>
+<p data-i18n="t_205">Three information sessions will be held in Baghdad, Basra, and Erbil during October to help institutions prepare their applications. Registration is open on the TVQF website.</p>
+</div>
+<div class="news-card" style="margin-bottom: 2rem;">
+<h3 data-i18n="t_206">RPL Pilot Centres Established</h3>
+<p class="news-date" data-i18n="t_207">August 12, 2025</p>
+<p data-i18n="t_208">Recognition of Prior Learning (RPL) pilot centres have been established in Baghdad, Basra, Erbil, and Mosul. These centres will assess applications from workers and learners seeking credit for skills and knowledge gained through work experience and informal learning.</p>
+<p data-i18n="t_209">Over 50 assessors have been trained to conduct RPL evaluations across multiple sectors. The centres are expected to process their first applications by November 2025.</p>
+</div>
+<div class="news-card" style="margin-bottom: 2rem;">
+<h3 data-i18n="t_210">Sectoral Learning Outcome Matrices in Development</h3>
+<p class="news-date" data-i18n="t_211">July 20, 2025</p>
+<p data-i18n="t_212">Technical working groups are developing detailed Sectoral Learning Outcome Matrices for Engineering, Information Technology, and Health sectors. These matrices will provide clear competency frameworks to guide program design and ensure consistent standards across institutions.</p>
+<p data-i18n="t_213">Draft matrices are expected to be released for stakeholder consultation in December 2025.</p>
+</div>
+<div class="news-card" style="margin-bottom: 2rem;">
+<h3 data-i18n="t_214">Upcoming Events</h3>
+<p class="news-date" data-i18n="t_215">November - December 2025</p>
+<ul>
+<li data-i18n-html="t_216"><strong>November 15:</strong> National TVQF Workshop - Baghdad</li>
+<li data-i18n-html="t_217"><strong>November 22:</strong> Institutional Accreditation Information Session - Erbil</li>
+<li data-i18n-html="t_218"><strong>December 5:</strong> RPL Assessment Training - Basra</li>
+<li data-i18n-html="t_219"><strong>December 10:</strong> Quality Assurance Seminar - Mosul</li>
+<li data-i18n-html="t_220"><strong>December 18:</strong> Year-End Progress Review - Baghdad</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- CONTACT US -->
+<div class="page-content" id="contact">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_221">Contact Us</h2>
+<p data-i18n="t_222">Have questions or need assistance? Use our contact form to reach the TVQF Secretariat.</p>
+</div>
+<div class="contact-form">
+<form onsubmit="handleSubmit(event)">
+<div class="form-group">
+<label data-i18n="t_223" for="name">Full Name *</label>
+<input id="name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label data-i18n="t_224" for="email">Email Address *</label>
+<input id="email" required="" type="email"/>
+</div>
+<div class="form-group">
+<label data-i18n="t_225" for="phone">Phone Number</label>
+<input id="phone" type="tel"/>
+</div>
+<div class="form-group">
+<label data-i18n="t_226" for="organization">Organization/Institution</label>
+<input id="organization" type="text"/>
+</div>
+<div class="form-group">
+<label data-i18n="t_227" for="subject">Subject *</label>
+<input id="subject" required="" type="text"/>
+</div>
+<div class="form-group">
+<label data-i18n="t_228" for="message">Message *</label>
+<textarea id="message" required=""></textarea>
+</div>
+<button class="submit-btn" data-i18n="btn_236" type="submit">Send Message</button>
+</form>
+</div>
+<div class="intro-section" style="margin-top: 3rem;">
+<h3 data-i18n="t_229">Contact Information</h3>
+<div class="content-box">
+<p data-i18n-html="t_230"><strong>Email:</strong> info@tvqf-iraq.org</p>
+<p data-i18n-html="t_231"><strong>Address:</strong> Ministry of Education, Baghdad, Iraq</p>
+<p data-i18n-html="t_232"><strong>Phone:</strong> Coming Soon</p>
+<p data-i18n-html="t_233"><strong>Working Hours:</strong> Sunday - Thursday, 8:00 AM - 3:00 PM</p>
+</div>
+<h3 data-i18n="t_234" style="margin-top: 2rem;">Follow Us</h3>
+<p data-i18n="t_235">Social media channels (LinkedIn, Facebook, YouTube) will be announced soon. Stay tuned for updates!</p>
+</div>
+</div>
+</div>
+<!-- QUALIFICATION TYPES -->
+<div class="page-content" id="framework-types">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_237">Qualification Types</h2>
+<p data-i18n="t_238">The framework describes how certificates, diplomas and degrees align with national levels. Understanding these qualification types helps learners and employers navigate the education system effectively.</p>
+<div class="content-box">
+<h3 data-i18n="t_239">Vocational Training Certificates (Levels 1-3)</h3>
+<p data-i18n="t_240">Short-cycle programs focused on practical skills for immediate employment in specific trades and occupations.</p>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_241">Secondary Vocational Diplomas (Level 4)</h3>
+<p data-i18n="t_242">Comprehensive programs combining theoretical knowledge with practical skills, typically completed after secondary education.</p>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_243">Technical Diplomas and First Degrees (Levels 5-6)</h3>
+<p data-i18n="t_244">Higher education qualifications that provide specialized knowledge and advanced competencies in professional fields.</p>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_245">Postgraduate Qualifications (Levels 7-10)</h3>
+<p data-i18n="t_246">Advanced academic and professional qualifications for research, specialized practice, and leadership roles.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- CREDIT & LEARNING HOURS -->
+<div class="page-content" id="framework-credit">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_247">Credit &amp; Learning Hours</h2>
+<p data-i18n="t_248">TVQF Iraq uses a provisional credit system (e.g., 25 learning hours = 1 credit). This supports transparent recognition of program volume, credit transfer and mobility between learning pathways.</p>
+<p data-i18n="t_249">The credit system facilitates:</p>
+<ul>
+<li data-i18n="t_250">Clear understanding of the workload required for each qualification</li>
+<li data-i18n="t_251">Recognition of prior learning and credit transfer between institutions</li>
+<li data-i18n="t_252">Flexibility in learning pathways and program design</li>
+<li data-i18n="t_253">Alignment with international credit systems for global mobility</li>
+</ul>
+<p data-i18n="t_254">Each credit represents a defined amount of learning time, including contact hours, independent study, and assessment preparation. This transparent approach helps learners plan their educational journey and institutions design effective programs.</p>
+</div>
+</div>
+</div>
+<!-- SECTORAL MATRICES -->
+<div class="page-content" id="framework-matrices">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_255">Sectoral Matrices (Pilot)</h2>
+<p data-i18n="t_256">Soon to be available: downloadable Sectoral Learning Outcome Matrices for key sectors (Engineering, IT, Health) to support program design and alignment with TVQF.</p>
+<div class="content-box">
+<h3 data-i18n="t_257">Engineering Sector</h3>
+<p data-i18n="t_258">Comprehensive learning outcome matrices for engineering disciplines, covering mechanical, electrical, civil, and other specializations.</p>
+<a class="download-btn" data-i18n="a_263" href="#">Coming Soon</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_259">Information Technology Sector</h3>
+<p data-i18n="t_260">Detailed competency frameworks for IT qualifications, including software development, networking, cybersecurity, and data management.</p>
+<a class="download-btn" data-i18n="a_264" href="#">Coming Soon</a>
+</div>
+<div class="content-box">
+<h3 data-i18n="t_261">Health Sector</h3>
+<p data-i18n="t_262">Learning outcome matrices for healthcare professions, covering nursing, medical technology, pharmacy, and allied health disciplines.</p>
+<a class="download-btn" data-i18n="a_265" href="#">Coming Soon</a>
+</div>
+</div>
+</div>
+</div>
+<!-- INSTITUTIONAL ACCREDITATION -->
+<div class="page-content" id="quality-accreditation">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_266">Institutional Accreditation</h2>
+<p data-i18n="t_267">Training providers must gain accreditation to issue TVQF-aligned qualifications. The process involves submitting evidence of governance, curriculum, assessment, staffing and continuous improvement to the Accreditation Committee.</p>
+<h3 data-i18n="t_268">Accreditation Requirements</h3>
+<ul>
+<li data-i18n="t_269">Clear organizational governance and management structures</li>
+<li data-i18n="t_270">Qualified and experienced teaching staff</li>
+<li data-i18n="t_271">Appropriate facilities and learning resources</li>
+<li data-i18n="t_272">Quality assurance and continuous improvement systems</li>
+<li data-i18n="t_273">Curriculum aligned with TVQF learning outcomes</li>
+<li data-i18n="t_274">Valid and reliable assessment practices</li>
+<li data-i18n="t_275">Student support services and safe learning environment</li>
+</ul>
+<a class="download-btn" data-i18n="a_276" data-i18n-href="a_276_href" href="Forms%20EN/Form%203%20%E2%80%93%20TVQF%20Institutional%20Accreditation.docx" target="_blank">📄 Download Institutional Accreditation Application (Form 3)</a>
+</div>
+</div>
+</div>
+<!-- QUALIFICATION APPROVAL -->
+<div class="page-content" id="quality-approval">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_277">Qualification Approval</h2>
+<p data-i18n="t_278">Institutions can apply for official level recognition for each program through the Qualification Leveling Application Form. The Sectoral Committee reviews and recommends level placement.</p>
+<h3 data-i18n="t_279">Application Process</h3>
+<ol>
+<li data-i18n="t_280">Complete the Qualification Leveling Application Form</li>
+<li data-i18n="t_281">Provide detailed program documentation including learning outcomes, curriculum, and assessment methods</li>
+<li data-i18n="t_282">Submit to the relevant Sectoral Committee for review</li>
+<li data-i18n="t_283">Participate in field visits or interviews as required</li>
+<li data-i18n="t_284">Receive decision and feedback from the committee</li>
+<li data-i18n="t_285">Implement any required modifications</li>
+<li data-i18n="t_286">Obtain final approval and level placement</li>
+</ol>
+<a class="download-btn" data-i18n="a_287" data-i18n-href="a_287_href" href="Forms%20EN/Form%201%20%E2%80%93%20Qualification%20Leveling%20(Alignment).docx" target="_blank">📄 Download Qualification Leveling Application (Form 1)</a>
+</div>
+</div>
+</div>
+<!-- MONITORING & EVALUATION -->
+<div class="page-content" id="quality-monitoring">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="t_288">Monitoring &amp; Evaluation</h2>
+<p data-i18n="t_289">Accredited institutions will be subject to monitoring cycles and periodic reviews to ensure continuous alignment with TVQF standards. Tools and feedback mechanisms support improvement.</p>
+<h3 data-i18n="t_290">Monitoring Activities</h3>
+<ul>
+<li data-i18n="t_291">Regular field visits by quality assurance teams</li>
+<li data-i18n="t_292">Annual reporting on program delivery and outcomes</li>
+<li data-i18n="t_293">Student feedback and satisfaction surveys</li>
+<li data-i18n="t_294">Employer feedback on graduate competencies</li>
+<li data-i18n="t_295">Review of assessment results and graduate destinations</li>
+<li data-i18n="t_296">Periodic re-accreditation reviews</li>
+</ul>
+<p data-i18n="t_297">The monitoring process is designed to be supportive and developmental, helping institutions identify areas for improvement while recognizing good practices.</p>
+<a class="download-btn" data-i18n="a_298" href="#">📄 Download Field Visit Observation Form</a>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer>
+<div class="footer-content">
+<div class="footer-section">
+<h3 data-i18n="f_299">About TVQF Iraq</h3>
+<p data-i18n="f_300">The Technical and Vocational Qualifications Framework establishes a coherent national system for qualifications across all educational levels in Iraq.</p>
+<p data-i18n-html="f_301" style="margin-top: 1rem;"><strong>Approved by Council of Ministers Decision 99 (2021)</strong></p>
+</div>
+<div class="footer-section">
+<h3 data-i18n="f_302">Quick Links</h3>
+<a data-i18n="f_303" href="#" onclick="showPage('about-tvqf')">About TVQF</a>
+<a data-i18n="f_304" href="#" onclick="showPage('framework-levels')">Levels &amp; Descriptors</a>
+<a data-i18n="f_305" href="#" onclick="showPage('quality-accreditation')">Quality Assurance</a>
+<a data-i18n="f_306" href="#" onclick="showPage('rpl-what')">Recognition of Prior Learning</a>
+<a data-i18n="f_307" href="#" onclick="showPage('resources-forms')">Forms &amp; Resources</a>
+<a data-i18n="f_308" href="#" onclick="showPage('news')">News &amp; Events</a>
+<a data-i18n="f_309" href="#" onclick="showPage('contact')">Contact Us</a>
+</div>
+<div class="footer-section">
+<h3 data-i18n="f_310">Contact</h3>
+<p data-i18n-html="f_311"><strong>Email:</strong> info@tvqf-iraq.org</p>
+<p data-i18n-html="f_312"><strong>Ministry of Education</strong></p>
+<p data-i18n="f_313">Baghdad, Iraq</p>
+<p data-i18n-html="f_314" style="margin-top: 1rem;">Working Hours:<br/>Sunday - Thursday<br/>8:00 AM - 3:00 PM</p>
+</div>
+<div class="footer-section">
+<h3 data-i18n="f_315">Our Partners</h3>
+<div class="partners">
+<span class="partner-logo">UNESCO</span>
+<span class="partner-logo">EU</span>
+<span class="partner-logo">Ministry of Education</span>
+<span class="partner-logo">Ministry of Higher Education &amp; Research</span>
+<span class="partner-logo">Ministry of Labour &amp; Social Affairs</span>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p data-i18n="f_316">© 2025 TVQF Iraq. All rights reserved.</p>
+</div>
+</footer>
+<script src="translation.js"></script>
+<script>
+        // Data for the 10 TVQF levels - knowledge, skills, competencies (AR + EN)
+        const TVQF_LEVELS_DATA_AR = [
+  {
+    "level": 1,
+    "title": "شهادة المستوى الأول",
+    "knowledge": "معرفة عامة أولية (أساسية) بموضوع ما (في ميدان التعلم) أو في ميدان عمل مألوف جداً.أوليات القراءة والكتابة والحساب اللازمة لاستذكار حقائق ونصوص بسيطة جداً، وتكوين حقائق وأفكار حسابية بسيطة جداً ترتبط بموضوع التعلم أو ميدان العمل.معرفة بأبسط الأدوات الأساسية للقيام بأعمال بسيطة تحت إشراف مباشر.",
+    "skills": "مهارات أولية (أساسية) للقيام بنشاطات بسيطة ومألوفة جداً.مهارات عملية أولية لاستخدام مواد وأدوات بسيطة.مهارات القراءة والكتابة والحساب اللازمة لتلقي ونقل المعلومات البسيطة، وحل المسائل الحسابية البسيطة جداً داخل سياقات معروفة ومنظمة جداً.",
+    "competencies": "القدرة على العمل تحت إشراف واضح ومباشر وفي بيئة روتينية واضحة المعالم تماماً.القدرة على العمل مع الآخرين في مجاميع صغيرة ومنظمة تحت إشراف مباشر وفي بيئة تعلم أو عمل مألوفة جداً.القدرة على الاستجابة إلى التعليمات والإرشادات البسيطة المكتوبة منها أو الشفهية، أو على التواصل مع الآخرين ضمن السياقات الروتينية جداً."
+  },
+  {
+    "level": 2,
+    "title": "شهادة المستوى الثاني",
+    "knowledge": "معرفة واقعية أولية بمواضيع عامة ذات صلة بميدان التعلم أو ميدان العمل.معرفة أساسية بالأدوات والمواد البسيطة المطلوبة للقيام بمهام روتينية في بيئة عمل عالية التنظيم.أوليات القراءة والكتابة والرياضيات لاستيعاب وإعداد نصوص وعمليات رياضية بسيطة في بيئات عمل/تعلم مألوفة جداً.",
+    "skills": "مهارات ذهنية وعملية أولية/بسيطة لاستخدام مواد وأدوات من أجل القيام بمهام اعتيادية، والتعامل مع مشكلات روتينية.مهارات التعلم تحت إشراف مباشر.مهارات أولية للقيام بمهام مألوفة وروتينية وحل المشكلات البسيطة جداً والتي يمكن توقعها مسبقاً.مهارات أولية في الاتصال وتكنولوجيا المعلومات اللازمة لتقديم معلومات من مصادر معروفة ومحددة جداً.مهارات القراءة والكتابة والرياضيات اللازمة لاستلام ونقل المعلومات البسيطة المأخوذة من نصوص بسيطة، وحل المسائل الرياضية البسيطة ضمن سياقات مألوفة جداً.",
+    "competencies": "القدرة على العمل تحت الإشراف المباشر في بيئة مألوفة وروتينية.القدرة على تحمل مسؤولية السلوك الذاتي والتمتع بمقدار قليل من الاستقلالية الذاتية.القدرة على إنجاز مهام روتينية بشكل فردي أو بالعمل مع الآخرين في مجاميع منظمة وصغيرة تحت إشراف مباشر.القدرة على الاستجابة إلى التعليمات أو المخاطبات البسيطة المكتوبة منها أو الشفهية ضمن بيئات عمل أو تعلم مألوفة."
+  },
+  {
+    "level": 3,
+    "title": "شهادة المستوى الثالث",
+    "knowledge": "معرفة واقعية وتقنية وإجرائية ونظرية ترتبط بميدان التعلم أو العمل.معرفة ضرورية لاستيعاب مقدار محدود من الحقائق والإجراءات المطلوبة للقيام بمهام أولية أو لاستخدام التكنولوجيا في ميدان التعلم أو العمل.القراءة والكتابة والرياضيات اللازمة لاستيعاب وإعداد نصوص كتابية بسيطة متجانسة أو لاستيعاب وحل مسائل رياضية بسيطة.",
+    "skills": "نطاق محدود من المهارات الذهنية والعملية اللازمة لفهم وتحليل المعلومات البسيطة وتقديم حلول أولية لقضايا محددة.مهارات ضرورية لاختيار واستخدام وسائل ومواد وأدوات أو معلومات تتفق مع بيئة التعلم أو العمل بما يساعد على إنجاز مهام محددة وحل مشكلات روتينية تحت توجيه مباشر.مهارات تكنولوجيا المعلومات والاتصال للوصول إلى المعلومات واستخدامها ضمن بيئات عمل أو تعلم روتينية وأحياناً غير روتينية.مهارات القراءة والكتابة والرياضيات لصياغة نصوص واضحة لكنها بسيطة، والقيام بعمليات رياضية ضمن سياقات محددة.",
+    "competencies": "القدرة على تنفيذ مهام روتينية بشكل فردي وضمن مجاميع صغيرة تحت إشراف مباشر ضمن بيئة عمل أو تعلم مألوفة وتوجيه محدد.القدرة على ممارسة المسؤولية الذاتية لإنجاز مهام محددة قد تتضمن حل المشكلات ذات الصلة بميدان التعلم أو العمل.القدرة على تحمل المسؤولية وممارسة نوع من الاستقلالية اللازمة لتحديد طبيعة الدور الذاتي والسلوك الفردي ونقاط الضعف والقوة الذاتية وفقاً لمعايير محددة مسبقاً، و/أو تحديد الأدوار المناطة بالآخرين ضمن مجاميع تعلم أو عمل صغيرة.القدرة على الاستجابة إلى التعليمات أو المخاطبات البسيطة المكتوبة منها أو الشفهية ضمن بيئات عمل أو تعلم مألوفة."
+  },
+  {
+    "level": 4,
+    "title": "شهادة المستوى الرابع",
+    "knowledge": "نطاق واسع من المعرفة الواقعية والنظرية والتطبيقية المرتبطة بميدان التعلم أو العمل.قاعدة معرفية كافية لتمكين الفرد من الوصول إلى المعلومة وفهمها وتحليلها، ومن ثم تقديم نتائج منطقية مبنية عليها أو استخدامها في حل المشكلات أو في توظيف وسائل تقنية معينة.القراءة والكتابة والرياضيات اللازمة لاستيعاب وتحليل وإعداد نصوص منسقة ووسائل رياضية واضحة ترتبط بميدان التعلم أو العمل.",
+    "skills": "مجموعة من المهارات الذهنية والعملية للتعامل مع مشكلات بسيطة ذات صلة بميدان التعلم أو العمل وطرح الحلول لها.المهارات اللازمة لجمع وتحليل وتبادل نطاق محدد من المعلومات باستخدام معايير وأسس متفق عليها مسبقاً، بالإضافة إلى امتلاك المهارات اللازمة لاختيار واستخدام المعدات والأدوات والوسائل المطلوبة في بيئات عمل أو تعلم مألوفة.مهارات الاتصال وتكنولوجيا المعلومات اللازمة للتعامل مع متطلبات بيئة العمل أو التعلم.مهارات القراءة والكتابة والرياضيات لتحليل المعلومات وصياغة نصوص متناسقة وإنجاز مختلف العمليات الرياضية (الرياضيات).",
+    "competencies": "القدرة على تنفيذ مهام متنوعة تحت إشراف محدود وفي بيئات عمل أو تعلم مألوفة وأحياناً غير مألوفة عند مستوى محدد في بعض جوانبها.القدرة على تحمل بعض المسؤولية وممارسة مستوى محدد من الاستقلالية الذاتية تجاه متطلبات العمل الوظيفي والسلوك الشخصي وفقاً للمعايير الاجتماعية والثقافية السائدة أو تجاه المهام الوظيفية المناطة بالآخرين ضمن مجاميع صغيرة وتحت إشراف غير مباشر في بيئة تعلم أو عمل منظمة.القدرة على العمل باستقلالية ذاتية محدودة أو العمل مع الآخرين ضمن فرق تقنية أو فرق تعلم صغيرة في بيئات مختلفة وتحت إشراف غير مباشر.القدرة على الاستجابة إلى بعض التعليمات أو المخاطبات المكتوبة منها أو الشفهية في بيئات تعلم أو عمل مألوفة."
+  },
+  {
+    "level": 5,
+    "title": "الدبلوم التقني",
+    "knowledge": "نطاق واسع من المعرفة التقنية والنظرية المتخصصة في حقل التعلم أو العمل.معرفة شاملة بالحقائق والمفاهيم والمبادئ والعمليات والقوانين اللازمة لتحديد وتحليل البيانات والمعلومات والمصطلحات اللازمة لحل المشكلات، وتطبيق واستخدام الأدوات والمعدات والتكنولوجيا المقترنة بحقل التعلم أو العمل أو ما يرتبط به من حقول تعلم أو عمل أخرى.",
+    "skills": "نطاق واسع من المهارات الذهنية والتقنية والاتصالية والإصلاحية، ومنها مهارات الاتصال، لاختيار واستخدام مختلف الوسائل والتكنولوجيا اللازمة للقيام بعدد من النشاطات الروتينية وغير الروتينية و/أو إيجاد حلول لمشكلات مألوفة وغير مألوفة.مهارات متخصصة في الاتصال وتكنولوجيا المعلومات للتعامل مع مختلف القضايا المتعلقة ببيئة التعلم والعمل.",
+    "competencies": "القدرة على الإدارة والعمل في بيئات تعلم أو عمل مألوفة أو غير مألوفة بشكل فردي أو ضمن فرق متنوعة وتحت توجيه محدد.القدرة، المستوى شبه الاحترافي، وتحت إشراف محدود جداً، على تولي بعض المسؤولية وممارسة نوع من الاستقلالية الذاتية لأداء مهام ذات صلة بميدان العمل أو التعلم.القدرة على تولي مهام إشرافية محدودة والمشاركة مع الآخرين في تحديد الدور الذاتي وتطويره و/أو تحديد الأمور المناطة بالآخرين في بيئات التعلم والعمل المختلفة والتي قد تكون غير مألوفة في بعض جوانبها."
+  },
+  {
+    "level": 6,
+    "title": "الدبلوم المتقدم التقني",
+    "knowledge": "معرفة شاملة ومتخصصة بالحقائق والمبادئ والنظريات والقوانين والإجراءات التطبيقية الرئيسية المقترنة بحقل التعلم أو العمل.المعرفة اللازمة لجمع وتحليل البيانات والمعلومات الضرورية لصياغة وتطوير الحلول والآراء لعدد من المشكلات، ومن بينها المشكلات التجريدية.معرفة بمتطلبات البحث المتصل بحقل التعلم أو العمل.",
+    "skills": "نطاق واسع من المهارات الذهنية والعملية والتقنية للوصول إلى حلول معززة بأدلة للمشكلات التي قد تكون مألوفة أو غير مألوفة، بما فيها المشكلات التجريدية.مهارات التفكير النقدي في تحليل المعلومات وصياغة الأفكار ذات الصلة بميدان التعلم أو العمل.المهارات اللازمة لتداول المعلومات والأفكار بأنماط مختلفة وبكفاءة وفاعلية.مهارات الاتصال وتكنولوجيا المعلومات اللازمة لتحليل وشرح المعلومات التي قد تكون صعبة أحياناً وإيصالها إلى شرائح مختلفة من المعنيين بالأمر.",
+    "competencies": "القدرة على تطبيق مبدأ الاستقلالية الذاتية وتولي زمام المبادرة لإدارة والإشراف على نشاطات قد تكون غير متوقعة داخل بيئات التعلم أو العمل الوظيفي.القدرة على ممارسة مستوى محدد من المسؤولية القيادية واتخاذ القرارات حيال عدد من القضايا المقترنة ببيئة العمل أو التعلم، أو بالموارد والوسائل المتاحة أمامهم.القدرة على تطوير القدرات الذاتية وتحديد نقاط القوة والضعف ذات الصلة بحقل التعلم والعمل الوظيفي وفقاً لمعايير محددة مسبقاً يشرف عليها رئيسه أو فريق آخرون (داخل المؤسسة المهنية).إدراك بطبيعة السلوك الذاتي والمهام الفردية وأثرها الأخلاقية على الفرد نفسه وعلى الآخرين داخل بيئتي العمل أو التعلم."
+  },
+  {
+    "level": 7,
+    "title": "البكالوريوس التقني",
+    "knowledge": "معرفة نظرية وتقنية شاملة ومعمقة ترتبط بحقل التخصص أو الممارسة الوظيفية.معرفة متكاملة في حقل التخصص أو الممارسة الوظيفية وما يرتبط به من حقول تخصص أو عمل أخرى.فهم بالمعارف المرتبطة بين حقل التخصص أو الممارسة الوظيفية والحقول الأخرى المتعلقة بها.إدراك معمق لأهم النظريات والمفاهيم والممارسات والأدوات والوسائل اللازمة لتحقيق وتقييم المعلومات والبيانات بما يفضي إلى إيجاد الحلول للمشكلات التي قد تكون معقدة.إدراك بأحدث القوانين واللوائح والتقنيات المتعلقة بحقل التخصص أو العمل، ومن بينها دراية بوسائل وطرق البحث ذات الصلة.",
+    "skills": "مهارات تقنية وفكرية متخصصة لاختيار واستخدام مختلف الوسائل والتكنولوجيا الضرورية لتحليل وتقييم المعلومات اللازمة لإنجاز مختلف النشاطات ذات الصلة.مهارات التحليل والتفكير النقدي لصياغة الأفكار وتطوير الحلول المناسبة للتعامل مع المشكلات التي قد تكون معقدة وغير مألوفة.المهارات اللازمة لاستخدام أو تطبيق وسائل وأساليب البحث ذات الصلة.مهارات متقدمة في الاتصال وتكنولوجيا المعلومات لتقييم المعلومات التي قد تكون معقدة بهدف الوصول إلى نتائج مناسبة.",
+    "competencies": "القدرة على العمل، عند مستوى متقدم، و/أو تولي مسؤولية قيادة المجموعة/الفريق في بيئات عمل أو تعلم مختلفة ترتبط بحقل التخصص المعرفي أو الوظيفي والتي قد تكون غير مألوفة في بعض جوانبها أحياناً.القدرة على تولي وتطبيق مبدأ المسؤولية في التعامل مع العديد من القضايا الأخلاقية والمهنية، وعلى تولي زمام المبادرة لأداء مختلف النشاطات التي قد تتضمن تقييم مستوى الأداء الذاتي أو أداء الآخرين.القدرة على تولي مسؤولية التطوير المهني الذاتي وفقاً لأسس ومعايير محددة مسبقاً وتحت توجيه محدود جداً."
+  },
+  {
+    "level": 8,
+    "title": "الدبلوم العالي التقني",
+    "knowledge": "معرفة منهجية وشاملة في حقل التخصص أو العمل الوظيفي.معرفة متقدمة وفهم معمق بالنظريات والتطبيقات ذات الصلة بحقل التخصص المعرفي أو العمل الوظيفي.معرفة معمقة بالمنهجيات والمبادئ والتقنيات والتكنولوجيا اللازمة لإجراء البحوث والدراسات وتحقيق الابتكار المقترن بحقل الدراسة أو العمل.",
+    "skills": "مهارات متقدمة إلى مستوى الإتقان والإبداع، لحل مشكلات معقدة وغير متوقعة ترتبط بحقل التعلم أو الممارسة الوظيفية.المهارات اللازمة للوصول إلى مستوى القدرة على تحقيق المراجعة النقدية/التحليلية للمعلومات والأنظمة والعمليات والتطبيقات المقترنة بحقل التعلم أو التخصص الوظيفي.مهارات متقدمة في اختيار منهجيات البحث وأدواته ذات الصلة بحقل التعلم أو العمل.مهارات متقدمة في الاتصال وتكنولوجيا المعلومات بما يساهم في تعزيز قوة الأفكار المطروحة و/أو دفع عجلة العمل الوظيفي.",
+    "competencies": "القدرة على الإدارة والعمل، عند المستوى الاختصاصي، في بيئات عمل أو تعلم مختلفة التي قد تكون غير متوقعة أحياناً.القدرة على ممارسة الاستقلالية الذاتية لتقييم العمليات التشغيلية و/أو تقييم مصادر التعلم المتاحة والتعامل مع القضايا المهنية والأخلاقية المعقدة وتحديد متطلبات التطوير الذاتي، لاسيما تلك المقترنة بالمهارات المتقدمة مثل التفكير النقدي وحل المشكلات.القدرة على تولي قيادة فرق متعددة وإصدار أحكام مدروسة وسليمة حيال الأدوار المناطة بأعضاء تلك الفرق ومستوى أدائهم."
+  },
+  {
+    "level": 9,
+    "title": "الماجستير التقني",
+    "knowledge": "معرفة متخصصة جداً وعند أعلى مستويات متطلبات العمل الوظيفي.أو حقل التخصص المعرفي والاختصاصات الأخرى ذات الصلة.فهم معمق وشامل بأهم النظريات والمفاهيم والمبادئ وتطبيقاتها المتعلقة بحقل الاختصاص المعرفي أو التخصص الوظيفي.معرفة متخصصة تغطي حقولاً متعددة تقترن بإدراك كامل بوسائل وتقنيات وطرق البحث والابتكار والأصالة في تطوير و/أو تطبيق الأفكار والعمليات والأدوات والمواد اللازمة لذلك.",
+    "skills": "مهارات متقدمة في تحليل وتقييم أفكار ومفاهيم قد تكون جداً معقدة ترتبط بحقل التخصص أو الممارسة الوظيفية.مهارات متخصصة لحل المشكلات المقترنة بحقل التعلم أو التخصص الوظيفي أو التخصصات الوظيفية ذات الصلة.مهارات متقدمة في استخدام أدوات ووسائل البحث الجوهرية ذات الصلة بالحقل المعرفي أو الوظيفي.مهارات متقدمة في الاتصال وفي تكنولوجيا المعلومات للتعامل مع مختلف القضايا المعقدة.",
+    "competencies": "القدرة على الإدارة والعمل عند المستوى الاحترافي، في بيئات عمل أو تعلم مختلفة والتي قد تكون معقدة وغير مألوفة أو غير واضحة المعالم.القدرة على إدارة العمل باستقلالية ذاتية تامة بهدف تحديد المتغيرات ومتطلبات بيئتي التعلم أو العمل الاحترافي، بما فيها المتطلبات الأساسية مثل تحسين مهارات التفكير النقدي وحل المشكلات والذكاء الاصطناعي والعاطفي.القدرة على تولي المسؤولية الكاملة لممارسة الدور القيادي الفاعل في إدارة فرق العمل أو التعلم المختلفة، وبما ينعكس إيجاباً على مستوى وطبيعة الدور الذاتي أو الأدوار الجماعية النشطة للآخرين."
+  },
+  {
+    "level": 10,
+    "title": "الدكتوراه التقنية",
+    "knowledge": "معرفة متخصصة جداً وشاملة تقع في طليعة حقل التخصص أو الممارسة الوظيفية والتي تشتمل على المعرفة المتقدمة بالنظريات والمفاهيم والمبادئ الرئيسية التي يمكن لها إعادة رسم حدود المعرفة القائمة أو تطويرها وتوسيع نطاقها.معرفة متكاملة لتحليل وتقييم والاستجابة للمشكلات المعقدة التي قد تتضمن المشكلات التجريبية ذات الصلة بحقل التخصص أو الممارسة الوظيفية.فهم منهجي ومعرفة واسعة بالتغيرات المتعلقة بتطبيقات وتكنولوجيا حقل التخصص الوظيفي أو الحقول الوظيفية ذات الصلة.أعلى مستويات المعرفة بالوسائل والتقنيات والمفاهيم ذات الصلة بميدان البحث التخصصي.",
+    "skills": "مهارات متقدمة ومتخصصة ومعارف تقنية/تطبيقية لتحليل وتقييم مشكلات جداً مهمة تقترن بحقل التعلم أو التخصص الوظيفي أو عند مستوى التخصصات ذات الصلة.الأصالة والابتكار في تطوير المفاهيم والطرق المنهجية و/أو تطبيق وسائل البحث التي يمكن استخدامها لإعادة تعريف وتجديد المعارف أو الممارسات الوظيفية القائمة حالياً والتعامل مع قضايا معقدة جداً ذات صلة بحقل التعلم أو العمل.",
+    "competencies": "القدرة، عند المستوى الاحترافي المتقدم (مستوى الخبراء)، على استخدام السلطة والاستقلالية الذاتيتين وكذلك توظيف القدرة الإبداعية من أجل اتخاذ القرارات ذات الصلة بميدان التخصص المعرفي أو الحقل الوظيفي بشكل سليم.القدرة على تحمل المسؤولية الكاملة للقيام بالدور القيادي الفاعل وحوكمة الأنظمة والتخطيط الاستراتيجي لمختلف النشاطات الوظيفية المعقدة.القدرة على تحديد وصياغة متطلبات تطوير بيئة العمل الوظيفي/المهني لاسيما في الجوانب المتعلقة بتطوير مهارات التفكير النقدي والذكاء العاطفي والاصطناعي وإدارة البحث ذات الصلة بحقل التخصص أو العمل."
+  }
+];
+
+        const TVQF_LEVELS_DATA_EN = [
+  {
+    "level": 1,
+    "title": "Level 1 Certificate",
+    "knowledge": "Basic introductory knowledge of a subject (in a field of learning) or a very familiar field of work. Basic literacy and numeracy needed to recall very simple facts and texts, and to form very simple numerical facts and ideas related to the subject of learning or field of work. Knowledge of the simplest basic tools needed to carry out simple tasks under direct supervision.",
+    "skills": "Basic (introductory) skills to carry out very simple and familiar activities. Basic practical skills for using simple materials and tools. Literacy and numeracy skills needed to receive and convey simple information, and to solve very simple numerical problems within very familiar and well-organised contexts.",
+    "competencies": "Ability to work under clear, direct supervision in a fully well-defined, routine environment. Ability to work with others in small, organised groups under direct supervision in a very familiar learning or work environment. Ability to respond to simple written or verbal instructions and guidance, or to communicate with others within highly routine contexts."
+  },
+  {
+    "level": 2,
+    "title": "Level 2 Certificate",
+    "knowledge": "Basic factual knowledge of general topics relevant to the field of learning or work. Basic knowledge of the simple tools and materials required to carry out routine tasks in a highly organised work environment. Basic literacy and numeracy needed to understand and produce simple texts and mathematical operations in very familiar work/learning environments.",
+    "skills": "Basic/simple cognitive and practical skills to use materials and tools to carry out routine tasks and handle routine problems. Learning skills under direct supervision. Basic skills to carry out familiar, routine tasks and solve very simple, predictable problems. Basic communication and IT skills needed to present information from known and very specific sources. Literacy and numeracy skills needed to receive and convey simple information taken from simple texts, and to solve simple mathematical problems within very familiar contexts.",
+    "competencies": "Ability to work under direct supervision in a familiar, routine environment. Ability to take responsibility for one's own conduct and exercise a small degree of self-autonomy. Ability to carry out routine tasks individually or with others in small, organised groups under direct supervision. Ability to respond to simple written or verbal instructions and correspondence within familiar work or learning environments."
+  },
+  {
+    "level": 3,
+    "title": "Level 3 Certificate",
+    "knowledge": "Factual, technical, procedural and theoretical knowledge related to the field of learning or work. Knowledge needed to understand a limited range of facts and procedures required for basic tasks or for using technology in the field of learning or work. Literacy and numeracy needed to understand and produce simple, consistent written texts, or to understand and solve simple mathematical problems.",
+    "skills": "A limited range of cognitive and practical skills needed to understand and analyse simple information and offer initial solutions to specific issues. Skills needed to select and use tools, materials or information appropriate to the learning or work environment, helping to complete specific tasks and solve routine problems under direct guidance. IT and communication skills to access and use information within routine and occasionally non-routine work or learning environments. Literacy and numeracy skills to produce clear but simple texts and carry out mathematical operations within defined contexts.",
+    "competencies": "Ability to carry out routine tasks individually and in small groups under direct supervision and specific guidance within a familiar work or learning environment. Ability to exercise self-responsibility for completing specific tasks, which may include solving problems related to the field of learning or work. Ability to take responsibility and exercise a degree of autonomy needed to identify one's own role, individual conduct and personal strengths and weaknesses according to pre-defined criteria, and/or to identify the roles assigned to others within small learning or work groups. Ability to respond to simple written or verbal instructions and correspondence within familiar work or learning environments."
+  },
+  {
+    "level": 4,
+    "title": "Level 4 Certificate",
+    "knowledge": "A broad range of factual, theoretical and applied knowledge related to the field of learning or work. A knowledge base sufficient to enable an individual to access, understand and analyse information, then draw logical conclusions from it or use it to solve problems or apply certain technical tools. Literacy and numeracy needed to understand, analyse and produce well-organised texts and clear mathematical tools related to the field of learning or work.",
+    "skills": "A set of cognitive and practical skills for handling simple problems related to the field of learning or work and proposing solutions. Skills needed to collect, analyse and exchange a defined range of information using pre-agreed criteria and standards, along with the skills needed to select and use the equipment, tools and materials required in familiar work or learning environments. Communication and IT skills needed to meet the requirements of the work or learning environment. Literacy and numeracy skills to analyse information, produce coherent texts and carry out various mathematical operations.",
+    "competencies": "Ability to carry out varied tasks under limited supervision, in work or learning environments that are familiar and, in some respects, occasionally unfamiliar. Ability to take on some responsibility and exercise a defined level of self-autonomy regarding job requirements and personal conduct according to prevailing social and cultural norms, or regarding tasks assigned to others in small groups under indirect supervision within an organised learning or work environment. Ability to work with limited self-autonomy or with others in small technical or learning teams in different environments under indirect supervision. Ability to respond to some written or verbal instructions and correspondence in familiar work or learning environments."
+  },
+  {
+    "level": 5,
+    "title": "Technical Diploma",
+    "knowledge": "A broad range of specialised technical and theoretical knowledge in the field of learning or work. Comprehensive knowledge of the facts, concepts, principles, processes and rules needed to identify and analyse the data, information and terminology required to solve problems, and to apply and use the tools, equipment and technology associated with the field of learning or work, or with related fields.",
+    "skills": "A broad range of cognitive, technical, communication and remedial skills — including communication skills — to select and use the various tools and technology needed to carry out a number of routine and non-routine activities and/or find solutions to familiar and unfamiliar problems. Specialised communication and IT skills to handle various issues related to the learning and work environment.",
+    "competencies": "Ability to manage and work in familiar or unfamiliar learning or work environments, individually or within diverse teams and under specific direction. Ability, at semi-professional level and under very limited supervision, to take on some responsibility and exercise a degree of self-autonomy in performing tasks related to the field of work or learning. Ability to take on limited supervisory tasks and work with others to define and develop one's own role and/or determine tasks assigned to others in different learning and work environments, which may in some respects be unfamiliar."
+  },
+  {
+    "level": 6,
+    "title": "Advanced Technical Diploma",
+    "knowledge": "Comprehensive, specialised knowledge of the key facts, principles, theories, rules and applied procedures associated with the field of learning or work. Knowledge needed to collect and analyse the data and information required to formulate and develop solutions and views on a number of problems, including abstract problems. Knowledge of the research requirements associated with the field of learning or work.",
+    "skills": "A broad range of cognitive, practical and technical skills to reach evidence-based solutions to problems that may be familiar or unfamiliar, including abstract problems. Critical thinking skills for analysing information and formulating ideas related to the field of learning or work. Skills needed to exchange information and ideas in different formats efficiently and effectively. Communication and IT skills needed to analyse and explain information, which may sometimes be difficult, and communicate it to different groups of stakeholders.",
+    "competencies": "Ability to apply the principle of self-autonomy and take the initiative to manage and supervise activities that may be unpredictable within learning or work environments. Ability to exercise a defined level of leadership responsibility and make decisions on a number of issues associated with the work or learning environment, or with the resources and means available. Ability to develop one's own capabilities and identify strengths and weaknesses related to the field of learning and work according to predefined criteria overseen by a supervisor or another team. Awareness of the nature of one's own conduct and individual tasks and their ethical impact on oneself and others within the work or learning environment."
+  },
+  {
+    "level": 7,
+    "title": "Technical Bachelor's Degree",
+    "knowledge": "Comprehensive and in-depth theoretical and technical knowledge related to the field of specialisation or professional practice. Integrated knowledge of the field of specialisation or professional practice and related fields of specialisation or work. Understanding of the connections between the field of specialisation or professional practice and other related fields. An in-depth grasp of the key theories, concepts, practices, tools and methods needed to generate and evaluate information and data in order to find solutions to problems that may be complex. Awareness of the latest laws, regulations and techniques related to the field of specialisation or work, including familiarity with relevant research methods and tools.",
+    "skills": "Specialised technical and intellectual skills to select and use the tools and technology needed to analyse and evaluate the information required to carry out related activities. Analytical and critical thinking skills to formulate ideas and develop appropriate solutions for handling problems that may be complex and unfamiliar. Skills needed to use or apply relevant research methods and tools. Advanced communication and IT skills to evaluate information that may be complex in order to reach appropriate conclusions.",
+    "competencies": "Ability to work at an advanced level, and/or take responsibility for leading a group/team in different work or learning environments related to the field of knowledge or professional specialisation, which may sometimes be unfamiliar in some respects. Ability to take on and apply the principle of responsibility in handling numerous ethical and professional issues, and to take the initiative in carrying out various activities, which may include evaluating one's own performance or that of others. Ability to take responsibility for one's own professional development according to predefined foundations and standards and under very limited direction."
+  },
+  {
+    "level": 8,
+    "title": "Higher Technical Diploma",
+    "knowledge": "Systematic and comprehensive knowledge in the field of specialisation or professional work. Advanced knowledge and an in-depth understanding of the theories and applications related to the field of knowledge specialisation or professional work. In-depth knowledge of the methodologies, principles, techniques and technology needed to conduct research and studies and achieve innovation associated with the field of study or work.",
+    "skills": "Advanced skills, to the level of mastery and creativity, for solving complex and unpredictable problems related to the field of learning or professional practice. Skills needed to reach the level of capability to carry out critical/analytical review of the information, systems, processes and applications associated with the field of learning or professional specialisation. Advanced skills in selecting relevant research methodologies and tools related to the field of learning or work. Advanced communication and IT skills that help strengthen the ideas presented and/or advance professional work.",
+    "competencies": "Ability to manage and work, at specialist level, in different work or learning environments that may sometimes be unpredictable. Ability to exercise self-autonomy to evaluate operational processes and/or available learning resources, handle complex professional and ethical issues, and identify self-development requirements — particularly those related to advanced skills such as critical thinking and problem solving. Ability to lead multiple teams and make sound, well-considered judgements regarding the roles assigned to team members and their level of performance."
+  },
+  {
+    "level": 9,
+    "title": "Technical Master's Degree",
+    "knowledge": "Highly specialised knowledge at the highest levels of professional work requirements or the field of knowledge specialisation and other related disciplines. A deep and comprehensive understanding of the key theories, concepts, principles and their applications related to the field of knowledge or professional specialisation. Specialised knowledge spanning multiple fields, coupled with a full grasp of the research and innovation methods and techniques, and originality in developing and/or applying the ideas, processes, tools and materials needed for this.",
+    "skills": "Advanced skills in analysing and evaluating ideas and concepts, which may be complex, related to the field of specialisation or professional practice. Specialised skills for solving problems associated with the field of learning, professional specialisation, or related professional disciplines. Advanced skills in using the core research tools and methods relevant to the field of knowledge or work. Advanced communication and IT skills for handling various complex issues.",
+    "competencies": "Ability to manage and work at a professional level, in different work or learning environments that may be complex, unfamiliar and ill-defined. Ability to manage work with complete self-autonomy in order to identify the variables and requirements of the professional learning or work environment, including basic requirements such as enhancing critical thinking, problem-solving, and artificial and emotional intelligence skills. Ability to take full responsibility for exercising an active leadership role in managing different work or learning teams, positively reflecting on the level and nature of one's own role and the active collective roles of others."
+  },
+  {
+    "level": 10,
+    "title": "Technical Doctorate",
+    "knowledge": "Highly specialised and comprehensive knowledge at the forefront of the field of specialisation or professional practice, encompassing advanced knowledge of the key theories, concepts and principles capable of redefining or extending the boundaries of existing knowledge. Integrated knowledge for analysing, evaluating and responding to complex problems, which may include empirical problems related to the field of specialisation or professional practice. Systematic understanding and broad knowledge of developments in the applications and technology of the professional field of specialisation or related professional fields. The highest levels of knowledge of the methods, techniques and concepts relevant to the field of specialised research.",
+    "skills": "Advanced, specialised skills and technical/applied knowledge for analysing and evaluating highly significant problems associated with the field of learning or professional specialisation, or with related specialisations. Originality and innovation in developing concepts and methodologies, and/or applying research methods that can be used to redefine and renew existing knowledge or professional practices, and to address highly complex issues related to the field of learning or work.",
+    "competencies": "The ability, at the advanced professional (expert) level, to exercise authority and self-autonomy, and to employ creative capability in order to make sound decisions related to the field of knowledge specialisation or professional field. Ability to take full responsibility for performing an active leadership role, and for the governance of systems and strategic planning of various complex professional activities. Ability to identify and formulate the requirements for developing the professional/vocational work environment, particularly in aspects related to developing critical thinking, emotional and artificial intelligence skills, and managing research relevant to the field of specialisation or work."
+  }
+];
+
+        const TVQF_LEVELS_LABELS = {
+            ar: {
+                levelCol: 'المستوى',
+                titleCol: 'مسمى المؤهل',
+                levelWord: 'المستوى',
+                knowledge: '📘 المعرفة',
+                skills: '🛠️ المهارات',
+                competencies: '🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)',
+                close: 'إغلاق'
+            },
+            en: {
+                levelCol: 'Level',
+                titleCol: 'Qualification Title',
+                levelWord: 'Level',
+                knowledge: '📘 Knowledge',
+                skills: '🛠️ Skills',
+                competencies: '🎯 Competencies (Responsibility & Autonomy, Application, Engagement)',
+                close: 'Close'
+            }
+        };
+
+        function getCurrentLevelsLang() {
+            const lang = (window.TVQF_CURRENT_LANG === 'en') ? 'en' : 'ar';
+            return lang;
+        }
+
+        function getLevelsData() {
+            return (getCurrentLevelsLang() === 'en') ? TVQF_LEVELS_DATA_EN : TVQF_LEVELS_DATA_AR;
+        }
+
+        function renderLevelsTable() {
+            const tbody = document.getElementById('levelsTableBody');
+            if (!tbody) return;
+            const lang = getCurrentLevelsLang();
+            const labels = TVQF_LEVELS_LABELS[lang];
+            const levelsColEl = document.getElementById('levelsColLevel');
+            const titleColEl = document.getElementById('levelsColTitle');
+            if (levelsColEl) levelsColEl.textContent = labels.levelCol;
+            if (titleColEl) titleColEl.textContent = labels.titleCol;
+
+            const knowledgeLabelEl = document.getElementById('levelModalKnowledgeLabel');
+            const skillsLabelEl = document.getElementById('levelModalSkillsLabel');
+            const competenciesLabelEl = document.getElementById('levelModalCompetenciesLabel');
+            if (knowledgeLabelEl) knowledgeLabelEl.textContent = labels.knowledge;
+            if (skillsLabelEl) skillsLabelEl.textContent = labels.skills;
+            if (competenciesLabelEl) competenciesLabelEl.textContent = labels.competencies;
+            const closeBtn = document.querySelector('.level-modal-close');
+            if (closeBtn) closeBtn.setAttribute('aria-label', labels.close);
+
+            const orderedLevels = getLevelsData().slice().sort(function (a, b) { return b.level - a.level; });
+            tbody.innerHTML = orderedLevels.map(function (lvl) {
+                return '<tr onclick="openLevelModal(' + lvl.level + ')">' +
+                    '<td><span class="level-badge">' + lvl.level + '</span></td>' +
+                    '<td class="level-title-cell">' + lvl.title + '</td>' +
+                    '</tr>';
+            }).join('');
+        }
+
+        function openLevelModal(levelNum) {
+            const lang = getCurrentLevelsLang();
+            const labels = TVQF_LEVELS_LABELS[lang];
+            const data = getLevelsData().find(function (l) { return l.level === levelNum; });
+            if (!data) return;
+            document.getElementById('levelModalTitle').textContent = labels.levelWord + ' ' + data.level + ' — ' + data.title;
+            document.getElementById('levelModalKnowledge').textContent = data.knowledge;
+            document.getElementById('levelModalSkills').textContent = data.skills;
+            document.getElementById('levelModalCompetencies').textContent = data.competencies;
+            document.getElementById('levelModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLevelModal() {
+            document.getElementById('levelModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLevelModal();
+        });
+
+        document.addEventListener('DOMContentLoaded', renderLevelsTable);
+
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Close mobile menu if open
+                const menu = document.getElementById('navMenu');
+                menu.classList.remove('active');
+            }
+            
+            // Prevent default link behavior
+            return false;
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! The TVQF Secretariat will contact you soon.');
+            event.target.reset();
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
