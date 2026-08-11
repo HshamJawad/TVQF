@@ -6,6 +6,14 @@
 const TVQF_TRANSLATIONS = {
   en: {
   "title_1": "TVQF Iraq - Technical & Vocational Qualifications Framework",
+  "site_notice": "Unofficial website — for research and educational purposes.",
+  "t_formoff": "⚠️ The contact form is not active yet. Messages are not sent or stored anywhere. Please use the contact details below.",
+  "dev_title": "About the Developer",
+  "dev_name": "Husham Jawad Kadhim",
+  "dev_role": "DACUM Live Pro Developer",
+  "dev_desc": "TVET curriculum developer and innovator in education technology.",
+  "dev_email_label": "Email:",
+  "dev_linkedin_label": "LinkedIn:",
   "ph_2": "Search for keywords...",
   "nav_3": "Home",
   "nav_4": "About ▼",
@@ -209,13 +217,12 @@ const TVQF_TRANSLATIONS = {
   "t_227": "Subject *",
   "t_228": "Message *",
   "t_229": "Contact Information",
-  "t_230": "<strong>Email:</strong> info@tvqf-iraq.org",
   "t_231": "<strong>Address:</strong> Ministry of Education, Baghdad, Iraq",
   "t_232": "<strong>Phone:</strong> Coming Soon",
   "t_233": "<strong>Working Hours:</strong> Sunday - Thursday, 8:00 AM - 3:00 PM",
   "t_234": "Follow Us",
   "t_235": "Social media channels (LinkedIn, Facebook, YouTube) will be announced soon. Stay tuned for updates!",
-  "btn_236": "Send Message",
+  "btn_236": "Send Message (coming soon)",
   "t_237": "Qualification Types",
   "t_238": "The framework describes how certificates, diplomas and degrees align with national levels. Understanding these qualification types helps learners and employers navigate the education system effectively.",
   "t_239": "Vocational Training Certificates (Levels 1-3)",
@@ -288,7 +295,6 @@ const TVQF_TRANSLATIONS = {
   "f_308": "News & Events",
   "f_309": "Contact Us",
   "f_310": "Contact",
-  "f_311": "<strong>Email:</strong> info@tvqf-iraq.org",
   "f_313": "Baghdad, Iraq",
   "f_314": "Working Hours:<br/>Sunday - Thursday<br/>8:00 AM - 3:00 PM",
   "f_315": "Our Partners",
@@ -302,6 +308,14 @@ const TVQF_TRANSLATIONS = {
 },
   ar: {
   "title_1": "الإطار الوطني للمؤهلات التقنية والمهنية في العراق - TVQF",
+  "site_notice": "الموقع غير رسمي، لأغراض بحثية وتعليمية.",
+  "t_formoff": "⚠️ نموذج الاتصال غير مفعّل حالياً، ولا تُرسَل الرسائل أو تُحفَظ في أي مكان. يُرجى استخدام معلومات التواصل أدناه.",
+  "dev_title": "عن المطوّر",
+  "dev_name": "Husham Jawad Kadhim",
+  "dev_role": "مطوّر DACUM Live Pro",
+  "dev_desc": "مطوّر مناهج التعليم والتدريب التقني والمهني ومبتكر في تكنولوجيا التعليم.",
+  "dev_email_label": "البريد الإلكتروني:",
+  "dev_linkedin_label": "LinkedIn:",
   "ph_2": "ابحث عن كلمات مفتاحية...",
   "nav_3": "الرئيسية",
   "nav_4": "عن الإطار ▼",
@@ -505,13 +519,12 @@ const TVQF_TRANSLATIONS = {
   "t_227": "الموضوع *",
   "t_228": "الرسالة *",
   "t_229": "معلومات الاتصال",
-  "t_230": "<strong>البريد الإلكتروني:</strong> info@tvqf-iraq.org",
   "t_231": "<strong>العنوان:</strong> وزارة التربية، بغداد، العراق",
   "t_232": "<strong>الهاتف:</strong> سيُعلن لاحقاً",
   "t_233": "<strong>ساعات الدوام:</strong> الأحد - الخميس، 8:00 صباحاً - 3:00 عصراً",
   "t_234": "تابعونا",
   "t_235": "سيُعلن قريباً عن قنوات التواصل الاجتماعي (لينكدإن، فيسبوك، يوتيوب). ترقّبوا التحديثات!",
-  "btn_236": "إرسال الرسالة",
+  "btn_236": "إرسال الرسالة (قريباً)",
   "t_237": "أنواع المؤهلات",
   "t_238": "يصف الإطار كيفية مواءمة الشهادات والدبلومات والدرجات العلمية مع المستويات الوطنية. ويساعد فهم أنواع المؤهلات هذه المتعلمين وأصحاب العمل على التعامل بفعالية مع النظام التعليمي.",
   "t_239": "الشهادات المهنية (المستويات 1-3)",
@@ -584,7 +597,6 @@ const TVQF_TRANSLATIONS = {
   "f_308": "الأخبار والفعاليات",
   "f_309": "اتصل بنا",
   "f_310": "التواصل",
-  "f_311": "<strong>البريد الإلكتروني:</strong> info@tvqf-iraq.org",
   "f_313": "بغداد، العراق",
   "f_314": "ساعات الدوام:<br/>الأحد - الخميس<br/>8:00 صباحاً - 3:00 عصراً",
   "f_315": "شركاؤنا",
@@ -600,7 +612,7 @@ const TVQF_TRANSLATIONS = {
 
 // Keys whose value contains inline HTML (e.g. <br>, <strong>) and must be
 // applied with innerHTML instead of textContent.
-const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_216", "t_217", "t_218", "t_219", "t_220", "t_230", "t_231", "t_232", "t_233", "f_301", "f_311", "f_314"]);
+const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_216", "t_217", "t_218", "t_219", "t_220", "t_231", "t_232", "t_233", "f_301", "f_314"]);
 
 (function() {
   const STORAGE_KEY = 'tvqf-lang';
