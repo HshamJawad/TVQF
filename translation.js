@@ -6,6 +6,10 @@
 const TVQF_TRANSLATIONS = {
   en: {
   "title_1": "TVQF Iraq - Technical & Vocational Qualifications Framework",
+  "pyr_title": "The Ten Levels of the Framework",
+  "pyr_sub": "Ten progressive levels describing the learning and qualification pathway from a Level 1 Certificate up to the Technical Doctorate.",
+  "pyr_count": "Levels",
+  "pyr_hint": "Select any level to view its knowledge, skills and competence descriptors.",
   "site_notice": "Unofficial website — for research and educational purposes.",
   "t_formoff": "⚠️ The contact form is not active yet. Messages are not sent or stored anywhere. Please use the contact details below.",
   "dev_title": "About the Developer",
@@ -307,6 +311,10 @@ const TVQF_TRANSLATIONS = {
 },
   ar: {
   "title_1": "الإطار الوطني للمؤهلات التقنية والمهنية في العراق - TVQF",
+  "pyr_title": "المستويات العشرة للإطار",
+  "pyr_sub": "عشرة مستويات متدرّجة تصف مسار التعلّم والتأهيل من شهادة المستوى الأول وحتى الدكتوراه التقنية.",
+  "pyr_count": "مستويات",
+  "pyr_hint": "اختر أي مستوى للاطلاع على واصفات المعرفة والمهارات والكفاية الخاصة به.",
   "site_notice": "الموقع غير رسمي، لأغراض بحثية وتعليمية.",
   "t_formoff": "⚠️ نموذج الاتصال غير مفعّل حالياً، ولا تُرسَل الرسائل أو تُحفَظ في أي مكان. يُرجى استخدام معلومات التواصل أدناه.",
   "dev_title": "عن المطوّر",
@@ -696,6 +704,11 @@ const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_
     // Re-render the TVQF Forms library (Forms & Resources) in the new language
     if (typeof window.renderTvqfForms === 'function') {
       window.renderTvqfForms();
+    }
+
+    // Re-render the home page levels pyramid in the new language
+    if (typeof window.renderLevelsPyramid === 'function') {
+      window.renderLevelsPyramid();
     }
   }
 

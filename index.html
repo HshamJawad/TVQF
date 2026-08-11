@@ -404,8 +404,148 @@
         }
 
         /* Level Modal */
-        .level-modal-overlay {
-            display: none;
+        /* ---------- Home: interactive levels pyramid ---------- */
+        .pyramid-section {
+            background: linear-gradient(180deg, #f4f9fc 0%, #e8f1f7 100%);
+            padding: 3.5rem 2rem 4rem;
+        }
+
+        .pyramid-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pyramid-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .pyramid-head h2 {
+            font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+            color: #1b3a5c;
+            margin-bottom: 0.6rem;
+        }
+
+        .pyramid-head p {
+            color: #55707f;
+            max-width: 680px;
+            margin: 0;
+        }
+
+        .pyramid-count {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .pyramid-count .num {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1;
+            color: #1b4674;
+        }
+
+        .pyramid-count .lbl {
+            color: #6b8494;
+            font-weight: 600;
+            margin-top: 0.3rem;
+        }
+
+        .pyramid-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .pyramid-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            height: clamp(48px, 4.4vw, 68px);
+            padding: 0 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            font-family: inherit;
+            text-align: start;
+            color: #12304d;
+            box-shadow: 0 8px 18px -14px rgba(10, 50, 80, 0.9);
+            opacity: 0;
+            transform: translateY(14px);
+            transition: filter 0.25s, transform 0.25s;
+        }
+
+        .pyramid-bars.revealed .pyramid-bar {
+            animation: pyramidReveal 0.7s cubic-bezier(0.2, 0.85, 0.25, 1) both;
+        }
+
+        @keyframes pyramidReveal {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .pyramid-bar:hover,
+        .pyramid-bar:focus-visible {
+            filter: brightness(1.06);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .pyramid-bar .pyr-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(32px, 2.8vw, 42px);
+            height: clamp(32px, 2.8vw, 42px);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+            font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+            flex-shrink: 0;
+        }
+
+        .pyramid-bar .pyr-title {
+            font-weight: 700;
+            font-size: clamp(0.95rem, 1.5vw, 1.35rem);
+        }
+
+        .pyramid-bar.dark {
+            color: #fff;
+        }
+
+        .pyramid-bar.dark .pyr-num {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .pyramid-hint {
+            margin-top: 1.2rem;
+            color: #6b8494;
+            font-size: 0.92rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pyramid-bars.revealed .pyramid-bar { animation: none; }
+            .pyramid-bar { opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 768px) {
+            .pyramid-section { padding: 2.5rem 1rem 3rem; }
+            .pyramid-bar {
+                padding: 0.55rem 0.7rem;
+                gap: 0.6rem;
+                min-width: 78%;
+                height: auto;
+                min-height: 54px;
+            }
+            .pyramid-head { gap: 1rem; }
+        }
+
+        .level-modal-overlay {            display: none;
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.6);
@@ -1136,6 +1276,22 @@
 </div>
 </div>
 </div>
+<section class="pyramid-section">
+<div class="pyramid-inner">
+<div class="pyramid-head">
+<div>
+<h2 data-i18n="pyr_title">The Ten Levels of the Framework</h2>
+<p data-i18n="pyr_sub">Ten progressive levels describing the learning and qualification pathway from a Level 1 Certificate up to the Technical Doctorate.</p>
+</div>
+<div class="pyramid-count">
+<div class="num">10</div>
+<div class="lbl" data-i18n="pyr_count">Levels</div>
+</div>
+</div>
+<div class="pyramid-bars" id="levelsPyramid"></div>
+<p class="pyramid-hint" data-i18n="pyr_hint">Select any level to view its knowledge, skills and competence descriptors.</p>
+</div>
+</section>
 <section class="news-section">
 <h2 data-i18n="t_43">Latest News &amp; Updates</h2>
 <div class="news-carousel">
@@ -1936,6 +2092,58 @@
         });
 
         document.addEventListener('DOMContentLoaded', renderLevelsTable);
+
+        /* =========================================================
+           HOME PAGE: interactive levels pyramid
+           ---------------------------------------------------------
+           Built from the same TVQF_LEVELS_DATA_* arrays as the levels
+           table, so titles stay in sync automatically. Clicking a bar
+           opens the existing level modal. Exposed on window and
+           re-rendered by applyLanguage() on language switch.
+           ========================================================= */
+        var PYRAMID_COLORS = [
+            '#dcecf3', '#cbe4ee', '#b0d8e8', '#8fc9de', '#6fb8d3',
+            '#55a6c6', '#3d8fb5', '#2f77a3', '#245f8c', '#1b4674'
+        ];
+
+        function renderLevelsPyramid() {
+            var host = document.getElementById('levelsPyramid');
+            if (!host) return;
+            var levels = getLevelsData().slice().sort(function (a, b) { return b.level - a.level; });
+            host.innerHTML = levels.map(function (lvl, i) {
+                var width = 42 + (lvl.level - 1) * (58 / 9);   // 42% at level 1 -> 100% at level 10
+                var dark = lvl.level >= 7 ? ' dark' : '';
+                return '<button type="button" class="pyramid-bar' + dark + '" ' +
+                    'style="width:' + width.toFixed(1) + '%;background:' + PYRAMID_COLORS[lvl.level - 1] +
+                    ';animation-delay:' + (i * 0.07).toFixed(2) + 's" ' +
+                    'onclick="openLevelModal(' + lvl.level + ')">' +
+                    '<span class="pyr-num">' + lvl.level + '</span>' +
+                    '<span class="pyr-title">' + lvl.title + '</span>' +
+                    '</button>';
+            }).join('');
+
+            // Play the reveal animation once the section scrolls into view.
+            if (host.classList.contains('revealed')) return;
+            if (!('IntersectionObserver' in window)) { host.classList.add('revealed'); return; }
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        host.classList.add('revealed');
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.15 });
+            observer.observe(host);
+            // Safety net: if the section never gets observed (e.g. the home page
+            // was hidden on load), show the bars anyway rather than leaving them blank.
+            setTimeout(function () {
+                host.classList.add('revealed');
+                observer.disconnect();
+            }, 2500);
+        }
+
+        window.renderLevelsPyramid = renderLevelsPyramid;
+        document.addEventListener('DOMContentLoaded', renderLevelsPyramid);
 
         /* =========================================================
            TVQF FORMS LIBRARY  (Forms & Resources > Forms and Templates)
