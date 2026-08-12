@@ -6,7 +6,7 @@
 const TVQF_TRANSLATIONS = {
   en: {
   "title_1": "TVQF Iraq - Technical & Vocational Qualifications Framework",
-  "pyr_title": "The Ten Levels of the Framework",
+  "pyr_title": "Levels & Descriptors",
   "pyr_sub": "Ten progressive levels describing the learning and qualification pathway from a Level 1 Certificate up to the Technical Doctorate.",
   "pyr_count": "Levels",
   "pyr_hint": "Select any level to view its knowledge, skills and competence descriptors.",
@@ -77,8 +77,6 @@ const TVQF_TRANSLATIONS = {
   "t_59": "Governance",
   "t_60": "The framework is overseen by a National Coordination Committee comprising representatives from the Ministries of Education, Higher Education & Research, and Labour & Social Affairs. Their mandate includes policy oversight, stakeholder coordination and guidance for institutional implementation.",
   "t_61": "The governance structure ensures that TVQF Iraq remains responsive to the needs of learners, employers, and the broader economy. Regular reviews and stakeholder consultations help maintain the framework's relevance and effectiveness.",
-  "t_62": "Levels & Descriptors",
-  "t_63": "Discover the full set of 10 qualification levels of TVQF Iraq, each defined by knowledge, skills and competence descriptors.",
   "t_64": "The 10 Levels of TVQF Iraq",
   "t_65": "Levels 1-3: Basic Vocational Training",
   "t_66": "Entry-level vocational certificates focusing on foundational skills and basic competencies in specific trades and occupations.",
@@ -311,7 +309,7 @@ const TVQF_TRANSLATIONS = {
 },
   ar: {
   "title_1": "الإطار الوطني للمؤهلات التقنية والمهنية في العراق - TVQF",
-  "pyr_title": "المستويات العشرة للإطار",
+  "pyr_title": "المستويات والواصفات",
   "pyr_sub": "عشرة مستويات متدرّجة تصف مسار التعلّم والتأهيل من شهادة المستوى الأول وحتى الدكتوراه التقنية.",
   "pyr_count": "مستويات",
   "pyr_hint": "اختر أي مستوى للاطلاع على واصفات المعرفة والمهارات والكفاية الخاصة به.",
@@ -382,8 +380,6 @@ const TVQF_TRANSLATIONS = {
   "t_59": "الحوكمة",
   "t_60": "يُشرف على الإطار لجنة تنسيق وطنية تضم ممثلين عن وزارات التربية، والتعليم العالي والبحث العلمي، والعمل والشؤون الاجتماعية. وتشمل مهامها الإشراف على السياسات وتنسيق أصحاب المصلحة وتوجيه التنفيذ المؤسسي.",
   "t_61": "يضمن هيكل الحوكمة بقاء الإطار متجاوباً مع احتياجات المتعلمين وأصحاب العمل والاقتصاد بشكل عام. وتساعد المراجعات الدورية والتشاور مع أصحاب المصلحة في الحفاظ على أهمية الإطار وفعاليته.",
-  "t_62": "المستويات والواصفات",
-  "t_63": "اكتشف المجموعة الكاملة من المستويات العشرة للمؤهلات في الإطار الوطني، وكل مستوى معرّف بواصفات المعرفة والمهارات والكفاءة.",
   "t_64": "المستويات العشرة للإطار الوطني للمؤهلات في العراق",
   "t_65": "المستويات 1-3: التدريب المهني الأساسي",
   "t_66": "شهادات مهنية للمستوى التمهيدي تركّز على المهارات الأساسية والكفاءات الأولية في حرف ومهن محددة.",

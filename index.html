@@ -339,74 +339,9 @@
             margin-top: 1rem;
         }
 
-        /* Interactive Levels Table */
-        .levels-table-wrapper {
-            overflow-x: auto;
-            margin: 1.5rem 0 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-
-        .levels-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 480px;
-            background: #fff;
-        }
-
-        .levels-table thead th {
-            background: #006400;
-            color: #fff;
-            padding: 1rem 1.25rem;
-            text-align: right;
-            font-size: 1rem;
-        }
-
-        .levels-table tbody td {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .levels-table tbody tr {
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-
-        .levels-table tbody tr:hover {
-            background: #f0f7f0;
-        }
-
-        .levels-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .level-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #006400;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .level-title-cell {
-            color: #004d00;
-            font-weight: 600;
-        }
-
-        .level-hint {
-            color: #999;
-            font-size: 0.85rem;
-        }
-
-        /* Level Modal */
         /* ---------- Home: interactive levels pyramid ---------- */
         .pyramid-section {
-            background: linear-gradient(180deg, #f4f9fc 0%, #e8f1f7 100%);
+            background: linear-gradient(180deg, #f6faf5 0%, #eaf3e8 100%);
             padding: 3.5rem 2rem 4rem;
         }
 
@@ -426,12 +361,12 @@
 
         .pyramid-head h2 {
             font-size: clamp(1.5rem, 2.6vw, 2.2rem);
-            color: #1b3a5c;
+            color: #006400;
             margin-bottom: 0.6rem;
         }
 
         .pyramid-head p {
-            color: #55707f;
+            color: #5a6f58;
             max-width: 680px;
             margin: 0;
         }
@@ -445,11 +380,11 @@
             font-size: clamp(2rem, 4vw, 3.2rem);
             font-weight: 800;
             line-height: 1;
-            color: #1b4674;
+            color: #006400;
         }
 
         .pyramid-count .lbl {
-            color: #6b8494;
+            color: #6b8468;
             font-weight: 600;
             margin-top: 0.3rem;
         }
@@ -472,8 +407,10 @@
             width: 100%;
             font-family: inherit;
             text-align: start;
-            color: #12304d;
-            box-shadow: 0 8px 18px -14px rgba(10, 50, 80, 0.9);
+            color: #123d12;
+            box-shadow: 0 8px 18px -14px rgba(10, 60, 20, 0.9);
+            position: relative;
+            overflow: hidden;
             opacity: 0;
             transform: translateY(14px);
             transition: filter 0.25s, transform 0.25s;
@@ -522,9 +459,31 @@
             color: #fff;
         }
 
+        .pyramid-bar .pyr-sheen {
+            position: absolute;
+            inset-block: 0;
+            width: 90px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+            animation: pyrSheen 4.5s ease-in-out 1.6s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pyrSheen {
+            0%   { transform: translateX(-120%); }
+            55%  { transform: translateX(900%); }
+            100% { transform: translateX(900%); }
+        }
+
+        .pyramid-downloads {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
         .pyramid-hint {
             margin-top: 1.2rem;
-            color: #6b8494;
+            color: #6b8468;
             font-size: 0.92rem;
         }
 
@@ -650,7 +609,6 @@
         .news-section {
             background: #f8f9fa;
             padding: 3rem 2rem;
-            margin: 0 -2rem;
         }
 
         .news-section h2 {
@@ -1205,7 +1163,7 @@
 <li class="dropdown">
 <a data-i18n="nav_8" href="#" onclick="showPage('framework')">The Framework ▼</a>
 <div class="dropdown-content">
-<a data-i18n="nav_9" href="#" onclick="showPage('framework-levels')">Levels &amp; Descriptors</a>
+<a data-i18n="nav_9" href="#" onclick="goToLevels()">Levels &amp; Descriptors</a>
 <a data-i18n="nav_10" href="#" onclick="showPage('framework-types')">Qualification Types</a>
 <a data-i18n="nav_11" href="#" onclick="showPage('framework-credit')">Credit &amp; Learning Hours</a>
 <a data-i18n="nav_12" href="#" onclick="showPage('framework-matrices')">Sectoral Matrices</a>
@@ -1258,7 +1216,7 @@
 <h3 data-i18n="t_33">What is TVQF?</h3>
 <p data-i18n="t_34">Learn about the framework and its role in Iraq's education system</p>
 </div>
-<div class="link-card" onclick="showPage('framework-levels')">
+<div class="link-card" onclick="goToLevels()">
 <h3 data-i18n="t_35">Levels &amp; Descriptors</h3>
 <p data-i18n="t_36">Explore the 10 qualification levels and their definitions</p>
 </div>
@@ -1276,7 +1234,7 @@
 </div>
 </div>
 </div>
-<section class="pyramid-section">
+<section class="pyramid-section" id="levelsPyramidSection">
 <div class="pyramid-inner">
 <div class="pyramid-head">
 <div>
@@ -1290,6 +1248,30 @@
 </div>
 <div class="pyramid-bars" id="levelsPyramid"></div>
 <p class="pyramid-hint" data-i18n="pyr_hint">Select any level to view its knowledge, skills and competence descriptors.</p>
+<div class="pyramid-downloads">
+<a class="download-btn" data-i18n="a_73" data-i18n-href="a_73_href" href="Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.pdf" target="_blank">📄 Download TVQF Levels &amp; Descriptors PDF</a>
+<a class="download-btn" data-i18n="a_73b" data-i18n-href="a_73b_href" href="Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.docx" target="_blank">📝 Download TVQF Levels &amp; Descriptors DOCX</a>
+</div>
+</div>
+<div class="level-modal-overlay" id="levelModalOverlay" onclick="if(event.target===this) closeLevelModal()">
+<div class="level-modal" role="dialog" aria-modal="true" aria-labelledby="levelModalTitle">
+<button class="level-modal-close" onclick="closeLevelModal()" aria-label="إغلاق">✕</button>
+<div class="level-modal-header">
+<h3 id="levelModalTitle"></h3>
+</div>
+<div class="level-modal-section">
+<h4 id="levelModalKnowledgeLabel">📘 المعرفة</h4>
+<p id="levelModalKnowledge"></p>
+</div>
+<div class="level-modal-section">
+<h4 id="levelModalSkillsLabel">🛠️ المهارات</h4>
+<p id="levelModalSkills"></p>
+</div>
+<div class="level-modal-section">
+<h4 id="levelModalCompetenciesLabel">🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)</h4>
+<p id="levelModalCompetencies"></p>
+</div>
+</div>
 </div>
 </section>
 <section class="news-section">
@@ -1344,50 +1326,6 @@
 </div>
 </div>
 <!-- LEVELS & DESCRIPTORS -->
-<div class="page-content" id="framework-levels">
-<div class="container">
-<div class="intro-section">
-<h2 data-i18n="t_62">Levels &amp; Descriptors</h2>
-<p data-i18n="t_63">Discover the full set of 10 qualification levels of TVQF Iraq, each defined by knowledge, skills and competence descriptors.</p>
-<a class="download-btn" data-i18n="a_73" data-i18n-href="a_73_href" href="Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.pdf" target="_blank">📄 Download TVQF Levels &amp; Descriptors PDF</a>
-<a class="download-btn" data-i18n="a_73b" data-i18n-href="a_73b_href" href="Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.docx" target="_blank">📝 Download TVQF Levels &amp; Descriptors DOCX</a>
-
-<div class="levels-table-wrapper">
-<table class="levels-table">
-<thead>
-
-<tr>
-<th style="width: 90px;" id="levelsColLevel">المستوى</th>
-<th id="levelsColTitle">مسمى المؤهل</th>
-</tr>
-</thead>
-<tbody id="levelsTableBody"></tbody>
-</table>
-</div>
-
-<div class="level-modal-overlay" id="levelModalOverlay" onclick="if(event.target===this) closeLevelModal()">
-<div class="level-modal" role="dialog" aria-modal="true" aria-labelledby="levelModalTitle">
-<button class="level-modal-close" onclick="closeLevelModal()" aria-label="إغلاق">✕</button>
-<div class="level-modal-header">
-<h3 id="levelModalTitle"></h3>
-</div>
-<div class="level-modal-section">
-<h4 id="levelModalKnowledgeLabel">📘 المعرفة</h4>
-<p id="levelModalKnowledge"></p>
-</div>
-<div class="level-modal-section">
-<h4 id="levelModalSkillsLabel">🛠️ المهارات</h4>
-<p id="levelModalSkills"></p>
-</div>
-<div class="level-modal-section">
-<h4 id="levelModalCompetenciesLabel">🎯 الكفايات (المسؤولية والاستقلالية، الأداء، والمشاركة)</h4>
-<p id="levelModalCompetencies"></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <!-- WHAT IS RPL -->
 <div class="page-content" id="rpl-what">
 <div class="container">
@@ -1830,7 +1768,7 @@
 <div class="footer-section">
 <h3 data-i18n="f_302">Quick Links</h3>
 <a data-i18n="f_303" href="#" onclick="showPage('about-tvqf')">About TVQF</a>
-<a data-i18n="f_304" href="#" onclick="showPage('framework-levels')">Levels &amp; Descriptors</a>
+<a data-i18n="f_304" href="#" onclick="goToLevels()">Levels &amp; Descriptors</a>
 <a data-i18n="f_305" href="#" onclick="showPage('quality-accreditation')">Quality Assurance</a>
 <a data-i18n="f_306" href="#" onclick="showPage('rpl-what')">Recognition of Prior Learning</a>
 <a data-i18n="f_307" href="#" onclick="showPage('resources-forms')">Forms &amp; Resources</a>
@@ -2041,15 +1979,13 @@
             return (getCurrentLevelsLang() === 'en') ? TVQF_LEVELS_DATA_EN : TVQF_LEVELS_DATA_AR;
         }
 
+        /* The levels table was replaced by the interactive pyramid on the home
+           page. This function now only refreshes the level-modal labels; it is
+           still called renderLevelsTable() because applyLanguage() in
+           translation.js invokes it by that name on every language switch. */
         function renderLevelsTable() {
-            const tbody = document.getElementById('levelsTableBody');
-            if (!tbody) return;
             const lang = getCurrentLevelsLang();
             const labels = TVQF_LEVELS_LABELS[lang];
-            const levelsColEl = document.getElementById('levelsColLevel');
-            const titleColEl = document.getElementById('levelsColTitle');
-            if (levelsColEl) levelsColEl.textContent = labels.levelCol;
-            if (titleColEl) titleColEl.textContent = labels.titleCol;
 
             const knowledgeLabelEl = document.getElementById('levelModalKnowledgeLabel');
             const skillsLabelEl = document.getElementById('levelModalSkillsLabel');
@@ -2059,14 +1995,6 @@
             if (competenciesLabelEl) competenciesLabelEl.textContent = labels.competencies;
             const closeBtn = document.querySelector('.level-modal-close');
             if (closeBtn) closeBtn.setAttribute('aria-label', labels.close);
-
-            const orderedLevels = getLevelsData().slice().sort(function (a, b) { return b.level - a.level; });
-            tbody.innerHTML = orderedLevels.map(function (lvl) {
-                return '<tr onclick="openLevelModal(' + lvl.level + ')">' +
-                    '<td><span class="level-badge">' + lvl.level + '</span></td>' +
-                    '<td class="level-title-cell">' + lvl.title + '</td>' +
-                    '</tr>';
-            }).join('');
         }
 
         function openLevelModal(levelNum) {
@@ -2102,8 +2030,8 @@
            re-rendered by applyLanguage() on language switch.
            ========================================================= */
         var PYRAMID_COLORS = [
-            '#dcecf3', '#cbe4ee', '#b0d8e8', '#8fc9de', '#6fb8d3',
-            '#55a6c6', '#3d8fb5', '#2f77a3', '#245f8c', '#1b4674'
+            '#e3f0e0', '#cfe6ca', '#b6d9af', '#99c990', '#7ab870',
+            '#5aa552', '#3d8f3a', '#2b7a2b', '#1c661f', '#0f4d16'
         ];
 
         function renderLevelsPyramid() {
@@ -2119,6 +2047,7 @@
                     'onclick="openLevelModal(' + lvl.level + ')">' +
                     '<span class="pyr-num">' + lvl.level + '</span>' +
                     '<span class="pyr-title">' + lvl.title + '</span>' +
+                    (lvl.level === 10 ? '<span class="pyr-sheen"></span>' : '') +
                     '</button>';
             }).join('');
 
@@ -2142,6 +2071,19 @@
             }, 2500);
         }
 
+        /* Nav / footer / quick-link entry point: the old "Levels & Descriptors"
+           page was replaced by the pyramid on the home page, so jump home and
+           scroll to it. */
+        function goToLevels() {
+            showPage('home');
+            setTimeout(function () {
+                const section = document.getElementById('levelsPyramidSection');
+                if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 120);
+            return false;
+        }
+
+        window.goToLevels = goToLevels;
         window.renderLevelsPyramid = renderLevelsPyramid;
         document.addEventListener('DOMContentLoaded', renderLevelsPyramid);
 
