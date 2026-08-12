@@ -703,6 +703,11 @@ const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_
     if (typeof window.renderTvqfFlows === 'function') {
       window.renderTvqfFlows();
     }
+
+    // Keep the contextual return bar in the procedures tab translated
+    if (typeof window.renderFlowReturnBar === 'function') {
+      window.renderFlowReturnBar();
+    }
   }
 
   function toggleLanguage() {

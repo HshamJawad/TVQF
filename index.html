@@ -480,6 +480,45 @@
             display: none;
         }
 
+        .flow-return-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            background: #f1f7f0;
+            border: 1px solid #cfe0cd;
+            border-radius: 8px;
+            padding: 0.75rem 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.93rem;
+            color: #3f5c3d;
+        }
+
+        .flow-return-bar[hidden] {
+            display: none;
+        }
+
+        .flow-return-bar a {
+            color: #14561a;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 1px solid #9dc499;
+        }
+
+        .flow-return-bar a:hover {
+            border-bottom-style: solid;
+            color: #006400;
+        }
+
+        .flow-return-code {
+            background: #006400;
+            color: #fff;
+            border-radius: 5px;
+            padding: 0.1rem 0.45rem;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+
         .flow-step.is-highlighted .flow-body {
             animation: flowHighlight 2.6s ease-out;
         }
@@ -1672,6 +1711,9 @@
 <h2 data-i18n="proc_title">Application Procedures</h2>
 <p data-i18n="proc_intro">Step-by-step pathways showing the order of each TVQF process and the form used at every stage. Select a pathway below.</p>
 <div class="form-disabled-note" data-i18n="proc_notice">ℹ️ These pathways are illustrative and prepared for educational purposes. They do not replace the procedures officially adopted by the TVQF Council.</div>
+<!-- Contextual return bar: only shown when the visitor arrived here by
+     clicking "where does this form sit in the pathway?" on a form card. -->
+<div class="flow-return-bar" id="flowReturnBar" hidden></div>
 <!-- Flow tabs + steps are rendered by renderTvqfFlows() in the script below -->
 <div class="flows-library" id="tvqfFlows">
 <div class="forms-tabs" id="tvqfFlowTabs" role="tablist"></div>
@@ -2622,8 +2664,10 @@
         ];
 
         const TVQF_FLOWS_UI = {
-            en: { open: 'Open form', unavailable: 'Form not available yet' },
-            ar: { open: '\u0641\u062A\u062D \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629', unavailable: '\u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629 \u063A\u064A\u0631 \u0645\u062A\u0648\u0641\u0631\u0629 \u0628\u0639\u062F' }
+            en: { open: 'Open form', unavailable: 'Form not available yet',
+                  cameFrom: 'You arrived here from the form', backToLibrary: '\u2190 Back to the forms library' },
+            ar: { open: '\u0641\u062A\u062D \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629', unavailable: '\u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629 \u063A\u064A\u0631 \u0645\u062A\u0648\u0641\u0631\u0629 \u0628\u0639\u062F',
+                  cameFrom: '\u0648\u0635\u0644\u062A \u0625\u0644\u0649 \u0647\u0646\u0627 \u0645\u0646 \u0627\u0633\u062A\u0645\u0627\u0631\u0629', backToLibrary: '\u2190 \u0627\u0644\u0639\u0648\u062F\u0629 \u0625\u0644\u0649 \u0645\u0643\u062A\u0628\u0629 \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0627\u062A' }
         };
 
         let TVQF_FLOWS_ACTIVE_TAB = 'leveling';
@@ -2690,6 +2734,52 @@
             }).join('');
         }
 
+        /* The form code the visitor came from, or null when they opened the
+           procedures tab directly. Drives the contextual return bar. */
+        let TVQF_FLOW_RETURN_CODE = null;
+
+        // Which forms-library category contains a given form code?
+        function findFormCategory(code) {
+            for (let i = 0; i < TVQF_FORMS_CATEGORIES.length; i++) {
+                const forms = TVQF_FORMS_CATEGORIES[i].forms;
+                for (let j = 0; j < forms.length; j++) {
+                    if (forms[j].code === code) return TVQF_FORMS_CATEGORIES[i].id;
+                }
+            }
+            return 'leveling';
+        }
+
+        function renderFlowReturnBar() {
+            const bar = document.getElementById('flowReturnBar');
+            if (!bar) return;
+            if (!TVQF_FLOW_RETURN_CODE) { bar.hidden = true; bar.innerHTML = ''; return; }
+
+            const lang = tvqfFormsLang();
+            const ui = TVQF_FLOWS_UI[lang];
+            const form = findTvqfForm(TVQF_FLOW_RETURN_CODE);
+            const title = (form && form[lang]) ? form[lang].title : '';
+            const catId = findFormCategory(TVQF_FLOW_RETURN_CODE);
+
+            bar.innerHTML = '<span>' + tvqfEscape(ui.cameFrom) + '</span>'
+                + '<span class="flow-return-code">' + tvqfEscape(TVQF_FLOW_RETURN_CODE) + '</span>'
+                + '<span>' + tvqfEscape(title) + '</span>'
+                + '<a href="#" onclick="return returnToFormsLibrary(\'' + catId + '\')">'
+                + tvqfEscape(ui.backToLibrary) + '</a>';
+            bar.hidden = false;
+        }
+
+        function returnToFormsLibrary(catId) {
+            TVQF_FLOW_RETURN_CODE = null;
+            renderFlowReturnBar();
+            return goToTvqfForms(catId);
+        }
+
+        function clearFlowReturn() {
+            if (!TVQF_FLOW_RETURN_CODE) return;
+            TVQF_FLOW_RETURN_CODE = null;
+            renderFlowReturnBar();
+        }
+
         // Find the first flow step that uses a given form code.
         function findFlowStepByForm(code) {
             for (let i = 0; i < TVQF_FLOWS.length; i++) {
@@ -2710,6 +2800,10 @@
             if (!hit) return false;
             if (typeof showPage === 'function') { showPage('procedures'); }
             selectTvqfFlowTab(hit.flowId);
+            // Set *after* selectTvqfFlowTab, which clears the context on a
+            // manual tab change.
+            TVQF_FLOW_RETURN_CODE = code;
+            renderFlowReturnBar();
             setTimeout(function () {
                 const el = document.getElementById('flowStep-' + hit.flowId + '-' + hit.index);
                 if (!el) return;
@@ -2722,6 +2816,7 @@
 
         function selectTvqfFlowTab(flowId) {
             TVQF_FLOWS_ACTIVE_TAB = flowId;
+            clearFlowReturn();
             renderTvqfFlows();
         }
 
@@ -2729,6 +2824,9 @@
         window.selectTvqfFlowTab = selectTvqfFlowTab;
         window.findFlowStepByForm = findFlowStepByForm;
         window.goToFlowStep = goToFlowStep;
+        window.returnToFormsLibrary = returnToFormsLibrary;
+        window.renderFlowReturnBar = renderFlowReturnBar;
+        window.clearFlowReturn = clearFlowReturn;
         document.addEventListener('DOMContentLoaded', renderTvqfFlows);
 
         function goToTvqfForms(catId) {
@@ -2857,27 +2955,88 @@
 
         window.runSiteSearch = runSiteSearch;
 
-        function showPage(pageId) {
+        /* =========================================================
+           PAGE NAVIGATION + BROWSER HISTORY
+           ---------------------------------------------------------
+           This is a single-page site, so without help the browser Back
+           button would leave the site entirely. Every showPage() call
+           therefore pushes a history entry with a hash (#procedures,
+           #resources-forms, ...). Effects:
+             - Back / Forward move between sections as expected
+             - A section can be linked to or bookmarked directly
+             - Reloading keeps the visitor on the same section
+           Pass skipHistory = true when *restoring* a state (popstate or
+           first load), otherwise going back would push a new entry and
+           trap the visitor in a loop.
+
+           History writes are wrapped in try/catch: sandboxed previews
+           (an about:srcdoc iframe, for example) refuse pushState with a
+           SecurityError. Navigation must keep working there, just
+           without Back-button support.
+           ========================================================= */
+        function tvqfWriteHistory(method, pageId) {
+            if (!window.history || !history[method]) return;
+            try {
+                history[method]({ page: pageId }, '', '#' + pageId);
+            } catch (e) {
+                /* Sandboxed document: no history support, navigation still works. */
+            }
+        }
+        function showPage(pageId, skipHistory) {
             // Hide all pages
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => page.classList.remove('active'));
-            
+
             // Show selected page
             const selectedPage = document.getElementById(pageId);
             if (selectedPage) {
                 selectedPage.classList.add('active');
-                
+
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                
+
                 // Close mobile menu if open
                 const menu = document.getElementById('navMenu');
-                menu.classList.remove('active');
+                if (menu) menu.classList.remove('active');
             }
-            
+
+            // Leaving the procedures tab ends the "came from a form" context.
+            if (pageId !== 'procedures' && typeof clearFlowReturn === 'function') {
+                clearFlowReturn();
+            }
+
+            if (!skipHistory && selectedPage) {
+                let current = null;
+                try { current = history.state && history.state.page; } catch (e) { current = null; }
+                // Re-clicking the section you are already on should not stack
+                // identical entries; replace instead of push.
+                tvqfWriteHistory((current === pageId) ? 'replaceState' : 'pushState', pageId);
+            }
+
             // Prevent default link behavior
             return false;
         }
+
+        // Back / Forward buttons
+        window.addEventListener('popstate', function (event) {
+            let pageId = null;
+            try { pageId = event.state && event.state.page; } catch (e) { pageId = null; }
+            if (!pageId) {
+                pageId = location.hash ? location.hash.slice(1) : 'home';
+            }
+            if (!document.getElementById(pageId)) pageId = 'home';
+            showPage(pageId, true);
+        });
+
+        // Honour a hash on first load (direct link, bookmark or refresh)
+        document.addEventListener('DOMContentLoaded', function () {
+            const fromHash = location.hash ? location.hash.slice(1) : '';
+            const target = (fromHash && document.getElementById(fromHash)
+                && document.getElementById(fromHash).classList.contains('page-content'))
+                ? fromHash : 'home';
+            showPage(target, true);
+            tvqfWriteHistory('replaceState', target);
+        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
