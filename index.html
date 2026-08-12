@@ -352,6 +352,139 @@
             margin-top: 1rem;
         }
 
+        /* ---------- Application procedures: vertical flow steps ---------- */
+        .flow-steps {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .flow-step {
+            position: relative;
+            padding-inline-start: 3.4rem;
+            padding-bottom: 2rem;
+        }
+
+        .flow-step:last-child {
+            padding-bottom: 0;
+        }
+
+        /* connector line between the step markers */
+        .flow-step::before {
+            content: "";
+            position: absolute;
+            inset-inline-start: 1.15rem;
+            top: 2.4rem;
+            bottom: -0.4rem;
+            width: 2px;
+            background: #cfe0cd;
+        }
+
+        .flow-step:last-child::before {
+            display: none;
+        }
+
+        .flow-marker {
+            position: absolute;
+            inset-inline-start: 0;
+            top: 0.15rem;
+            width: 2.4rem;
+            height: 2.4rem;
+            border-radius: 50%;
+            background: #006400;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 0 0 4px #eaf3e8;
+        }
+
+        .flow-step.is-decision .flow-marker {
+            background: #C8102E;
+        }
+
+        .flow-body {
+            background: #fff;
+            border: 1px solid #e2e8e4;
+            border-inline-start: 4px solid #006400;
+            border-radius: 10px;
+            padding: 1.1rem 1.3rem;
+        }
+
+        .flow-step.is-decision .flow-body {
+            border-inline-start-color: #C8102E;
+            background: #fffaf9;
+        }
+
+        .flow-body h3 {
+            font-size: 1.08rem;
+            color: #006400;
+            margin: 0 0 0.4rem;
+        }
+
+        .flow-step.is-decision .flow-body h3 {
+            color: #C8102E;
+        }
+
+        .flow-body p {
+            margin: 0;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .flow-form {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+            background: #f1f7f0;
+            border: 1px solid #cfe0cd;
+            border-radius: 8px;
+            padding: 0.5rem 0.9rem;
+            color: #14561a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: background 0.25s;
+        }
+
+        .flow-form:hover {
+            background: #e2efe0;
+        }
+
+        .flow-form .flow-form-code {
+            background: #006400;
+            color: #fff;
+            border-radius: 5px;
+            padding: 0.1rem 0.45rem;
+            font-size: 0.82rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .flow-form.is-unavailable {
+            background: #f3f3f3;
+            border-color: #ddd;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .flow-form.is-unavailable .flow-form-code {
+            background: #aaa;
+        }
+
+        .flow-panel[hidden] {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .flow-step { padding-inline-start: 2.9rem; }
+            .flow-body { padding: 0.9rem 1rem; }
+        }
+
         /* ---------- Home: interactive levels pyramid ---------- */
         .pyramid-section {
             background: linear-gradient(180deg, #f6faf5 0%, #eaf3e8 100%);
@@ -1207,6 +1340,7 @@
 <a data-i18n="nav_25" href="#" onclick="showPage('resources-training')">Training Materials</a>
 </div>
 </li>
+<li><a data-i18n="nav_proc" href="#" onclick="showPage('procedures')">Application Procedures</a></li>
 <li><a data-i18n="nav_26" href="#" onclick="showPage('news')">News &amp; Events</a></li>
 <li><a data-i18n="nav_27" href="#" onclick="showPage('contact')">Contact Us</a></li>
 </ul>
@@ -1454,6 +1588,21 @@
 <h3 data-i18n="t_rplforms_new">Official RPL Forms (RPL-01 to RPL-04)</h3>
 <p data-i18n="t_rplforms_new_desc">The official Recognition of Prior Learning forms are available in the TVQF Forms &amp; Templates library.</p>
 <a class="download-btn forms-link-btn" data-i18n="a_formslink_rpl" href="#" onclick="return goToTvqfForms('rpl')">📂 Go to TVQF Forms &amp; Templates</a>
+</div>
+</div>
+</div>
+</div>
+<!-- APPLICATION PROCEDURES (FLOW CHARTS) -->
+<div class="page-content" id="procedures">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="proc_title">Application Procedures</h2>
+<p data-i18n="proc_intro">Step-by-step pathways showing the order of each TVQF process and the form used at every stage. Select a pathway below.</p>
+<div class="form-disabled-note" data-i18n="proc_notice">ℹ️ These pathways are illustrative and prepared for educational purposes. They do not replace the procedures officially adopted by the TVQF Council.</div>
+<!-- Flow tabs + steps are rendered by renderTvqfFlows() in the script below -->
+<div class="flows-library" id="tvqfFlows">
+<div class="forms-tabs" id="tvqfFlowTabs" role="tablist"></div>
+<div id="tvqfFlowPanels"></div>
 </div>
 </div>
 </div>
@@ -2313,6 +2462,153 @@
         }
 
         // Jump from any page to the Forms & Templates library, opening a given tab
+        /* =========================================================
+           APPLICATION PROCEDURES (FLOW CHARTS)
+           ---------------------------------------------------------
+           Each flow is a list of ordered steps. A step may reference a
+           form by its code (e.g. 'RPL-01'); the link, filename and
+           title are then looked up in TVQF_FORMS_CATEGORIES for the
+           active language, so form names live in exactly one place.
+           Steps marked decision: true are rendered as decision points.
+           ========================================================= */
+        const TVQF_FLOWS = [
+            {
+                id: 'leveling',
+                label: { en: 'Qualification Leveling', ar: '\u062A\u0633\u0643\u064A\u0646 \u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062A' },
+                steps: [
+                    { title: { en: 'Prepare the qualification file', ar: '\u0625\u0639\u062F\u0627\u062F \u0645\u0644\u0641 \u0627\u0644\u0645\u0624\u0647\u0644' }, desc: { en: 'The institution compiles the qualification specification, learning outcomes, assessment strategy and supporting evidence before applying.', ar: '\u062A\u064F\u0639\u062F\u0651 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0645\u0648\u0627\u0635\u0641\u0627\u062A \u0627\u0644\u0645\u0624\u0647\u0644 \u0648\u0646\u0648\u0627\u062A\u062C \u0627\u0644\u062A\u0639\u0644\u0651\u0645 \u0648\u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A\u0629 \u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0648\u0627\u0644\u0623\u062F\u0644\u0629 \u0627\u0644\u062F\u0627\u0639\u0645\u0629 \u0642\u0628\u0644 \u0627\u0644\u062A\u0642\u062F\u064A\u0645.' } },
+                    { title: { en: 'Submit the placement application', ar: '\u062A\u0642\u062F\u064A\u0645 \u0637\u0644\u0628 \u0627\u0644\u062A\u0633\u0643\u064A\u0646' }, desc: { en: 'The institution submits the application requesting placement of the qualification at a specific TVQF level.', ar: '\u062A\u0642\u062F\u0651\u0645 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0627\u0644\u0637\u0644\u0628 \u0644\u062A\u0633\u0643\u064A\u0646 \u0627\u0644\u0645\u0624\u0647\u0644 \u0636\u0645\u0646 \u0645\u0633\u062A\u0648\u0649 \u0645\u062D\u062F\u062F \u0641\u064A \u0627\u0644\u0625\u0637\u0627\u0631.' }, form: 'L-01' },
+                    { title: { en: 'Self-map against level descriptors', ar: '\u0627\u0644\u0645\u0637\u0627\u0628\u0642\u0629 \u0627\u0644\u0630\u0627\u062A\u064A\u0629 \u0645\u0639 \u0648\u0627\u0635\u0641\u0627\u062A \u0627\u0644\u0645\u0633\u062A\u0648\u0649' }, desc: { en: 'The institution maps the qualification against the knowledge, skills and competence descriptors of the proposed level.', ar: '\u062A\u0637\u0627\u0628\u0642 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0627\u0644\u0645\u0624\u0647\u0644 \u0645\u0639 \u0648\u0627\u0635\u0641\u0627\u062A \u0627\u0644\u0645\u0639\u0631\u0641\u0629 \u0648\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062A \u0648\u0627\u0644\u0643\u0641\u0627\u064A\u0629 \u0644\u0644\u0645\u0633\u062A\u0648\u0649 \u0627\u0644\u0645\u0642\u062A\u0631\u062D.' }, form: 'L-02' },
+                    { title: { en: 'Evaluation by the committee', ar: '\u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0645\u0646 \u0642\u0628\u0644 \u0627\u0644\u0644\u062C\u0646\u0629' }, desc: { en: 'The committee reviews the file and documents its evaluation of the proposed level.', ar: '\u062A\u0631\u0627\u062C\u0639 \u0627\u0644\u0644\u062C\u0646\u0629 \u0627\u0644\u0645\u0644\u0641 \u0648\u062A\u0648\u062B\u0651\u0642 \u062A\u0642\u064A\u064A\u0645\u0647\u0627 \u0644\u0644\u0645\u0633\u062A\u0648\u0649 \u0627\u0644\u0645\u0642\u062A\u0631\u062D.' }, form: 'L-03' },
+                    { title: { en: 'Placement decision', ar: '\u0642\u0631\u0627\u0631 \u0627\u0644\u062A\u0633\u0643\u064A\u0646' }, desc: { en: 'The decision is issued: approved, approved with conditions, or returned for revision.', ar: '\u064A\u0635\u062F\u0631 \u0627\u0644\u0642\u0631\u0627\u0631: \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629\u060C \u0623\u0648 \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629 \u0628\u0634\u0631\u0648\u0637\u060C \u0623\u0648 \u0627\u0644\u0625\u0639\u0627\u062F\u0629 \u0644\u0644\u062A\u0639\u062F\u064A\u0644.' }, form: 'L-04', decision: true },
+                    { title: { en: 'Sectoral review (where required)', ar: '\u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0642\u0637\u0627\u0639\u064A\u0629 (\u0639\u0646\u062F \u0627\u0644\u0627\u0642\u062A\u0636\u0627\u0621)' }, desc: { en: 'Qualifications with a sectoral dimension continue to the sectoral pathway for occupational relevance review.', ar: '\u062A\u0646\u062A\u0642\u0644 \u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062A \u0630\u0627\u062A \u0627\u0644\u0628\u0639\u062F \u0627\u0644\u0642\u0637\u0627\u0639\u064A \u0625\u0644\u0649 \u0627\u0644\u0645\u0633\u0627\u0631 \u0627\u0644\u0642\u0637\u0627\u0639\u064A \u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u0627\u0644\u0645\u0647\u0646\u064A\u0629.' } }
+                ]
+            },
+            {
+                id: 'rpl',
+                label: { en: 'Recognition of Prior Learning (RPL)', ar: '\u0627\u0644\u0627\u0639\u062A\u0631\u0627\u0641 \u0628\u0627\u0644\u062A\u0639\u0644\u0645 \u0627\u0644\u0645\u0633\u0628\u0642' },
+                steps: [
+                    { title: { en: 'Guidance and self-assessment', ar: '\u0627\u0644\u0625\u0631\u0634\u0627\u062F \u0648\u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0630\u0627\u062A\u064A' }, desc: { en: 'The applicant reviews the target qualification and identifies the prior learning to be recognised.', ar: '\u064A\u0637\u0651\u0644\u0639 \u0627\u0644\u0645\u062A\u0642\u062F\u0645 \u0639\u0644\u0649 \u0627\u0644\u0645\u0624\u0647\u0644 \u0627\u0644\u0645\u0633\u062A\u0647\u062F\u0641 \u0648\u064A\u062D\u062F\u062F \u0627\u0644\u062A\u0639\u0644\u0651\u0645 \u0627\u0644\u0645\u0633\u0628\u0642 \u0627\u0644\u0645\u0637\u0644\u0648\u0628 \u0627\u0644\u0627\u0639\u062A\u0631\u0627\u0641 \u0628\u0647.' } },
+                    { title: { en: 'Submit the RPL application', ar: '\u062A\u0642\u062F\u064A\u0645 \u0637\u0644\u0628 \u0627\u0644\u0627\u0639\u062A\u0631\u0627\u0641' }, desc: { en: 'The applicant submits the application with personal, occupational and prior learning details.', ar: '\u064A\u0642\u062F\u0651\u0645 \u0627\u0644\u0645\u062A\u0642\u062F\u0645 \u0627\u0644\u0637\u0644\u0628 \u0645\u062A\u0636\u0645\u0646\u0627\u064B \u0628\u064A\u0627\u0646\u0627\u062A\u0647 \u0627\u0644\u0634\u062E\u0635\u064A\u0629 \u0648\u0627\u0644\u0645\u0647\u0646\u064A\u0629 \u0648\u062A\u0641\u0627\u0635\u064A\u0644 \u062A\u0639\u0644\u0651\u0645\u0647 \u0627\u0644\u0645\u0633\u0628\u0642.' }, form: 'RPL-01' },
+                    { title: { en: 'Build the evidence portfolio', ar: '\u0628\u0646\u0627\u0621 \u0645\u0644\u0641 \u0627\u0644\u0623\u062F\u0644\u0629' }, desc: { en: 'The applicant gathers identity documents, certificates, employment letters and work samples using the checklist.', ar: '\u064A\u062C\u0645\u0639 \u0627\u0644\u0645\u062A\u0642\u062F\u0645 \u0648\u062B\u0627\u0626\u0642 \u0627\u0644\u0647\u0648\u064A\u0629 \u0648\u0627\u0644\u0634\u0647\u0627\u062F\u0627\u062A \u0648\u0643\u062A\u0628 \u0627\u0644\u0639\u0645\u0644 \u0648\u0639\u064A\u0646\u0627\u062A \u0627\u0644\u0623\u0639\u0645\u0627\u0644 \u0648\u0641\u0642 \u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u062A\u062F\u0642\u064A\u0642.' }, form: 'RPL-02' },
+                    { title: { en: 'Assessment', ar: '\u0627\u0644\u062A\u0642\u064A\u064A\u0645' }, desc: { en: 'The assessor applies the agreed methods \u2014 portfolio review, interview, practical demonstration or challenge test \u2014 and documents the outcome.', ar: '\u064A\u0637\u0628\u0651\u0642 \u0627\u0644\u0645\u0642\u064A\u0651\u0645 \u0627\u0644\u0623\u0633\u0627\u0644\u064A\u0628 \u0627\u0644\u0645\u062A\u0641\u0642 \u0639\u0644\u064A\u0647\u0627 \u0645\u0646 \u0645\u0631\u0627\u062C\u0639\u0629 \u0645\u0644\u0641 \u0627\u0644\u0623\u062F\u0644\u0629 \u0623\u0648 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629 \u0623\u0648 \u0627\u0644\u0639\u0631\u0636 \u0627\u0644\u0639\u0645\u0644\u064A \u0623\u0648 \u0627\u062E\u062A\u0628\u0627\u0631 \u0627\u0644\u062A\u062D\u062F\u064A\u060C \u0648\u064A\u0648\u062B\u0651\u0642 \u0627\u0644\u0646\u062A\u064A\u062C\u0629.' }, form: 'RPL-03' },
+                    { title: { en: 'Assessment decision', ar: '\u0642\u0631\u0627\u0631 \u0627\u0644\u062A\u0642\u064A\u064A\u0645' }, desc: { en: 'The outcome is issued: competent, competent with conditions, or not yet competent with further training identified.', ar: '\u062A\u0635\u062F\u0631 \u0627\u0644\u0646\u062A\u064A\u062C\u0629: \u0643\u0641\u0624\u060C \u0623\u0648 \u0643\u0641\u0624 \u0628\u0634\u0631\u0648\u0637\u060C \u0623\u0648 \u063A\u064A\u0631 \u0643\u0641\u0624 \u0628\u0639\u062F \u0645\u0639 \u062A\u062D\u062F\u064A\u062F \u0627\u0644\u062A\u062F\u0631\u064A\u0628 \u0627\u0644\u0625\u0636\u0627\u0641\u064A.' }, decision: true },
+                    { title: { en: 'Appeal (if the applicant objects)', ar: '\u0627\u0644\u0637\u0639\u0646 (\u0639\u0646\u062F \u0627\u0639\u062A\u0631\u0627\u0636 \u0627\u0644\u0645\u062A\u0642\u062F\u0645)' }, desc: { en: 'The applicant may appeal the decision on procedural or evidentiary grounds within the notified period.', ar: '\u064A\u062C\u0648\u0632 \u0644\u0644\u0645\u062A\u0642\u062F\u0645 \u0627\u0644\u0637\u0639\u0646 \u0639\u0644\u0649 \u0627\u0644\u0642\u0631\u0627\u0631 \u0644\u0623\u0633\u0628\u0627\u0628 \u0625\u062C\u0631\u0627\u0626\u064A\u0629 \u0623\u0648 \u062A\u062A\u0639\u0644\u0642 \u0628\u0627\u0644\u0623\u062F\u0644\u0629 \u062E\u0644\u0627\u0644 \u0627\u0644\u0645\u062F\u0629 \u0627\u0644\u0645\u0628\u0644\u064E\u0651\u063A \u0628\u0647\u0627.' }, form: 'RPL-04' }
+                ]
+            },
+            {
+                id: 'accreditation',
+                label: { en: 'Institutional Accreditation', ar: '\u0627\u0644\u0627\u0639\u062A\u0645\u0627\u062F \u0627\u0644\u0645\u0624\u0633\u0633\u064A' },
+                steps: [
+                    { title: { en: 'Eligibility check', ar: '\u0627\u0644\u062A\u062D\u0642\u0642 \u0645\u0646 \u0627\u0644\u0623\u0647\u0644\u064A\u0629' }, desc: { en: 'The institution verifies it meets the legal, human resource and infrastructure prerequisites before applying.', ar: '\u062A\u062A\u062D\u0642\u0642 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0645\u0646 \u0627\u0633\u062A\u064A\u0641\u0627\u0626\u0647\u0627 \u0627\u0644\u0645\u062A\u0637\u0644\u0628\u0627\u062A \u0627\u0644\u0642\u0627\u0646\u0648\u0646\u064A\u0629 \u0648\u0627\u0644\u0628\u0634\u0631\u064A\u0629 \u0648\u0627\u0644\u0628\u0646\u064A\u0629 \u0627\u0644\u062A\u062D\u062A\u064A\u0629 \u0642\u0628\u0644 \u0627\u0644\u062A\u0642\u062F\u064A\u0645.' }, form: 'A-01' },
+                    { title: { en: 'Submit the accreditation application', ar: '\u062A\u0642\u062F\u064A\u0645 \u0637\u0644\u0628 \u0627\u0644\u0627\u0639\u062A\u0645\u0627\u062F' }, desc: { en: 'The institution submits its profile, programmes offered and supporting documents.', ar: '\u062A\u0642\u062F\u0651\u0645 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0628\u064A\u0627\u0646\u0627\u062A\u0647\u0627 \u0627\u0644\u062A\u0639\u0631\u064A\u0641\u064A\u0629 \u0648\u0627\u0644\u0628\u0631\u0627\u0645\u062C \u0627\u0644\u0645\u0642\u062F\u064E\u0651\u0645\u0629 \u0648\u0627\u0644\u0648\u062B\u0627\u0626\u0642 \u0627\u0644\u062F\u0627\u0639\u0645\u0629.' }, form: 'A-02' },
+                    { title: { en: 'Self-assessment', ar: '\u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0630\u0627\u062A\u064A' }, desc: { en: 'The institution assesses itself against the quality standards covering governance, delivery, resources and learner support.', ar: '\u062A\u0642\u064A\u0651\u0645 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0646\u0641\u0633\u0647\u0627 \u0645\u0642\u0627\u0628\u0644 \u0645\u0639\u0627\u064A\u064A\u0631 \u0627\u0644\u062C\u0648\u062F\u0629 \u0627\u0644\u0634\u0627\u0645\u0644\u0629 \u0644\u0644\u062D\u0648\u0643\u0645\u0629 \u0648\u0627\u0644\u062A\u0646\u0641\u064A\u0630 \u0648\u0627\u0644\u0645\u0648\u0627\u0631\u062F \u0648\u062F\u0639\u0645 \u0627\u0644\u0645\u062A\u0639\u0644\u0645\u064A\u0646.' }, form: 'QP-SA' },
+                    { title: { en: 'Site evaluation visit', ar: '\u0627\u0644\u0632\u064A\u0627\u0631\u0629 \u0627\u0644\u062A\u0642\u064A\u064A\u0645\u064A\u0629 \u0627\u0644\u0645\u064A\u062F\u0627\u0646\u064A\u0629' }, desc: { en: 'The evaluation team visits the institution and documents strengths, areas for improvement and corrective actions.', ar: '\u064A\u0632\u0648\u0631 \u0641\u0631\u064A\u0642 \u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0648\u064A\u0648\u062B\u0651\u0642 \u0646\u0642\u0627\u0637 \u0627\u0644\u0642\u0648\u0629 \u0648\u0645\u062C\u0627\u0644\u0627\u062A \u0627\u0644\u062A\u062D\u0633\u064A\u0646 \u0648\u0627\u0644\u0625\u062C\u0631\u0627\u0621\u0627\u062A \u0627\u0644\u062A\u0635\u062D\u064A\u062D\u064A\u0629.' }, form: 'A-03' },
+                    { title: { en: 'Accreditation decision', ar: '\u0642\u0631\u0627\u0631 \u0627\u0644\u0627\u0639\u062A\u0645\u0627\u062F' }, desc: { en: 'The decision is issued: accredited, conditionally accredited, deferred or not accredited, with a validity period.', ar: '\u064A\u0635\u062F\u0631 \u0627\u0644\u0642\u0631\u0627\u0631: \u0645\u0639\u062A\u0645\u062F\u0629\u060C \u0623\u0648 \u0645\u0639\u062A\u0645\u062F\u0629 \u0628\u0634\u0631\u0648\u0637\u060C \u0623\u0648 \u0645\u0624\u062C\u0644\u0629\u060C \u0623\u0648 \u063A\u064A\u0631 \u0645\u0639\u062A\u0645\u062F\u0629\u060C \u0645\u0639 \u062A\u062D\u062F\u064A\u062F \u0645\u062F\u0629 \u0627\u0644\u0633\u0631\u064A\u0627\u0646.' }, form: 'A-04', decision: true },
+                    { title: { en: 'Renewal at the end of the cycle', ar: '\u0627\u0644\u062A\u062C\u062F\u064A\u062F \u0641\u064A \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u062F\u0648\u0631\u0629' }, desc: { en: 'Before expiry the institution submits a renewal request supported by monitoring reports.', ar: '\u0642\u0628\u0644 \u0627\u0646\u062A\u0647\u0627\u0621 \u0627\u0644\u0645\u062F\u0629 \u062A\u0642\u062F\u0651\u0645 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0637\u0644\u0628 \u0627\u0644\u062A\u062C\u062F\u064A\u062F \u0645\u062F\u0639\u0648\u0645\u0627\u064B \u0628\u062A\u0642\u0627\u0631\u064A\u0631 \u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629.' }, form: 'A-04' }
+                ]
+            },
+            {
+                id: 'quality',
+                label: { en: 'Quality Assurance', ar: '\u0636\u0645\u0627\u0646 \u0627\u0644\u062C\u0648\u062F\u0629' },
+                steps: [
+                    { title: { en: 'Annual self-assessment', ar: '\u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0630\u0627\u062A\u064A \u0627\u0644\u0633\u0646\u0648\u064A' }, desc: { en: 'The institution reviews its own performance against the quality standards at the start of the cycle.', ar: '\u062A\u0631\u0627\u062C\u0639 \u0627\u0644\u0645\u0624\u0633\u0633\u0629 \u0623\u062F\u0627\u0621\u0647\u0627 \u0645\u0642\u0627\u0628\u0644 \u0645\u0639\u0627\u064A\u064A\u0631 \u0627\u0644\u062C\u0648\u062F\u0629 \u0641\u064A \u0628\u062F\u0627\u064A\u0629 \u0627\u0644\u062F\u0648\u0631\u0629.' }, form: 'QP-SA' },
+                    { title: { en: 'Annual quality review', ar: '\u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0633\u0646\u0648\u064A\u0629 \u0644\u0644\u062C\u0648\u062F\u0629' }, desc: { en: 'Performance in governance, delivery, graduate employment and satisfaction is documented for the year.', ar: '\u064A\u0648\u062B\u064E\u0651\u0642 \u0627\u0644\u0623\u062F\u0627\u0621 \u0641\u064A \u0627\u0644\u062D\u0648\u0643\u0645\u0629 \u0648\u0627\u0644\u062A\u0646\u0641\u064A\u0630 \u0648\u062A\u0634\u063A\u064A\u0644 \u0627\u0644\u062E\u0631\u064A\u062C\u064A\u0646 \u0648\u0645\u0633\u062A\u0648\u0649 \u0627\u0644\u0631\u0636\u0627 \u062E\u0644\u0627\u0644 \u0627\u0644\u0633\u0646\u0629.' }, form: 'QP-AR' },
+                    { title: { en: 'Identify improvement priorities', ar: '\u062A\u062D\u062F\u064A\u062F \u0623\u0648\u0644\u0648\u064A\u0627\u062A \u0627\u0644\u062A\u062D\u0633\u064A\u0646' }, desc: { en: 'Gaps surfaced by the review are ranked by priority and turned into actionable items.', ar: '\u062A\u064F\u0631\u062A\u064E\u0651\u0628 \u0627\u0644\u0641\u062C\u0648\u0627\u062A \u0627\u0644\u062A\u064A \u0623\u0638\u0647\u0631\u062A\u0647\u0627 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u062D\u0633\u0628 \u0627\u0644\u0623\u0648\u0644\u0648\u064A\u0629 \u0648\u062A\u064F\u062D\u0648\u064E\u0651\u0644 \u0625\u0644\u0649 \u0625\u062C\u0631\u0627\u0621\u0627\u062A \u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u062A\u0646\u0641\u064A\u0630.' } },
+                    { title: { en: 'Continuous improvement plan', ar: '\u062E\u0637\u0629 \u0627\u0644\u062A\u062D\u0633\u064A\u0646 \u0627\u0644\u0645\u0633\u062A\u0645\u0631' }, desc: { en: 'Each action is assigned an owner, resources and a target date, with monitoring arrangements.', ar: '\u064A\u064F\u0633\u0646\u064E\u062F \u0644\u0643\u0644 \u0625\u062C\u0631\u0627\u0621 \u0645\u0633\u0624\u0648\u0644 \u0648\u0645\u0648\u0627\u0631\u062F \u0648\u062A\u0627\u0631\u064A\u062E \u0645\u0633\u062A\u0647\u062F\u0641\u060C \u0645\u0639 \u062A\u0631\u062A\u064A\u0628\u0627\u062A \u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629.' }, form: 'QP-CI' },
+                    { title: { en: 'Monitoring and follow-up', ar: '\u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629 \u0648\u0627\u0644\u0631\u0635\u062F' }, desc: { en: 'Progress is tracked, evidence of completion recorded and outstanding issues carried forward.', ar: '\u064A\u064F\u062A\u0627\u0628\u064E\u0639 \u0627\u0644\u062A\u0642\u062F\u0645 \u0648\u062A\u064F\u0633\u062C\u064E\u0651\u0644 \u0623\u062F\u0644\u0629 \u0627\u0644\u0625\u0646\u062C\u0627\u0632 \u0648\u062A\u064F\u0631\u062D\u064E\u0651\u0644 \u0627\u0644\u0645\u0633\u0627\u0626\u0644 \u0627\u0644\u0639\u0627\u0644\u0642\u0629.' } },
+                    { title: { en: 'Feeds the next accreditation cycle', ar: '\u0627\u0644\u062A\u063A\u0630\u064A\u0629 \u0627\u0644\u0631\u0627\u062C\u0639\u0629 \u0644\u062F\u0648\u0631\u0629 \u0627\u0644\u0627\u0639\u062A\u0645\u0627\u062F \u0627\u0644\u062A\u0627\u0644\u064A\u0629' }, desc: { en: 'Review and improvement outputs form part of the evidence for accreditation renewal.', ar: '\u062A\u0634\u0643\u0651\u0644 \u0645\u062E\u0631\u062C\u0627\u062A \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0648\u0627\u0644\u062A\u062D\u0633\u064A\u0646 \u062C\u0632\u0621\u0627\u064B \u0645\u0646 \u0623\u062F\u0644\u0629 \u062A\u062C\u062F\u064A\u062F \u0627\u0644\u0627\u0639\u062A\u0645\u0627\u062F.' }, decision: true }
+                ]
+            },
+            {
+                id: 'sectoral',
+                label: { en: 'Sectoral Qualifications', ar: '\u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062A \u0627\u0644\u0642\u0637\u0627\u0639\u064A\u0629' },
+                steps: [
+                    { title: { en: 'Referral to the sectoral committee', ar: '\u0627\u0644\u0625\u062D\u0627\u0644\u0629 \u0625\u0644\u0649 \u0627\u0644\u0644\u062C\u0646\u0629 \u0627\u0644\u0642\u0637\u0627\u0639\u064A\u0629' }, desc: { en: 'A qualification with a sectoral dimension is referred to the relevant sectoral committee.', ar: '\u064A\u064F\u062D\u0627\u0644 \u0627\u0644\u0645\u0624\u0647\u0644 \u0630\u0648 \u0627\u0644\u0628\u0639\u062F \u0627\u0644\u0642\u0637\u0627\u0639\u064A \u0625\u0644\u0649 \u0627\u0644\u0644\u062C\u0646\u0629 \u0627\u0644\u0642\u0637\u0627\u0639\u064A\u0629 \u0627\u0644\u0645\u062E\u062A\u0635\u0629.' } },
+                    { title: { en: 'Sectoral evaluation', ar: '\u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0642\u0637\u0627\u0639\u064A' }, desc: { en: 'The committee evaluates the qualification against the TVQF requirements and labour market relevance.', ar: '\u062A\u0642\u064A\u0651\u0645 \u0627\u0644\u0644\u062C\u0646\u0629 \u0627\u0644\u0645\u0624\u0647\u0644 \u0648\u0641\u0642 \u0645\u062A\u0637\u0644\u0628\u0627\u062A \u0627\u0644\u0625\u0637\u0627\u0631 \u0648\u0645\u062F\u0649 \u0645\u0644\u0627\u0621\u0645\u062A\u0647 \u0644\u0633\u0648\u0642 \u0627\u0644\u0639\u0645\u0644.' }, form: 'S-01' },
+                    { title: { en: 'Committee recommendation', ar: '\u062A\u0648\u0635\u064A\u0629 \u0627\u0644\u0644\u062C\u0646\u0629' }, desc: { en: 'The committee recommends approval, approval with conditions, revision, or non-approval.', ar: '\u062A\u0648\u0635\u064A \u0627\u0644\u0644\u062C\u0646\u0629 \u0628\u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629\u060C \u0623\u0648 \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629 \u0628\u0634\u0631\u0648\u0637\u060C \u0623\u0648 \u0627\u0644\u062A\u0639\u062F\u064A\u0644\u060C \u0623\u0648 \u0639\u062F\u0645 \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629.' }, form: 'S-02', decision: true },
+                    { title: { en: 'Appeal against the decision', ar: '\u0627\u0644\u0637\u0639\u0646 \u0639\u0644\u0649 \u0627\u0644\u0642\u0631\u0627\u0631' }, desc: { en: 'The applicant may appeal; the committee reviews the grounds and issues a final decision.', ar: '\u064A\u062C\u0648\u0632 \u0644\u0645\u0642\u062F\u0645 \u0627\u0644\u0637\u0644\u0628 \u0627\u0644\u0637\u0639\u0646\u060C \u0641\u062A\u0631\u0627\u062C\u0639 \u0627\u0644\u0644\u062C\u0646\u0629 \u0623\u0633\u0628\u0627\u0628\u0647 \u0648\u062A\u0635\u062F\u0631 \u0642\u0631\u0627\u0631\u0647\u0627 \u0627\u0644\u0646\u0647\u0627\u0626\u064A.' }, form: 'S-03' }
+                ]
+            }
+        ];
+
+        const TVQF_FLOWS_UI = {
+            en: { open: 'Open form', unavailable: 'Form not available yet' },
+            ar: { open: '\u0641\u062A\u062D \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629', unavailable: '\u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629 \u063A\u064A\u0631 \u0645\u062A\u0648\u0641\u0631\u0629 \u0628\u0639\u062F' }
+        };
+
+        let TVQF_FLOWS_ACTIVE_TAB = 'leveling';
+
+        // Look a form up by its code across all form categories.
+        function findTvqfForm(code) {
+            for (let i = 0; i < TVQF_FORMS_CATEGORIES.length; i++) {
+                const forms = TVQF_FORMS_CATEGORIES[i].forms;
+                for (let j = 0; j < forms.length; j++) {
+                    if (forms[j].code === code) return forms[j];
+                }
+            }
+            return null;
+        }
+
+        function renderTvqfFlows() {
+            const tabsHost = document.getElementById('tvqfFlowTabs');
+            const panelsHost = document.getElementById('tvqfFlowPanels');
+            if (!tabsHost || !panelsHost) return;
+
+            const lang = tvqfFormsLang();
+            const ui = TVQF_FLOWS_UI[lang];
+
+            tabsHost.innerHTML = TVQF_FLOWS.map(function (flow) {
+                const selected = (flow.id === TVQF_FLOWS_ACTIVE_TAB);
+                return '<button type="button" class="forms-tab" role="tab" id="tvqfFlowTab-' + flow.id + '"'
+                    + ' aria-selected="' + selected + '"'
+                    + ' aria-controls="tvqfFlowPanel-' + flow.id + '"'
+                    + ' onclick="selectTvqfFlowTab(\'' + flow.id + '\')">'
+                    + tvqfEscape(flow.label[lang]) + '</button>';
+            }).join('');
+
+            panelsHost.innerHTML = TVQF_FLOWS.map(function (flow) {
+                const steps = flow.steps.map(function (step, i) {
+                    let formHtml = '';
+                    if (step.form) {
+                        const form = findTvqfForm(step.form);
+                        const meta = form ? form[lang] : null;
+                        if (meta && meta.file) {
+                            formHtml = '<a class="flow-form" target="_blank" rel="noopener" href="'
+                                + tvqfFormPath(lang, meta.file) + '">'
+                                + '<span class="flow-form-code">' + tvqfEscape(step.form) + '</span>'
+                                + tvqfEscape(meta.title) + '</a>';
+                        } else {
+                            formHtml = '<span class="flow-form is-unavailable" aria-disabled="true">'
+                                + '<span class="flow-form-code">' + tvqfEscape(step.form) + '</span>'
+                                + tvqfEscape(ui.unavailable) + '</span>';
+                        }
+                    }
+                    return '<li class="flow-step' + (step.decision ? ' is-decision' : '') + '">'
+                        + '<span class="flow-marker" aria-hidden="true">' + (step.decision ? '\u2756' : (i + 1)) + '</span>'
+                        + '<div class="flow-body">'
+                        + '<h3>' + tvqfEscape(step.title[lang]) + '</h3>'
+                        + '<p>' + tvqfEscape(step.desc[lang]) + '</p>'
+                        + formHtml
+                        + '</div></li>';
+                }).join('');
+
+                return '<div class="flow-panel" role="tabpanel" id="tvqfFlowPanel-' + flow.id + '"'
+                    + ' aria-labelledby="tvqfFlowTab-' + flow.id + '"'
+                    + (flow.id === TVQF_FLOWS_ACTIVE_TAB ? '' : ' hidden')
+                    + '><ol class="flow-steps">' + steps + '</ol></div>';
+            }).join('');
+        }
+
+        function selectTvqfFlowTab(flowId) {
+            TVQF_FLOWS_ACTIVE_TAB = flowId;
+            renderTvqfFlows();
+        }
+
+        window.renderTvqfFlows = renderTvqfFlows;
+        window.selectTvqfFlowTab = selectTvqfFlowTab;
+        document.addEventListener('DOMContentLoaded', renderTvqfFlows);
+
         function goToTvqfForms(catId) {
             if (typeof showPage === 'function') { showPage('resources-forms'); }
             selectTvqfFormsTab(catId || 'leveling');

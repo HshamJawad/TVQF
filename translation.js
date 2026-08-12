@@ -6,6 +6,10 @@
 const TVQF_TRANSLATIONS = {
   en: {
   "title_1": "TVQF Iraq - Technical & Vocational Qualifications Framework",
+  "nav_proc": "Application Procedures",
+  "proc_title": "Application Procedures",
+  "proc_intro": "Step-by-step pathways showing the order of each TVQF process and the form used at every stage. Select a pathway below.",
+  "proc_notice": "\u2139\ufe0f These pathways are illustrative and prepared for educational purposes. They do not replace the procedures officially adopted by the TVQF Council.",
   "t_qa_card": "Quality Assurance & Accreditation",
   "t_qa_card_desc": "Accreditation requirements for providers and how quality is monitored",
   "pyr_title": "Levels & Descriptors",
@@ -300,6 +304,10 @@ const TVQF_TRANSLATIONS = {
 },
   ar: {
   "title_1": "الإطار الوطني للمؤهلات التقنية والمهنية في العراق - TVQF",
+  "nav_proc": "آليات التقديم",
+  "proc_title": "آليات التقديم",
+  "proc_intro": "مسارات متسلسلة توضّح ترتيب خطوات كل إجراء في الإطار والاستمارة المستخدمة في كل مرحلة. اختر المسار من التبويبات أدناه.",
+  "proc_notice": "ℹ️ هذه المسارات توضيحية أُعدّت لأغراض تعليمية، ولا تُغني عن الإجراءات المعتمدة رسمياً من مجلس الإطار.",
   "t_qa_card": "ضمان الجودة والاعتماد",
   "t_qa_card_desc": "متطلبات اعتماد الجهات المقدِّمة وآليات متابعة الجودة",
   "pyr_title": "المستويات والواصفات",
@@ -687,6 +695,11 @@ const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_
     // Re-render the home page levels pyramid in the new language
     if (typeof window.renderLevelsPyramid === 'function') {
       window.renderLevelsPyramid();
+    }
+
+    // Re-render the application-procedure flow charts in the new language
+    if (typeof window.renderTvqfFlows === 'function') {
+      window.renderTvqfFlows();
     }
   }
 
