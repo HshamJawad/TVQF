@@ -6,6 +6,8 @@
 const TVQF_TRANSLATIONS = {
   en: {
   "title_1": "TVQF Iraq - Technical & Vocational Qualifications Framework",
+  "t_qa_card": "Quality Assurance & Accreditation",
+  "t_qa_card_desc": "Accreditation requirements for providers and how quality is monitored",
   "pyr_title": "Levels & Descriptors",
   "pyr_sub": "Ten progressive levels describing the learning and qualification pathway from a Level 1 Certificate up to the Technical Doctorate.",
   "pyr_count": "Levels",
@@ -50,8 +52,8 @@ const TVQF_TRANSLATIONS = {
   "t_32": "The Technical and Vocational Qualifications Framework (TVQF Iraq) sets the foundation for a unified qualifications system in Iraq, aligning vocational, technical and higher education to national levels and globally-comparable standards. It supports lifelong learning, clearer pathways, and improved links between skills, education and employment.",
   "t_33": "What is TVQF?",
   "t_34": "Learn about the framework and its role in Iraq's education system",
-  "t_35": "Levels & Descriptors",
-  "t_36": "Explore the 10 qualification levels and their definitions",
+  "t_35": "Forms & Templates Library",
+  "t_36": "Download the 18 official TVQF forms in Arabic and English",
   "t_37": "Apply for Leveling",
   "t_38": "Submit your qualification for official level recognition",
   "t_39": "Recognition of Prior Learning",
@@ -77,15 +79,6 @@ const TVQF_TRANSLATIONS = {
   "t_59": "Governance",
   "t_60": "The framework is overseen by a National Coordination Committee comprising representatives from the Ministries of Education, Higher Education & Research, and Labour & Social Affairs. Their mandate includes policy oversight, stakeholder coordination and guidance for institutional implementation.",
   "t_61": "The governance structure ensures that TVQF Iraq remains responsive to the needs of learners, employers, and the broader economy. Regular reviews and stakeholder consultations help maintain the framework's relevance and effectiveness.",
-  "t_64": "The 10 Levels of TVQF Iraq",
-  "t_65": "Levels 1-3: Basic Vocational Training",
-  "t_66": "Entry-level vocational certificates focusing on foundational skills and basic competencies in specific trades and occupations.",
-  "t_67": "Level 4: Secondary Vocational Diplomas",
-  "t_68": "Intermediate technical qualifications that prepare learners for skilled employment or further education.",
-  "t_69": "Levels 5-6: Technical Diplomas and First Degrees",
-  "t_70": "Advanced technical diplomas and bachelor's degrees demonstrating substantial knowledge and skills in a field of study.",
-  "t_71": "Levels 7-10: Higher Degrees",
-  "t_72": "Postgraduate qualifications including master's degrees (Level 7), doctoral degrees (Level 9-10), and advanced research qualifications.",
   "a_73": "📄 Download TVQF Levels & Descriptors PDF",
   "a_73_href": "Levels%20and%20Descriptors/TVQF%20Iraq%20-%2010-Level%20Descriptors%20EN.pdf",
   "a_73b": "📝 Download TVQF Levels & Descriptors DOCX",
@@ -295,9 +288,7 @@ const TVQF_TRANSLATIONS = {
   "f_307": "Forms & Resources",
   "f_308": "News & Events",
   "f_309": "Contact Us",
-  "f_310": "Contact",
   "f_313": "Baghdad, Iraq",
-  "f_314": "Working Hours:<br/>Sunday - Thursday<br/>8:00 AM - 3:00 PM",
   "f_315": "Our Partners",
   "a_formslink_rpl": "📂 Go to RPL Forms (RPL-01 – RPL-04)",
   "a_formslink_accr": "📂 Go to Institutional Accreditation Forms (A-01 – A-04)",
@@ -309,6 +300,8 @@ const TVQF_TRANSLATIONS = {
 },
   ar: {
   "title_1": "الإطار الوطني للمؤهلات التقنية والمهنية في العراق - TVQF",
+  "t_qa_card": "ضمان الجودة والاعتماد",
+  "t_qa_card_desc": "متطلبات اعتماد الجهات المقدِّمة وآليات متابعة الجودة",
   "pyr_title": "المستويات والواصفات",
   "pyr_sub": "عشرة مستويات متدرّجة تصف مسار التعلّم والتأهيل من شهادة المستوى الأول وحتى الدكتوراه التقنية.",
   "pyr_count": "مستويات",
@@ -353,8 +346,8 @@ const TVQF_TRANSLATIONS = {
   "t_32": "يضع الإطار الوطني للمؤهلات التقنية والمهنية (TVQF Iraq) الأساس لنظام موحّد للمؤهلات في العراق، يربط التعليم والتدريب التقني والمهني بالتعليم العالي بمستويات وطنية ومعايير قابلة للمقارنة عالمياً. ويدعم التعلم مدى الحياة، ومسارات أوضح، وروابط محسّنة بين المهارات والتعليم والتوظيف.",
   "t_33": "ما هو الإطار الوطني للمؤهلات؟",
   "t_34": "تعرّف على الإطار ودوره في النظام التعليمي في العراق",
-  "t_35": "المستويات والواصفات",
-  "t_36": "استكشف المستويات العشرة للمؤهلات وتعريفاتها",
+  "t_35": "مكتبة الاستمارات والنماذج",
+  "t_36": "حمّل استمارات الإطار الرسمية الثماني عشرة بالعربية والإنجليزية",
   "t_37": "التقديم لاعتماد المستوى",
   "t_38": "قدّم مؤهلك للحصول على الاعتراف الرسمي بالمستوى",
   "t_39": "الاعتراف بالتعلم المسبق",
@@ -380,15 +373,6 @@ const TVQF_TRANSLATIONS = {
   "t_59": "الحوكمة",
   "t_60": "يُشرف على الإطار لجنة تنسيق وطنية تضم ممثلين عن وزارات التربية، والتعليم العالي والبحث العلمي، والعمل والشؤون الاجتماعية. وتشمل مهامها الإشراف على السياسات وتنسيق أصحاب المصلحة وتوجيه التنفيذ المؤسسي.",
   "t_61": "يضمن هيكل الحوكمة بقاء الإطار متجاوباً مع احتياجات المتعلمين وأصحاب العمل والاقتصاد بشكل عام. وتساعد المراجعات الدورية والتشاور مع أصحاب المصلحة في الحفاظ على أهمية الإطار وفعاليته.",
-  "t_64": "المستويات العشرة للإطار الوطني للمؤهلات في العراق",
-  "t_65": "المستويات 1-3: التدريب المهني الأساسي",
-  "t_66": "شهادات مهنية للمستوى التمهيدي تركّز على المهارات الأساسية والكفاءات الأولية في حرف ومهن محددة.",
-  "t_67": "المستوى 4: الدبلومات المهنية الثانوية",
-  "t_68": "مؤهلات تقنية متوسطة تُهيّئ المتعلمين للتوظيف الماهر أو مواصلة التعليم.",
-  "t_69": "المستويات 5-6: الدبلومات التقنية والدرجات الجامعية الأولى",
-  "t_70": "دبلومات تقنية متقدمة ودرجات بكالوريوس تُظهر معرفة ومهارات متعمّقة في مجال الدراسة.",
-  "t_71": "المستويات 7-10: الدرجات العليا",
-  "t_72": "مؤهلات الدراسات العليا وتشمل درجة الماجستير (المستوى 7)، والدكتوراه (المستويات 9-10)، ومؤهلات البحث المتقدم.",
   "a_73": "📄 تحميل ملف مستويات وواصفات الإطار (PDF)",
   "a_73_href": "Levels%20and%20Descriptors/%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20%D9%88%20%D9%88%D8%A7%D8%B5%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B7%D8%A7%D8%B1%20AR.pdf",
   "a_73b": "📝 تحميل ملف مستويات وواصفات الإطار (DOCX)",
@@ -598,9 +582,7 @@ const TVQF_TRANSLATIONS = {
   "f_307": "النماذج والموارد",
   "f_308": "الأخبار والفعاليات",
   "f_309": "اتصل بنا",
-  "f_310": "التواصل",
   "f_313": "بغداد، العراق",
-  "f_314": "ساعات الدوام:<br/>الأحد - الخميس<br/>8:00 صباحاً - 3:00 عصراً",
   "f_315": "شركاؤنا",
   "a_formslink_rpl": "📂 الانتقال إلى استمارات الاعتراف بالتعلم المسبق (RPL-01 – RPL-04)",
   "a_formslink_accr": "📂 الانتقال إلى استمارات الاعتماد المؤسسي (A-01 – A-04)",
@@ -614,7 +596,7 @@ const TVQF_TRANSLATIONS = {
 
 // Keys whose value contains inline HTML (e.g. <br>, <strong>) and must be
 // applied with innerHTML instead of textContent.
-const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_216", "t_217", "t_218", "t_219", "t_220", "t_231", "t_232", "t_233", "f_301", "f_314"]);
+const TVQF_HTML_KEYS = new Set(["t_120", "t_122", "t_124", "t_126", "t_127", "t_216", "t_217", "t_218", "t_219", "t_220", "t_231", "t_232", "t_233", "f_301"]);
 
 (function() {
   const STORAGE_KEY = 'tvqf-lang';
