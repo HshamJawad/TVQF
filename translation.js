@@ -6,6 +6,7 @@
 const TVQF_TRANSLATIONS = {
   en: {
   "title_1": "TVQF Iraq - Technical & Vocational Qualifications Framework",
+  "search_title": "Search Results",
   "nav_proc": "Application Procedures",
   "proc_title": "Application Procedures",
   "proc_intro": "Step-by-step pathways showing the order of each TVQF process and the form used at every stage. Select a pathway below.",
@@ -304,6 +305,7 @@ const TVQF_TRANSLATIONS = {
 },
   ar: {
   "title_1": "الإطار الوطني للمؤهلات التقنية والمهنية في العراق - TVQF",
+  "search_title": "نتائج البحث",
   "nav_proc": "آليات التقديم",
   "proc_title": "آليات التقديم",
   "proc_intro": "مسارات متسلسلة توضّح ترتيب خطوات كل إجراء في الإطار والاستمارة المستخدمة في كل مرحلة. اختر المسار من التبويبات أدناه.",

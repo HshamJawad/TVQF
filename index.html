@@ -480,6 +480,70 @@
             display: none;
         }
 
+        .flow-step.is-highlighted .flow-body {
+            animation: flowHighlight 2.6s ease-out;
+        }
+
+        @keyframes flowHighlight {
+            0%, 60% { background: #fff8e1; box-shadow: 0 0 0 3px #f0d38a; }
+            100%    { background: #fff; box-shadow: none; }
+        }
+
+        .search-result {
+            background: #f8f9fa;
+            border: 1px solid #e3e6e4;
+            border-inline-start: 4px solid #006400;
+            border-radius: 6px;
+            padding: 1.1rem 1.3rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
+        .search-result:hover {
+            background: #eef3ee;
+        }
+
+        .search-result h3 {
+            color: #006400;
+            font-size: 1.05rem;
+            margin: 0 0 0.35rem;
+        }
+
+        .search-result p {
+            margin: 0;
+            color: #555;
+            font-size: 0.93rem;
+            line-height: 1.8;
+        }
+
+        .search-result mark {
+            background: #fff3bf;
+            color: inherit;
+            padding: 0 0.15rem;
+            border-radius: 3px;
+        }
+
+        .search-summary {
+            color: #6b8468;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-card-flow {
+            display: inline-block;
+            margin-top: 0.6rem;
+            color: #14561a;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed #9dc499;
+        }
+
+        .form-card-flow:hover {
+            color: #006400;
+            border-bottom-style: solid;
+        }
+
         @media (max-width: 768px) {
             .flow-step { padding-inline-start: 2.9rem; }
             .flow-body { padding: 0.9rem 1rem; }
@@ -1289,8 +1353,8 @@
 <span id="langToggleLabel">EN</span>
 </button>
 <div class="search-box">
-<input data-i18n-placeholder="ph_2" placeholder="Search for keywords..." type="text"/>
-<button type="submit">🔍</button>
+<input data-i18n-placeholder="ph_2" id="siteSearchInput" placeholder="Search for keywords..." type="text" onkeydown="if(event.key==='Enter'){runSiteSearch();}"/>
+<button type="button" onclick="runSiteSearch()" aria-label="Search">🔍</button>
 </div>
 </div>
 </div>
@@ -1589,6 +1653,15 @@
 <p data-i18n="t_rplforms_new_desc">The official Recognition of Prior Learning forms are available in the TVQF Forms &amp; Templates library.</p>
 <a class="download-btn forms-link-btn" data-i18n="a_formslink_rpl" href="#" onclick="return goToTvqfForms('rpl')">📂 Go to TVQF Forms &amp; Templates</a>
 </div>
+</div>
+</div>
+</div>
+<!-- SEARCH RESULTS (filled by runSiteSearch()) -->
+<div class="page-content" id="search-results">
+<div class="container">
+<div class="intro-section">
+<h2 data-i18n="search_title">Search Results</h2>
+<div id="siteSearchOutput"></div>
 </div>
 </div>
 </div>
@@ -2273,8 +2346,16 @@
         const TVQF_FORMS_DIR = { en: 'TVQF Forms New EN', ar: 'TVQF Forms New AR' };
 
         const TVQF_FORMS_UI = {
-            en: { download: '\u{1F4C4} Download Form', unavailable: 'Arabic version coming soon' },
-            ar: { download: '\u{1F4C4} \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0646\u0645\u0648\u0630\u062C', unavailable: '\u0627\u0644\u0646\u0633\u062E\u0629 \u0642\u0631\u064A\u0628\u0627\u064B' }
+            en: {
+                download: '\u{1F4C4} Download Form',
+                unavailable: 'Arabic version coming soon',
+                whereInFlow: '\u{1F5FA}\uFE0F Where does this form sit in the pathway?'
+            },
+            ar: {
+                download: '\u{1F4C4} \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0646\u0645\u0648\u0630\u062C',
+                unavailable: '\u0627\u0644\u0646\u0633\u062E\u0629 \u0642\u0631\u064A\u0628\u0627\u064B',
+                whereInFlow: '\u{1F5FA}\uFE0F \u0623\u064A\u0646 \u062A\u0642\u0639 \u0647\u0630\u0647 \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0629 \u0641\u064A \u0627\u0644\u0645\u0633\u0627\u0631\u061F'
+            }
         };
 
         const TVQF_FORMS_CATEGORIES = [
@@ -2444,11 +2525,19 @@
                           + tvqfEscape(ui.download) + '</a>'
                         : '<span class="download-btn is-unavailable" aria-disabled="true">'
                           + tvqfEscape(ui.unavailable) + '</span>';
+                    // Reverse link into the procedures tab, only when the form
+                    // actually appears in one of the flows.
+                    const flowHit = findFlowStepByForm(form.code);
+                    const flowLink = flowHit
+                        ? '<a class="form-card-flow" href="#" onclick="return goToFlowStep(\'' + form.code + '\')">'
+                          + tvqfEscape(ui.whereInFlow) + '</a>'
+                        : '';
                     return '<div class="form-card">'
                         + '<span class="form-card-code">' + tvqfEscape(form.code) + '</span>'
                         + '<h3 class="form-card-title">' + tvqfEscape(meta.title) + '</h3>'
                         + '<p class="form-card-desc">' + tvqfEscape(meta.desc) + '</p>'
                         + btn
+                        + flowLink
                         + '</div>';
                 }).join('');
 
@@ -2584,7 +2673,8 @@
                                 + tvqfEscape(ui.unavailable) + '</span>';
                         }
                     }
-                    return '<li class="flow-step' + (step.decision ? ' is-decision' : '') + '">'
+                    return '<li class="flow-step' + (step.decision ? ' is-decision' : '') + '"'
+                        + ' id="flowStep-' + flow.id + '-' + i + '">'
                         + '<span class="flow-marker" aria-hidden="true">' + (step.decision ? '\u2756' : (i + 1)) + '</span>'
                         + '<div class="flow-body">'
                         + '<h3>' + tvqfEscape(step.title[lang]) + '</h3>'
@@ -2600,6 +2690,36 @@
             }).join('');
         }
 
+        // Find the first flow step that uses a given form code.
+        function findFlowStepByForm(code) {
+            for (let i = 0; i < TVQF_FLOWS.length; i++) {
+                const steps = TVQF_FLOWS[i].steps;
+                for (let j = 0; j < steps.length; j++) {
+                    if (steps[j].form === code) {
+                        return { flowId: TVQF_FLOWS[i].id, index: j };
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Jump from a form card in the library to that form's step in the
+        // procedures tab, and flag it briefly so it is easy to spot.
+        function goToFlowStep(code) {
+            const hit = findFlowStepByForm(code);
+            if (!hit) return false;
+            if (typeof showPage === 'function') { showPage('procedures'); }
+            selectTvqfFlowTab(hit.flowId);
+            setTimeout(function () {
+                const el = document.getElementById('flowStep-' + hit.flowId + '-' + hit.index);
+                if (!el) return;
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.add('is-highlighted');
+                setTimeout(function () { el.classList.remove('is-highlighted'); }, 2600);
+            }, 120);
+            return false;
+        }
+
         function selectTvqfFlowTab(flowId) {
             TVQF_FLOWS_ACTIVE_TAB = flowId;
             renderTvqfFlows();
@@ -2607,6 +2727,8 @@
 
         window.renderTvqfFlows = renderTvqfFlows;
         window.selectTvqfFlowTab = selectTvqfFlowTab;
+        window.findFlowStepByForm = findFlowStepByForm;
+        window.goToFlowStep = goToFlowStep;
         document.addEventListener('DOMContentLoaded', renderTvqfFlows);
 
         function goToTvqfForms(catId) {
@@ -2630,6 +2752,110 @@
             const menu = document.getElementById('navMenu');
             menu.classList.toggle('active');
         }
+
+        /* =========================================================
+           SITE SEARCH
+           ---------------------------------------------------------
+           A small client-side search over the rendered pages. The index
+           is rebuilt on every query from the live DOM, so it always
+           reflects the active language and any dynamically rendered
+           content (forms library, flow charts) without a separate data
+           file to keep in sync.
+           ========================================================= */
+        const SITE_SEARCH_UI = {
+            en: {
+                heading: 'Search Results',
+                summary: 'result(s) for',
+                none: 'No results found for',
+                hint: 'Try a shorter word, or check the Forms library and Application Procedures tabs.',
+                empty: 'Please type a word to search for.'
+            },
+            ar: {
+                heading: '\u0646\u062A\u0627\u0626\u062C \u0627\u0644\u0628\u062D\u062B',
+                summary: '\u0646\u062A\u064A\u062C\u0629 \u0644\u0640',
+                none: '\u0644\u0627 \u062A\u0648\u062C\u062F \u0646\u062A\u0627\u0626\u062C \u0644\u0640',
+                hint: '\u062C\u0631\u0651\u0628 \u0643\u0644\u0645\u0629 \u0623\u0642\u0635\u0631\u060C \u0623\u0648 \u062A\u0635\u0641\u0651\u062D \u062A\u0628\u0648\u064A\u0628\u064A \u0645\u0643\u062A\u0628\u0629 \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0631\u0627\u062A \u0648\u0622\u0644\u064A\u0627\u062A \u0627\u0644\u062A\u0642\u062F\u064A\u0645.',
+                empty: '\u064A\u064F\u0631\u062C\u0649 \u0643\u062A\u0627\u0628\u0629 \u0643\u0644\u0645\u0629 \u0644\u0644\u0628\u062D\u062B \u0639\u0646\u0647\u0627.'
+            }
+        };
+
+        // Arabic letters that vary in writing; normalising them means a search
+        // for "الاطار" also matches "الإطار", and "علي" matches "على".
+        function siteSearchNormalize(text) {
+            return String(text)
+                .toLowerCase()
+                .replace(/[\u0623\u0625\u0622\u0671]/g, '\u0627')
+                .replace(/\u0649/g, '\u064A')
+                .replace(/\u0629/g, '\u0647')
+                .replace(/[\u064B-\u0652\u0640]/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function siteSearchEscapeRe(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Build a snippet around the first match, with the term marked.
+        function siteSearchSnippet(text, term) {
+            const norm = siteSearchNormalize(text);
+            const at = norm.indexOf(term);
+            const start = Math.max(0, at - 60);
+            const raw = text.slice(start, start + 220).trim();
+            const safe = tvqfEscape(raw);
+            const re = new RegExp(siteSearchEscapeRe(term), 'gi');
+            const marked = safe.replace(re, function (m) { return '<mark>' + m + '</mark>'; });
+            return (start > 0 ? '\u2026' : '') + marked + '\u2026';
+        }
+
+        function runSiteSearch() {
+            const input = document.getElementById('siteSearchInput');
+            const output = document.getElementById('siteSearchOutput');
+            if (!input || !output) return false;
+
+            const lang = tvqfFormsLang();
+            const ui = SITE_SEARCH_UI[lang];
+            const rawQuery = input.value.trim();
+            const term = siteSearchNormalize(rawQuery);
+
+            const heading = document.querySelector('#search-results h2');
+            if (heading) heading.textContent = ui.heading;
+            showPage('search-results');
+
+            if (term.length < 2) {
+                output.innerHTML = '<p class="search-summary">' + tvqfEscape(ui.empty) + '</p>';
+                return false;
+            }
+
+            const hits = [];
+            document.querySelectorAll('.page-content').forEach(function (page) {
+                if (page.id === 'search-results') return;
+                const titleEl = page.querySelector('h2');
+                const title = titleEl ? titleEl.textContent.trim() : page.id;
+                const text = (page.innerText || page.textContent || '').replace(/\s+/g, ' ');
+                if (siteSearchNormalize(text).indexOf(term) === -1) return;
+                hits.push({ id: page.id, title: title, snippet: siteSearchSnippet(text, term) });
+            });
+
+            if (!hits.length) {
+                output.innerHTML = '<p class="search-summary">' + tvqfEscape(ui.none) + ' \u00AB'
+                    + tvqfEscape(rawQuery) + '\u00BB</p><p class="search-summary">'
+                    + tvqfEscape(ui.hint) + '</p>';
+                return false;
+            }
+
+            output.innerHTML = '<p class="search-summary">' + hits.length + ' ' + tvqfEscape(ui.summary)
+                + ' \u00AB' + tvqfEscape(rawQuery) + '\u00BB</p>'
+                + hits.map(function (hit) {
+                    return '<div class="search-result" onclick="showPage(\'' + hit.id + '\')">'
+                        + '<h3>' + tvqfEscape(hit.title) + '</h3>'
+                        + '<p>' + hit.snippet + '</p>'
+                        + '</div>';
+                }).join('');
+            return false;
+        }
+
+        window.runSiteSearch = runSiteSearch;
 
         function showPage(pageId) {
             // Hide all pages
